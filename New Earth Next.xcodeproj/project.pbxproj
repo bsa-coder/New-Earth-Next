@@ -15,6 +15,15 @@
 		551C256C205F0AA4007D8987 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 551C256B205F0AA4007D8987 /* Assets.xcassets */; };
 		551C256F205F0AA4007D8987 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 551C256D205F0AA4007D8987 /* LaunchScreen.storyboard */; };
 		551C2572205F0AA4007D8987 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 551C2571205F0AA4007D8987 /* main.m */; };
+		551C2580205F1DCC007D8987 /* GameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 551C2578205F1DC7007D8987 /* GameView.m */; };
+		551C2581205F1DCC007D8987 /* MapScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 551C2579205F1DC8007D8987 /* MapScrollView.m */; };
+		551C2582205F1DCC007D8987 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 551C257A205F1DC9007D8987 /* GameViewController.m */; };
+		551C2583205F1DCC007D8987 /* MapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 551C257F205F1DCC007D8987 /* MapView.m */; };
+		551C2586205F6B0E007D8987 /* Globals.m in Sources */ = {isa = PBXBuildFile; fileRef = 551C2584205F6B0D007D8987 /* Globals.m */; };
+		557E860020608B8D009E8A11 /* GeoTile.m in Sources */ = {isa = PBXBuildFile; fileRef = 557E85FC20608B8B009E8A11 /* GeoTile.m */; };
+		557E860120608B8D009E8A11 /* ItemEnums.m in Sources */ = {isa = PBXBuildFile; fileRef = 557E85FD20608B8B009E8A11 /* ItemEnums.m */; };
+		557E860420608D1A009E8A11 /* NewTech.m in Sources */ = {isa = PBXBuildFile; fileRef = 557E860220608D19009E8A11 /* NewTech.m */; };
+		557E86072060B4F9009E8A11 /* TileItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 557E86052060B4F8009E8A11 /* TileItem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +41,24 @@
 		551C256E205F0AA4007D8987 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		551C2570205F0AA4007D8987 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		551C2571205F0AA4007D8987 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		551C2578205F1DC7007D8987 /* GameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameView.m; sourceTree = "<group>"; };
+		551C2579205F1DC8007D8987 /* MapScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapScrollView.m; sourceTree = "<group>"; };
+		551C257A205F1DC9007D8987 /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
+		551C257B205F1DCA007D8987 /* MapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapView.h; sourceTree = "<group>"; };
+		551C257C205F1DCA007D8987 /* GameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameView.h; sourceTree = "<group>"; };
+		551C257D205F1DCB007D8987 /* MapScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapScrollView.h; sourceTree = "<group>"; };
+		551C257E205F1DCB007D8987 /* GameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
+		551C257F205F1DCC007D8987 /* MapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapView.m; sourceTree = "<group>"; };
+		551C2584205F6B0D007D8987 /* Globals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Globals.m; sourceTree = "<group>"; };
+		551C2585205F6B0E007D8987 /* Globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Globals.h; sourceTree = "<group>"; };
+		557E85FC20608B8B009E8A11 /* GeoTile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoTile.m; sourceTree = "<group>"; };
+		557E85FD20608B8B009E8A11 /* ItemEnums.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemEnums.m; sourceTree = "<group>"; };
+		557E85FE20608B8B009E8A11 /* GeoTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoTile.h; sourceTree = "<group>"; };
+		557E85FF20608B8C009E8A11 /* ItemEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemEnums.h; sourceTree = "<group>"; };
+		557E860220608D19009E8A11 /* NewTech.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewTech.m; sourceTree = "<group>"; };
+		557E860320608D1A009E8A11 /* NewTech.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewTech.h; sourceTree = "<group>"; };
+		557E86052060B4F8009E8A11 /* TileItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TileItem.m; sourceTree = "<group>"; };
+		557E86062060B4F8009E8A11 /* TileItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TileItem.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,11 +95,29 @@
 				551C255D205F0AA4007D8987 /* AppDelegate.m */,
 				551C255F205F0AA4007D8987 /* RootViewController.h */,
 				551C2560205F0AA4007D8987 /* RootViewController.m */,
+				551C257C205F1DCA007D8987 /* GameView.h */,
+				551C2578205F1DC7007D8987 /* GameView.m */,
+				551C257E205F1DCB007D8987 /* GameViewController.h */,
+				551C257A205F1DC9007D8987 /* GameViewController.m */,
+				557E860320608D1A009E8A11 /* NewTech.h */,
+				557E860220608D19009E8A11 /* NewTech.m */,
+				557E85FE20608B8B009E8A11 /* GeoTile.h */,
+				557E86062060B4F8009E8A11 /* TileItem.h */,
+				557E86052060B4F8009E8A11 /* TileItem.m */,
+				557E85FC20608B8B009E8A11 /* GeoTile.m */,
+				557E85FF20608B8C009E8A11 /* ItemEnums.h */,
+				557E85FD20608B8B009E8A11 /* ItemEnums.m */,
+				551C257D205F1DCB007D8987 /* MapScrollView.h */,
+				551C2579205F1DC8007D8987 /* MapScrollView.m */,
+				551C257B205F1DCA007D8987 /* MapView.h */,
+				551C257F205F1DCC007D8987 /* MapView.m */,
 				551C2562205F0AA4007D8987 /* DataViewController.h */,
 				551C2563205F0AA4007D8987 /* DataViewController.m */,
 				551C2565205F0AA4007D8987 /* ModelController.h */,
 				551C2566205F0AA4007D8987 /* ModelController.m */,
 				551C2568205F0AA4007D8987 /* Main.storyboard */,
+				551C2585205F6B0E007D8987 /* Globals.h */,
+				551C2584205F6B0D007D8987 /* Globals.m */,
 				551C256B205F0AA4007D8987 /* Assets.xcassets */,
 				551C256D205F0AA4007D8987 /* LaunchScreen.storyboard */,
 				551C2570205F0AA4007D8987 /* Info.plist */,
@@ -152,10 +197,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				551C2582205F1DCC007D8987 /* GameViewController.m in Sources */,
+				557E860420608D1A009E8A11 /* NewTech.m in Sources */,
+				557E860020608B8D009E8A11 /* GeoTile.m in Sources */,
+				551C2580205F1DCC007D8987 /* GameView.m in Sources */,
+				557E86072060B4F9009E8A11 /* TileItem.m in Sources */,
 				551C2572205F0AA4007D8987 /* main.m in Sources */,
 				551C2561205F0AA4007D8987 /* RootViewController.m in Sources */,
 				551C2567205F0AA4007D8987 /* ModelController.m in Sources */,
+				551C2581205F1DCC007D8987 /* MapScrollView.m in Sources */,
 				551C2564205F0AA4007D8987 /* DataViewController.m in Sources */,
+				551C2583205F1DCC007D8987 /* MapView.m in Sources */,
+				557E860120608B8D009E8A11 /* ItemEnums.m in Sources */,
+				551C2586205F6B0E007D8987 /* Globals.m in Sources */,
 				551C255E205F0AA4007D8987 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -293,6 +347,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4EPTA2P3JC;
 				INFOPLIST_FILE = "New Earth Next/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bigdogtools.New-Earth-Next";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -307,6 +362,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4EPTA2P3JC;
 				INFOPLIST_FILE = "New Earth Next/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bigdogtools.New-Earth-Next";
 				PRODUCT_NAME = "$(TARGET_NAME)";

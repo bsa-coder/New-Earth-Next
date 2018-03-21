@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" systemVersion="17A278a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="703-4V-yAM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="6Kw-yG-keO">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -9,22 +14,83 @@
         <!--Root View Controller-->
         <scene sceneID="clB-vc-fyl">
             <objects>
-                <viewController id="703-4V-yAM" customClass="RootViewController" customModuleProvider="" sceneMemberID="viewController">
+                <viewController id="703-4V-yAM" customClass="RootViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="502-Ir-ELC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.60000002379999995" green="0.40000000600000002" blue="0.20000000300000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="brooklyn map simpler 02" translatesAutoresizingMaskIntoConstraints="NO" id="4LG-w5-tiM">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="iAZ-4m-2z3"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q3h-pU-vEd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-101" y="-243"/>
+            <point key="canvasLocation" x="-101.59999999999999" y="-243.32833583208398"/>
+        </scene>
+        <!--Game View Controller-->
+        <scene sceneID="Kso-Rv-9x6">
+            <objects>
+                <viewController id="6Kw-yG-keO" customClass="GameViewController" sceneMemberID="viewController">
+                    <scrollView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" semanticContentAttribute="spatial" ambiguous="YES" minimumZoomScale="0.25" maximumZoomScale="10" id="IHm-8D-mSh" userLabel="The Scroll View" customClass="MapScrollView">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ffi-ZP-pYe" customClass="GameView">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="brooklyn map simpler 02" translatesAutoresizingMaskIntoConstraints="NO" id="QJI-nh-lJ4" customClass="MapView">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="XrE-EG-kuj" appends="YES" id="Yf1-lG-q65"/>
+                                </connections>
+                            </view>
+                        </subviews>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="ffi-ZP-pYe" firstAttribute="leading" secondItem="tAe-eZ-4AG" secondAttribute="leading" id="Da4-0g-irE"/>
+                            <constraint firstItem="ffi-ZP-pYe" firstAttribute="bottom" secondItem="tAe-eZ-4AG" secondAttribute="bottom" id="POf-vF-jxZ"/>
+                            <constraint firstItem="ffi-ZP-pYe" firstAttribute="trailing" secondItem="tAe-eZ-4AG" secondAttribute="trailing" id="SMO-Jl-9V2"/>
+                            <constraint firstItem="ffi-ZP-pYe" firstAttribute="top" secondItem="IHm-8D-mSh" secondAttribute="top" id="fSd-uc-ra1"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="tAe-eZ-4AG"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="6jR-n2-Mey" appends="YES" id="2Wq-Qf-aCz"/>
+                        </connections>
+                    </scrollView>
+                    <connections>
+                        <outlet property="myGameView" destination="ffi-ZP-pYe" id="fgx-dS-z6k"/>
+                        <outlet property="myMapView" destination="QJI-nh-lJ4" id="2nI-mV-WdW"/>
+                        <outlet property="theScrollView" destination="IHm-8D-mSh" id="VlZ-o0-8Mw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eGJ-01-1gL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="6jR-n2-Mey">
+                    <connections>
+                        <action selector="handleDoubleTap:" destination="6Kw-yG-keO" id="of7-1B-Z2f"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="XrE-EG-kuj">
+                    <connections>
+                        <action selector="handleTap:" destination="6Kw-yG-keO" id="uNW-T2-jGE"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="-112.8" y="429.53523238380814"/>
         </scene>
         <!--Data View Controller-->
         <scene sceneID="snT-py-3hH">
             <objects>
-                <viewController storyboardIdentifier="DataViewController" id="S4R-Ja-viH" customClass="DataViewController" customModuleProvider="" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DataViewController" id="S4R-Ja-viH" customClass="DataViewController" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="ZwX-cT-FIQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -61,4 +127,7 @@
             <point key="canvasLocation" x="597" y="-243"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="brooklyn map simpler 02" width="1675" height="2187"/>
+    </resources>
 </document>

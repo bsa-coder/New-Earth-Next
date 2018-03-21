@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+// message to update GUI
+extern NSString* const kSetUpdateNotification;
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
