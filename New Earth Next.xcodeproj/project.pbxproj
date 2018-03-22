@@ -20,6 +20,11 @@
 		551C2582205F1DCC007D8987 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 551C257A205F1DC9007D8987 /* GameViewController.m */; };
 		551C2583205F1DCC007D8987 /* MapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 551C257F205F1DCC007D8987 /* MapView.m */; };
 		551C2586205F6B0E007D8987 /* Globals.m in Sources */ = {isa = PBXBuildFile; fileRef = 551C2584205F6B0D007D8987 /* Globals.m */; };
+		557680CD206200F600F88B18 /* Grid View.m in Sources */ = {isa = PBXBuildFile; fileRef = 557680CB206200F400F88B18 /* Grid View.m */; };
+		557680D02062036600F88B18 /* Envelope.m in Sources */ = {isa = PBXBuildFile; fileRef = 557680CF2062036600F88B18 /* Envelope.m */; };
+		557680D32062078400F88B18 /* UnitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 557680D12062078200F88B18 /* UnitView.m */; };
+		557680D62063338500F88B18 /* UnitInventory.m in Sources */ = {isa = PBXBuildFile; fileRef = 557680D42063338500F88B18 /* UnitInventory.m */; };
+		557680D920633D3200F88B18 /* AvailTech.m in Sources */ = {isa = PBXBuildFile; fileRef = 557680D820633D3200F88B18 /* AvailTech.m */; };
 		557E860020608B8D009E8A11 /* GeoTile.m in Sources */ = {isa = PBXBuildFile; fileRef = 557E85FC20608B8B009E8A11 /* GeoTile.m */; };
 		557E860120608B8D009E8A11 /* ItemEnums.m in Sources */ = {isa = PBXBuildFile; fileRef = 557E85FD20608B8B009E8A11 /* ItemEnums.m */; };
 		557E860420608D1A009E8A11 /* NewTech.m in Sources */ = {isa = PBXBuildFile; fileRef = 557E860220608D19009E8A11 /* NewTech.m */; };
@@ -51,6 +56,16 @@
 		551C257F205F1DCC007D8987 /* MapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapView.m; sourceTree = "<group>"; };
 		551C2584205F6B0D007D8987 /* Globals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Globals.m; sourceTree = "<group>"; };
 		551C2585205F6B0E007D8987 /* Globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Globals.h; sourceTree = "<group>"; };
+		557680CB206200F400F88B18 /* Grid View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Grid View.m"; sourceTree = "<group>"; };
+		557680CC206200F500F88B18 /* Grid View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Grid View.h"; sourceTree = "<group>"; };
+		557680CE2062036500F88B18 /* Envelope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Envelope.h; sourceTree = "<group>"; };
+		557680CF2062036600F88B18 /* Envelope.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Envelope.m; sourceTree = "<group>"; };
+		557680D12062078200F88B18 /* UnitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnitView.m; sourceTree = "<group>"; };
+		557680D22062078300F88B18 /* UnitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnitView.h; sourceTree = "<group>"; };
+		557680D42063338500F88B18 /* UnitInventory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnitInventory.m; sourceTree = "<group>"; };
+		557680D52063338500F88B18 /* UnitInventory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnitInventory.h; sourceTree = "<group>"; };
+		557680D720633D3200F88B18 /* AvailTech.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AvailTech.h; sourceTree = "<group>"; };
+		557680D820633D3200F88B18 /* AvailTech.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AvailTech.m; sourceTree = "<group>"; };
 		557E85FC20608B8B009E8A11 /* GeoTile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoTile.m; sourceTree = "<group>"; };
 		557E85FD20608B8B009E8A11 /* ItemEnums.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemEnums.m; sourceTree = "<group>"; };
 		557E85FE20608B8B009E8A11 /* GeoTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoTile.h; sourceTree = "<group>"; };
@@ -99,18 +114,28 @@
 				551C2578205F1DC7007D8987 /* GameView.m */,
 				551C257E205F1DCB007D8987 /* GameViewController.h */,
 				551C257A205F1DC9007D8987 /* GameViewController.m */,
+				557680D22062078300F88B18 /* UnitView.h */,
+				557680D720633D3200F88B18 /* AvailTech.h */,
+				557680D820633D3200F88B18 /* AvailTech.m */,
+				557680D12062078200F88B18 /* UnitView.m */,
+				557680CE2062036500F88B18 /* Envelope.h */,
+				557680CF2062036600F88B18 /* Envelope.m */,
+				557680CC206200F500F88B18 /* Grid View.h */,
+				557680CB206200F400F88B18 /* Grid View.m */,
 				557E860320608D1A009E8A11 /* NewTech.h */,
 				557E860220608D19009E8A11 /* NewTech.m */,
 				557E85FE20608B8B009E8A11 /* GeoTile.h */,
+				557E85FC20608B8B009E8A11 /* GeoTile.m */,
 				557E86062060B4F8009E8A11 /* TileItem.h */,
 				557E86052060B4F8009E8A11 /* TileItem.m */,
-				557E85FC20608B8B009E8A11 /* GeoTile.m */,
 				557E85FF20608B8C009E8A11 /* ItemEnums.h */,
 				557E85FD20608B8B009E8A11 /* ItemEnums.m */,
 				551C257D205F1DCB007D8987 /* MapScrollView.h */,
 				551C2579205F1DC8007D8987 /* MapScrollView.m */,
 				551C257B205F1DCA007D8987 /* MapView.h */,
 				551C257F205F1DCC007D8987 /* MapView.m */,
+				557680D52063338500F88B18 /* UnitInventory.h */,
+				557680D42063338500F88B18 /* UnitInventory.m */,
 				551C2562205F0AA4007D8987 /* DataViewController.h */,
 				551C2563205F0AA4007D8987 /* DataViewController.m */,
 				551C2565205F0AA4007D8987 /* ModelController.h */,
@@ -199,11 +224,16 @@
 			files = (
 				551C2582205F1DCC007D8987 /* GameViewController.m in Sources */,
 				557E860420608D1A009E8A11 /* NewTech.m in Sources */,
+				557680D62063338500F88B18 /* UnitInventory.m in Sources */,
 				557E860020608B8D009E8A11 /* GeoTile.m in Sources */,
+				557680D02062036600F88B18 /* Envelope.m in Sources */,
 				551C2580205F1DCC007D8987 /* GameView.m in Sources */,
+				557680D32062078400F88B18 /* UnitView.m in Sources */,
 				557E86072060B4F9009E8A11 /* TileItem.m in Sources */,
 				551C2572205F0AA4007D8987 /* main.m in Sources */,
+				557680CD206200F600F88B18 /* Grid View.m in Sources */,
 				551C2561205F0AA4007D8987 /* RootViewController.m in Sources */,
+				557680D920633D3200F88B18 /* AvailTech.m in Sources */,
 				551C2567205F0AA4007D8987 /* ModelController.m in Sources */,
 				551C2581205F1DCC007D8987 /* MapScrollView.m in Sources */,
 				551C2564205F0AA4007D8987 /* DataViewController.m in Sources */,
