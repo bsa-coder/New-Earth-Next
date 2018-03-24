@@ -28,6 +28,16 @@
 		557680E120634D0000F88B18 /* AppStatusItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 557680DD20634CFE00F88B18 /* AppStatusItem.m */; };
 		557680E220634D0000F88B18 /* AppStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 557680DF20634CFF00F88B18 /* AppStatusView.m */; };
 		557680E520634F1100F88B18 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 557680E420634F1000F88B18 /* GameViewController.m */; };
+		557680E82064952100F88B18 /* StatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 557680E72064952100F88B18 /* StatusViewController.m */; };
+		557680EB2064957000F88B18 /* StatusRoom.m in Sources */ = {isa = PBXBuildFile; fileRef = 557680E92064956F00F88B18 /* StatusRoom.m */; };
+		557680EE2065DA2B00F88B18 /* NotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 557680ED2065DA2A00F88B18 /* NotificationsViewController.m */; };
+		557680F12065DAD300F88B18 /* NeNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 557680F02065DAD200F88B18 /* NeNotifications.m */; };
+		557680F42065DB5E00F88B18 /* NENotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 557680F32065DB5D00F88B18 /* NENotification.m */; };
+		557680F72065EF7100F88B18 /* WarehouseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 557680F62065EF7000F88B18 /* WarehouseViewController.m */; };
+		557680FA2065F43300F88B18 /* UnitsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 557680F92065F43200F88B18 /* UnitsDetailViewController.m */; };
+		557680FD2065F47D00F88B18 /* UnitsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 557680FC2065F47D00F88B18 /* UnitsViewController.m */; };
+		557681002065F4E200F88B18 /* DetailResourceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 557680FE2065F4E100F88B18 /* DetailResourceView.m */; };
+		557681032065F8A800F88B18 /* DetailResourceView2.m in Sources */ = {isa = PBXBuildFile; fileRef = 557681022065F8A700F88B18 /* DetailResourceView2.m */; };
 		557E860020608B8D009E8A11 /* GeoTile.m in Sources */ = {isa = PBXBuildFile; fileRef = 557E85FC20608B8B009E8A11 /* GeoTile.m */; };
 		557E860120608B8D009E8A11 /* ItemEnums.m in Sources */ = {isa = PBXBuildFile; fileRef = 557E85FD20608B8B009E8A11 /* ItemEnums.m */; };
 		557E860420608D1A009E8A11 /* NewTech.m in Sources */ = {isa = PBXBuildFile; fileRef = 557E860220608D19009E8A11 /* NewTech.m */; };
@@ -75,6 +85,26 @@
 		557680DF20634CFF00F88B18 /* AppStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppStatusView.m; sourceTree = "<group>"; };
 		557680E320634F1000F88B18 /* GameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
 		557680E420634F1000F88B18 /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
+		557680E62064952000F88B18 /* StatusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusViewController.h; sourceTree = "<group>"; };
+		557680E72064952100F88B18 /* StatusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusViewController.m; sourceTree = "<group>"; };
+		557680E92064956F00F88B18 /* StatusRoom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusRoom.m; sourceTree = "<group>"; };
+		557680EA2064956F00F88B18 /* StatusRoom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusRoom.h; sourceTree = "<group>"; };
+		557680EC2065DA2A00F88B18 /* NotificationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationsViewController.h; sourceTree = "<group>"; };
+		557680ED2065DA2A00F88B18 /* NotificationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationsViewController.m; sourceTree = "<group>"; };
+		557680EF2065DAD200F88B18 /* NeNotifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NeNotifications.h; sourceTree = "<group>"; };
+		557680F02065DAD200F88B18 /* NeNotifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NeNotifications.m; sourceTree = "<group>"; };
+		557680F22065DB5D00F88B18 /* NENotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NENotification.h; sourceTree = "<group>"; };
+		557680F32065DB5D00F88B18 /* NENotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NENotification.m; sourceTree = "<group>"; };
+		557680F52065EF7000F88B18 /* WarehouseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WarehouseViewController.h; sourceTree = "<group>"; };
+		557680F62065EF7000F88B18 /* WarehouseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WarehouseViewController.m; sourceTree = "<group>"; };
+		557680F82065F43200F88B18 /* UnitsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnitsDetailViewController.h; sourceTree = "<group>"; };
+		557680F92065F43200F88B18 /* UnitsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnitsDetailViewController.m; sourceTree = "<group>"; };
+		557680FB2065F47C00F88B18 /* UnitsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnitsViewController.h; sourceTree = "<group>"; };
+		557680FC2065F47D00F88B18 /* UnitsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnitsViewController.m; sourceTree = "<group>"; };
+		557680FE2065F4E100F88B18 /* DetailResourceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailResourceView.m; sourceTree = "<group>"; };
+		557680FF2065F4E200F88B18 /* DetailResourceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailResourceView.h; sourceTree = "<group>"; };
+		557681012065F8A700F88B18 /* DetailResourceView2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailResourceView2.h; sourceTree = "<group>"; };
+		557681022065F8A700F88B18 /* DetailResourceView2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailResourceView2.m; sourceTree = "<group>"; };
 		557E85FC20608B8B009E8A11 /* GeoTile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoTile.m; sourceTree = "<group>"; };
 		557E85FD20608B8B009E8A11 /* ItemEnums.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemEnums.m; sourceTree = "<group>"; };
 		557E85FE20608B8B009E8A11 /* GeoTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoTile.h; sourceTree = "<group>"; };
@@ -129,6 +159,16 @@
 				557680DD20634CFE00F88B18 /* AppStatusItem.m */,
 				557680DE20634CFF00F88B18 /* AppStatusView.h */,
 				557680DF20634CFF00F88B18 /* AppStatusView.m */,
+				557680EA2064956F00F88B18 /* StatusRoom.h */,
+				557680E92064956F00F88B18 /* StatusRoom.m */,
+				557680E62064952000F88B18 /* StatusViewController.h */,
+				557680E72064952100F88B18 /* StatusViewController.m */,
+				557680EC2065DA2A00F88B18 /* NotificationsViewController.h */,
+				557680ED2065DA2A00F88B18 /* NotificationsViewController.m */,
+				557680F22065DB5D00F88B18 /* NENotification.h */,
+				557680F32065DB5D00F88B18 /* NENotification.m */,
+				557680EF2065DAD200F88B18 /* NeNotifications.h */,
+				557680F02065DAD200F88B18 /* NeNotifications.m */,
 				557680D22062078300F88B18 /* UnitView.h */,
 				557680D720633D3200F88B18 /* AvailTech.h */,
 				557680D820633D3200F88B18 /* AvailTech.m */,
@@ -156,6 +196,16 @@
 				551C2565205F0AA4007D8987 /* ModelController.h */,
 				551C2566205F0AA4007D8987 /* ModelController.m */,
 				551C2568205F0AA4007D8987 /* Main.storyboard */,
+				557680FF2065F4E200F88B18 /* DetailResourceView.h */,
+				557680FE2065F4E100F88B18 /* DetailResourceView.m */,
+				557681012065F8A700F88B18 /* DetailResourceView2.h */,
+				557681022065F8A700F88B18 /* DetailResourceView2.m */,
+				557680FB2065F47C00F88B18 /* UnitsViewController.h */,
+				557680FC2065F47D00F88B18 /* UnitsViewController.m */,
+				557680F82065F43200F88B18 /* UnitsDetailViewController.h */,
+				557680F92065F43200F88B18 /* UnitsDetailViewController.m */,
+				557680F52065EF7000F88B18 /* WarehouseViewController.h */,
+				557680F62065EF7000F88B18 /* WarehouseViewController.m */,
 				551C2585205F6B0E007D8987 /* Globals.h */,
 				551C2584205F6B0D007D8987 /* Globals.m */,
 				551C256B205F0AA4007D8987 /* Assets.xcassets */,
@@ -237,24 +287,34 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				557680FD2065F47D00F88B18 /* UnitsViewController.m in Sources */,
 				557E860420608D1A009E8A11 /* NewTech.m in Sources */,
 				557680D62063338500F88B18 /* UnitInventory.m in Sources */,
 				557E860020608B8D009E8A11 /* GeoTile.m in Sources */,
 				557680D02062036600F88B18 /* Envelope.m in Sources */,
 				551C2580205F1DCC007D8987 /* GameView.m in Sources */,
 				557680E220634D0000F88B18 /* AppStatusView.m in Sources */,
+				557680FA2065F43300F88B18 /* UnitsDetailViewController.m in Sources */,
 				557680D32062078400F88B18 /* UnitView.m in Sources */,
+				557680F12065DAD300F88B18 /* NeNotifications.m in Sources */,
 				557E86072060B4F9009E8A11 /* TileItem.m in Sources */,
 				551C2572205F0AA4007D8987 /* main.m in Sources */,
+				557680F72065EF7100F88B18 /* WarehouseViewController.m in Sources */,
 				557680E120634D0000F88B18 /* AppStatusItem.m in Sources */,
 				557680CD206200F600F88B18 /* Grid View.m in Sources */,
 				551C2561205F0AA4007D8987 /* RootViewController.m in Sources */,
+				557680E82064952100F88B18 /* StatusViewController.m in Sources */,
 				557680E520634F1100F88B18 /* GameViewController.m in Sources */,
 				557680D920633D3200F88B18 /* AvailTech.m in Sources */,
+				557681002065F4E200F88B18 /* DetailResourceView.m in Sources */,
 				551C2567205F0AA4007D8987 /* ModelController.m in Sources */,
+				557680EB2064957000F88B18 /* StatusRoom.m in Sources */,
+				557680F42065DB5E00F88B18 /* NENotification.m in Sources */,
 				551C2581205F1DCC007D8987 /* MapScrollView.m in Sources */,
+				557681032065F8A800F88B18 /* DetailResourceView2.m in Sources */,
 				557680E020634D0000F88B18 /* AppStatusBarView.m in Sources */,
 				551C2564205F0AA4007D8987 /* DataViewController.m in Sources */,
+				557680EE2065DA2B00F88B18 /* NotificationsViewController.m in Sources */,
 				551C2583205F1DCC007D8987 /* MapView.m in Sources */,
 				557E860120608B8D009E8A11 /* ItemEnums.m in Sources */,
 				551C2586205F6B0E007D8987 /* Globals.m in Sources */,
