@@ -30,7 +30,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q3h-pU-vEd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-101.59999999999999" y="-243.32833583208398"/>
+            <point key="canvasLocation" x="-369" y="0.0"/>
         </scene>
         <!--Units Detail View Controller-->
         <scene sceneID="ICI-6e-7ZK">
@@ -214,7 +214,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1ab-2g-xB6" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="cMh-so-Ju2" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-1647" y="1607"/>
+            <point key="canvasLocation" x="-2047" y="1595"/>
         </scene>
         <!--Warehouse-->
         <scene sceneID="AQ1-Uv-4xa">
@@ -263,7 +263,66 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UKf-c8-PFZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1647.2" y="869.41529235382313"/>
+            <point key="canvasLocation" x="-2047" y="859"/>
+        </scene>
+        <!--Units View Controller-->
+        <scene sceneID="Fss-HK-adQ">
+            <objects>
+                <viewController id="jSh-yL-tMF" customClass="UnitsViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4zH-9M-cVG">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H2g-q4-bVF">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="dVx-oI-Zk6"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="Store" id="DMF-w2-BEx">
+                                        <barButtonItem key="leftBarButtonItem" title="Done" id="FIY-DK-fyE" userLabel="Done">
+                                            <connections>
+                                                <segue destination="27x-WO-NyR" kind="unwind" unwindAction="exitToHere:" id="zXh-pR-kf2"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Buy It" id="dHC-gS-uRA" userLabel="Buy It">
+                                            <connections>
+                                                <action selector="placeTheNewUnit:" destination="jSh-yL-tMF" id="Qvj-dZ-Rx4"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TGI-16-YIU">
+                                <rect key="frame" x="16" y="44" width="343" height="623"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="jSh-yL-tMF" id="Nuv-YG-mi4"/>
+                                    <outlet property="delegate" destination="jSh-yL-tMF" id="PUS-aQ-CgQ"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="TGI-16-YIU" firstAttribute="top" secondItem="H2g-q4-bVF" secondAttribute="bottom" id="2E8-rq-b6b"/>
+                            <constraint firstItem="TGI-16-YIU" firstAttribute="bottom" secondItem="wsh-Cp-aiJ" secondAttribute="bottom" id="F9c-zo-phW"/>
+                            <constraint firstItem="wsh-Cp-aiJ" firstAttribute="trailing" secondItem="TGI-16-YIU" secondAttribute="trailing" constant="16" id="TYo-PQ-2Fe"/>
+                            <constraint firstItem="H2g-q4-bVF" firstAttribute="top" secondItem="4zH-9M-cVG" secondAttribute="top" id="XNS-ts-r0N"/>
+                            <constraint firstItem="H2g-q4-bVF" firstAttribute="leading" secondItem="wsh-Cp-aiJ" secondAttribute="leading" id="h57-Bw-aBe"/>
+                            <constraint firstItem="H2g-q4-bVF" firstAttribute="trailing" secondItem="wsh-Cp-aiJ" secondAttribute="trailing" id="hB6-zf-eZl"/>
+                            <constraint firstItem="TGI-16-YIU" firstAttribute="leading" secondItem="wsh-Cp-aiJ" secondAttribute="leading" constant="16" id="meM-sh-X5y"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="wsh-Cp-aiJ"/>
+                    </view>
+                    <connections>
+                        <segue destination="t3P-U5-nvb" kind="show" identifier="AvailTechToDetails" id="AKV-6z-eQc"/>
+                        <segue destination="R0C-5z-YBQ" kind="show" id="36d-eJ-D8K"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WmI-SK-OI3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="27x-WO-NyR" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="-1332" y="859"/>
         </scene>
         <!--Control Room-->
         <scene sceneID="jkw-4a-dGG">
@@ -374,7 +433,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N6J-xA-Rx5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-916" y="782.15892053973016"/>
+            <point key="canvasLocation" x="-450" y="1595"/>
         </scene>
         <!--Status-->
         <scene sceneID="dex-1f-DYs">
@@ -431,7 +490,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6xM-pG-43x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-872.79999999999995" y="-195.6521739130435"/>
+            <point key="canvasLocation" x="286" y="1595"/>
         </scene>
         <!--Root Tab Bar Controller-->
         <scene sceneID="Gum-1d-Qps">
@@ -451,54 +510,70 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0DS-pj-nkQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1822" y="138"/>
+            <point key="canvasLocation" x="-1191" y="0.0"/>
         </scene>
         <!--The Map-->
         <scene sceneID="Kso-Rv-9x6">
             <objects>
-                <viewController id="6Kw-yG-keO" customClass="GameViewController" sceneMemberID="viewController">
-                    <scrollView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" semanticContentAttribute="spatial" ambiguous="YES" minimumZoomScale="0.25" maximumZoomScale="10" id="IHm-8D-mSh" userLabel="The Scroll View" customClass="MapScrollView">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                <viewController autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" id="6Kw-yG-keO" customClass="GameViewController" sceneMemberID="viewController">
+                    <scrollView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" semanticContentAttribute="spatial" ambiguous="YES" minimumZoomScale="0.5" maximumZoomScale="5" id="IHm-8D-mSh" userLabel="The Scroll View" customClass="MapScrollView">
+                        <rect key="frame" x="0.0" y="0.0" width="1675" height="2187"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ffi-ZP-pYe" customClass="GameView">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <view contentMode="scaleAspectFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ffi-ZP-pYe" customClass="GameView">
+                                <rect key="frame" x="0.0" y="0.0" width="1675" height="2187"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="brooklyn map simpler 02" translatesAutoresizingMaskIntoConstraints="NO" id="QJI-nh-lJ4" customClass="MapView">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" semanticContentAttribute="spatial" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" preservesSuperviewLayoutMargins="YES" image="brooklyn map simpler 02" translatesAutoresizingMaskIntoConstraints="NO" id="QJI-nh-lJ4" customClass="MapView">
+                                        <rect key="frame" x="0.0" y="0.0" width="1675" height="2187"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </imageView>
+                                    <view opaque="NO" contentMode="scaleAspectFill" fixedFrame="YES" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NkI-nl-bCx" customClass="Grid_View">
+                                        <rect key="frame" x="0.0" y="0.0" width="1675" height="2187"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                    <view opaque="NO" contentMode="scaleAspectFill" fixedFrame="YES" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="An5-AZ-3cy" customClass="Envelope">
+                                        <rect key="frame" x="0.0" y="0.0" width="1675" height="2187"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                    <view opaque="NO" contentMode="scaleAspectFill" fixedFrame="YES" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rVq-mW-M9S" customClass="UnitView">
+                                        <rect key="frame" x="0.0" y="0.0" width="1675" height="2187"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="XrE-EG-kuj" appends="YES" id="Yf1-lG-q65"/>
+                                    <outletCollection property="gestureRecognizers" destination="6jR-n2-Mey" appends="YES" id="xOr-hu-3Wh"/>
                                 </connections>
                             </view>
                         </subviews>
                         <gestureRecognizers/>
-                        <constraints>
-                            <constraint firstItem="ffi-ZP-pYe" firstAttribute="leading" secondItem="tAe-eZ-4AG" secondAttribute="leading" id="Da4-0g-irE"/>
-                            <constraint firstItem="ffi-ZP-pYe" firstAttribute="bottom" secondItem="tAe-eZ-4AG" secondAttribute="bottom" id="POf-vF-jxZ"/>
-                            <constraint firstItem="ffi-ZP-pYe" firstAttribute="trailing" secondItem="tAe-eZ-4AG" secondAttribute="trailing" id="SMO-Jl-9V2"/>
-                            <constraint firstItem="ffi-ZP-pYe" firstAttribute="top" secondItem="IHm-8D-mSh" secondAttribute="top" id="fSd-uc-ra1"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="tAe-eZ-4AG"/>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="6jR-n2-Mey" appends="YES" id="2Wq-Qf-aCz"/>
-                        </connections>
                     </scrollView>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <tabBarItem key="tabBarItem" title="The Map" image="TabIconMap48" id="O88-io-0Jm" userLabel="Map"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="1600" height="2105"/>
+                    <size key="freeformSize" width="1675" height="2187"/>
                     <connections>
+                        <outlet property="myEnvView" destination="An5-AZ-3cy" id="3c9-9e-Zhc"/>
                         <outlet property="myGameView" destination="ffi-ZP-pYe" id="fgx-dS-z6k"/>
+                        <outlet property="myGridView" destination="NkI-nl-bCx" id="4TX-Zj-VPu"/>
                         <outlet property="myMapView" destination="QJI-nh-lJ4" id="2nI-mV-WdW"/>
+                        <outlet property="myUnitView" destination="rVq-mW-M9S" id="aVx-OD-6Kz"/>
                         <outlet property="theScrollView" destination="IHm-8D-mSh" id="VlZ-o0-8Mw"/>
+                        <segue destination="jSh-yL-tMF" kind="show" identifier="fromMapToStore" id="1W6-OG-4yX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eGJ-01-1gL" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="6jR-n2-Mey">
+                <tapGestureRecognizer numberOfTapsRequired="2" id="6jR-n2-Mey">
                     <connections>
-                        <action selector="handleDoubleTap:" destination="6Kw-yG-keO" id="of7-1B-Z2f"/>
+                        <action selector="handleDoubleTap:" destination="6Kw-yG-keO" id="gJw-K7-EsC"/>
                     </connections>
                 </tapGestureRecognizer>
                 <tapGestureRecognizer id="XrE-EG-kuj">
@@ -507,7 +582,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-112.8" y="429.53523238380814"/>
+            <point key="canvasLocation" x="-1191" y="3054"/>
         </scene>
         <!--Data View Controller-->
         <scene sceneID="snT-py-3hH">
@@ -546,7 +621,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GmD-Rr-ZGN" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="597" y="-243"/>
+            <point key="canvasLocation" x="330" y="0.0"/>
         </scene>
         <!--Root View Controller-->
         <scene sceneID="jTy-PX-1WO">
@@ -575,7 +650,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="azZ-Rq-O0X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="788" y="430"/>
+            <point key="canvasLocation" x="1023" y="-1"/>
         </scene>
     </scenes>
     <resources>
@@ -587,5 +662,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="sr0-rm-muw"/>
+        <segue reference="36d-eJ-D8K"/>
+        <segue reference="AKV-6z-eQc"/>
     </inferredMetricsTieBreakers>
 </document>
