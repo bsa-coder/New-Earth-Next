@@ -42,6 +42,9 @@
 		557E860120608B8D009E8A11 /* ItemEnums.m in Sources */ = {isa = PBXBuildFile; fileRef = 557E85FD20608B8B009E8A11 /* ItemEnums.m */; };
 		557E860420608D1A009E8A11 /* NewTech.m in Sources */ = {isa = PBXBuildFile; fileRef = 557E860220608D19009E8A11 /* NewTech.m */; };
 		557E86072060B4F9009E8A11 /* TileItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 557E86052060B4F8009E8A11 /* TileItem.m */; };
+		55D24574206E6FC500EC8054 /* FileOps.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D24573206E6FC500EC8054 /* FileOps.m */; };
+		55D24577206E731C00EC8054 /* GameInit.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D24576206E731C00EC8054 /* GameInit.m */; };
+		55D2457A206EE7FD00EC8054 /* ModelProduction.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D24578206EE7FC00EC8054 /* ModelProduction.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -113,6 +116,12 @@
 		557E860320608D1A009E8A11 /* NewTech.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewTech.h; sourceTree = "<group>"; };
 		557E86052060B4F8009E8A11 /* TileItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TileItem.m; sourceTree = "<group>"; };
 		557E86062060B4F8009E8A11 /* TileItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TileItem.h; sourceTree = "<group>"; };
+		55D24572206E6FC500EC8054 /* FileOps.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileOps.h; sourceTree = "<group>"; };
+		55D24573206E6FC500EC8054 /* FileOps.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FileOps.m; sourceTree = "<group>"; };
+		55D24575206E731C00EC8054 /* GameInit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameInit.h; sourceTree = "<group>"; };
+		55D24576206E731C00EC8054 /* GameInit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameInit.m; sourceTree = "<group>"; };
+		55D24578206EE7FC00EC8054 /* ModelProduction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelProduction.m; sourceTree = "<group>"; };
+		55D24579206EE7FD00EC8054 /* ModelProduction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelProduction.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,42 +164,48 @@
 				551C2579205F1DC8007D8987 /* MapScrollView.m */,
 				551C257C205F1DCA007D8987 /* GameView.h */,
 				551C2578205F1DC7007D8987 /* GameView.m */,
+				551C257B205F1DCA007D8987 /* MapView.h */,
+				551C257F205F1DCC007D8987 /* MapView.m */,
+				557680CC206200F500F88B18 /* Grid View.h */,
+				557680CB206200F400F88B18 /* Grid View.m */,
+				557680CE2062036500F88B18 /* Envelope.h */,
+				557680CF2062036600F88B18 /* Envelope.m */,
+				557680D22062078300F88B18 /* UnitView.h */,
+				557680D12062078200F88B18 /* UnitView.m */,
 				557680DC20634CFD00F88B18 /* AppStatusBarView.h */,
 				557680DA20634CFD00F88B18 /* AppStatusBarView.m */,
 				557680DB20634CFD00F88B18 /* AppStatusItem.h */,
 				557680DD20634CFE00F88B18 /* AppStatusItem.m */,
 				557680DE20634CFF00F88B18 /* AppStatusView.h */,
 				557680DF20634CFF00F88B18 /* AppStatusView.m */,
-				557680EA2064956F00F88B18 /* StatusRoom.h */,
-				557680E92064956F00F88B18 /* StatusRoom.m */,
 				557680E62064952000F88B18 /* StatusViewController.h */,
 				557680E72064952100F88B18 /* StatusViewController.m */,
+				557680EA2064956F00F88B18 /* StatusRoom.h */,
+				557680E92064956F00F88B18 /* StatusRoom.m */,
 				557680EC2065DA2A00F88B18 /* NotificationsViewController.h */,
 				557680ED2065DA2A00F88B18 /* NotificationsViewController.m */,
 				557680F22065DB5D00F88B18 /* NENotification.h */,
 				557680F32065DB5D00F88B18 /* NENotification.m */,
 				557680EF2065DAD200F88B18 /* NeNotifications.h */,
 				557680F02065DAD200F88B18 /* NeNotifications.m */,
-				557680D22062078300F88B18 /* UnitView.h */,
-				557680D720633D3200F88B18 /* AvailTech.h */,
-				557680D820633D3200F88B18 /* AvailTech.m */,
-				557680D12062078200F88B18 /* UnitView.m */,
-				557680CE2062036500F88B18 /* Envelope.h */,
-				557680CF2062036600F88B18 /* Envelope.m */,
-				557680CC206200F500F88B18 /* Grid View.h */,
-				557680CB206200F400F88B18 /* Grid View.m */,
-				557E860320608D1A009E8A11 /* NewTech.h */,
-				557E860220608D19009E8A11 /* NewTech.m */,
 				557E85FE20608B8B009E8A11 /* GeoTile.h */,
 				557E85FC20608B8B009E8A11 /* GeoTile.m */,
 				557E86062060B4F8009E8A11 /* TileItem.h */,
 				557E86052060B4F8009E8A11 /* TileItem.m */,
 				557E85FF20608B8C009E8A11 /* ItemEnums.h */,
 				557E85FD20608B8B009E8A11 /* ItemEnums.m */,
-				551C257B205F1DCA007D8987 /* MapView.h */,
-				551C257F205F1DCC007D8987 /* MapView.m */,
+				557680D720633D3200F88B18 /* AvailTech.h */,
+				557680D820633D3200F88B18 /* AvailTech.m */,
+				55D24572206E6FC500EC8054 /* FileOps.h */,
+				55D24573206E6FC500EC8054 /* FileOps.m */,
+				55D24575206E731C00EC8054 /* GameInit.h */,
+				55D24576206E731C00EC8054 /* GameInit.m */,
+				55D24579206EE7FD00EC8054 /* ModelProduction.h */,
+				55D24578206EE7FC00EC8054 /* ModelProduction.m */,
 				557680D52063338500F88B18 /* UnitInventory.h */,
 				557680D42063338500F88B18 /* UnitInventory.m */,
+				557E860320608D1A009E8A11 /* NewTech.h */,
+				557E860220608D19009E8A11 /* NewTech.m */,
 				551C2562205F0AA4007D8987 /* DataViewController.h */,
 				551C2563205F0AA4007D8987 /* DataViewController.m */,
 				551C2565205F0AA4007D8987 /* ModelController.h */,
@@ -310,6 +325,7 @@
 				551C2567205F0AA4007D8987 /* ModelController.m in Sources */,
 				557680EB2064957000F88B18 /* StatusRoom.m in Sources */,
 				557680F42065DB5E00F88B18 /* NENotification.m in Sources */,
+				55D24577206E731C00EC8054 /* GameInit.m in Sources */,
 				551C2581205F1DCC007D8987 /* MapScrollView.m in Sources */,
 				557681032065F8A800F88B18 /* DetailResourceView2.m in Sources */,
 				557680E020634D0000F88B18 /* AppStatusBarView.m in Sources */,
@@ -317,7 +333,9 @@
 				557680EE2065DA2B00F88B18 /* NotificationsViewController.m in Sources */,
 				551C2583205F1DCC007D8987 /* MapView.m in Sources */,
 				557E860120608B8D009E8A11 /* ItemEnums.m in Sources */,
+				55D2457A206EE7FD00EC8054 /* ModelProduction.m in Sources */,
 				551C2586205F6B0E007D8987 /* Globals.m in Sources */,
+				55D24574206E6FC500EC8054 /* FileOps.m in Sources */,
 				551C255E205F0AA4007D8987 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
