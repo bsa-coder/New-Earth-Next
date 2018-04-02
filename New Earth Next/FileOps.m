@@ -48,6 +48,16 @@
     return MapTilesDir;
 }
 
+-(NSArray*) getContentsOfDirAt:(NSString*) thePath
+{
+    NSError* error;
+    NSArray* returnArray;
+    
+    returnArray = [[NSFileManager defaultManager] contentsOfDirectoryAtPath: thePath error: &error];
+    if (error) { NSLog(@"contents of path error: %ld - %@ (size: %ld)", (long) error.code, error.localizedDescription, (unsigned long)returnArray.count); }
+    
+    return returnArray;
+}
 
 #pragma mark - Inactive Methods - Map Tiles
 

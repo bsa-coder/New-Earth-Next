@@ -11,5 +11,6 @@
 @interface FileOps : NSObject
 - (NSString *) getUnitsDir;
 - (NSString *) getMapTilesDir;
+- (NSArray *) getContentsOfDirAt:(NSString*) thePath;
 
 @end

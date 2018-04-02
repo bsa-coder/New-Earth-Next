@@ -28,15 +28,15 @@
 #pragma mark - Unit Tech Methods
 -(void) getUnitTechDataNEW
 {
-    NSString* unitTechPath = @"";
+    NSString* unitTechPath = nil;
     NSError* error;
     fo = [[FileOps alloc] init];
     
     unitTechPath = [fo getUnitsDir];
-//    unitTechPath = [self getUnitsDir];
     
-    NSArray* newTechUnits = [[NSFileManager defaultManager] contentsOfDirectoryAtPath: unitTechPath error: &error];
-    if (error) { NSLog(@"newTechUnits path error: %@ (count=%ld)", error.localizedDescription, (unsigned long)newTechUnits.count); }
+//    NSArray* newTechUnits = [[NSFileManager defaultManager] contentsOfDirectoryAtPath: unitTechPath error: &error];
+//    if (error) { NSLog(@"newTechUnits path error: %@ (count=%ld)", error.localizedDescription, (unsigned long)newTechUnits.count); }
+    NSArray* newTechUnits = [fo getContentsOfDirAt: unitTechPath];
     
     if (newTechUnits.count<=0) {
         NSLog(@"newly created folder");
@@ -73,10 +73,6 @@
 }
 
 - (void) getUnitTechDataOLD {
-    
-    fo = [[FileOps alloc] init];
-    
-    NSString* thePath = [fo getUnitsDir];
     
     __unused BOOL resetTile = YES;
     
@@ -339,8 +335,6 @@
     if (theGlobals.geoTileList == nil) return nil;
     if (theGlobals.geoTileList.count <= 0) return nil;
     
-    //     [self createDataPath];
-    
     NSString* allTileData = @"";
     
     for (NSString* aTileID in theGlobals.geoTileList)
@@ -360,7 +354,6 @@
     NSData* data = [allTileData dataUsingEncoding:NSUTF8StringEncoding];
     
     return data;
-    
 }
 
 

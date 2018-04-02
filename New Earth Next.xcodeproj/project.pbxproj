@@ -45,6 +45,7 @@
 		55D24574206E6FC500EC8054 /* FileOps.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D24573206E6FC500EC8054 /* FileOps.m */; };
 		55D24577206E731C00EC8054 /* GameInit.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D24576206E731C00EC8054 /* GameInit.m */; };
 		55D2457A206EE7FD00EC8054 /* ModelProduction.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D24578206EE7FC00EC8054 /* ModelProduction.m */; };
+		55D2457D206F06DC00EC8054 /* RootTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D2457C206F06DB00EC8054 /* RootTabBarViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -122,6 +123,8 @@
 		55D24576206E731C00EC8054 /* GameInit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameInit.m; sourceTree = "<group>"; };
 		55D24578206EE7FC00EC8054 /* ModelProduction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelProduction.m; sourceTree = "<group>"; };
 		55D24579206EE7FD00EC8054 /* ModelProduction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelProduction.h; sourceTree = "<group>"; };
+		55D2457B206F06DB00EC8054 /* RootTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootTabBarViewController.h; sourceTree = "<group>"; };
+		55D2457C206F06DB00EC8054 /* RootTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootTabBarViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +161,8 @@
 				551C255D205F0AA4007D8987 /* AppDelegate.m */,
 				551C255F205F0AA4007D8987 /* RootViewController.h */,
 				551C2560205F0AA4007D8987 /* RootViewController.m */,
+				55D2457B206F06DB00EC8054 /* RootTabBarViewController.h */,
+				55D2457C206F06DB00EC8054 /* RootTabBarViewController.m */,
 				557680E320634F1000F88B18 /* GameViewController.h */,
 				557680E420634F1000F88B18 /* GameViewController.m */,
 				551C257D205F1DCB007D8987 /* MapScrollView.h */,
@@ -334,6 +339,7 @@
 				551C2583205F1DCC007D8987 /* MapView.m in Sources */,
 				557E860120608B8D009E8A11 /* ItemEnums.m in Sources */,
 				55D2457A206EE7FD00EC8054 /* ModelProduction.m in Sources */,
+				55D2457D206F06DC00EC8054 /* RootTabBarViewController.m in Sources */,
 				551C2586205F6B0E007D8987 /* Globals.m in Sources */,
 				55D24574206E6FC500EC8054 /* FileOps.m in Sources */,
 				551C255E205F0AA4007D8987 /* AppDelegate.m in Sources */,

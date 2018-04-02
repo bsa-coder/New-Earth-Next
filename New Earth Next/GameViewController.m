@@ -183,7 +183,7 @@
 
 -(void) setUnitInventory: (UnitInventory*) unitInventory { _aWarehouse = unitInventory; }
 -(void) setAvailTech: (AvailTech*) availTech { _aStore = availTech; }
--(void) setMyGlobals: (NewEarthGlobals *) myGlobals { _aGlobals = myGlobals; }
+-(void) setTheGlobals: (NewEarthGlobals *) myGlobals { _aGlobals = myGlobals; }
 
 
 #pragma mark - Private Methods
@@ -429,7 +429,6 @@
         controller.theTapLocation = myTapLoc; // CGPointMake(myTapLoc.x / theScrollView.zoomScale, myTapLoc.y / theScrollView.zoomScale);
 //        CGPoint abc = CGPointMake(myTapLoc.x * _theScale, myTapLoc.y * _theScale);
     }
-    
 }
 
 
@@ -454,12 +453,12 @@
 }
 
 -(void) scrollViewDidScroll:(UIScrollView *)scrollView {
-    NSLog(@"scroll h=%f w=%f scale=%f", scrollView.contentSize.height, scrollView.contentSize.width, scrollView.zoomScale);
+//    NSLog(@"scroll h=%f w=%f scale=%f", scrollView.contentSize.height, scrollView.contentSize.width, scrollView.zoomScale);
     [self updateUI];
     
 }
 -(void)scrollViewDidZoom:(UIScrollView *)scrollView {
-    NSLog(@"zoomed h=%f w=%f scale=%f", scrollView.contentSize.height, scrollView.contentSize.width, scrollView.zoomScale);
+//    NSLog(@"zoomed h=%f w=%f scale=%f", scrollView.contentSize.height, scrollView.contentSize.width, scrollView.zoomScale);
     [self updateUI];
     
 }

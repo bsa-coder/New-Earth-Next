@@ -13,11 +13,15 @@
 @end
 
 @implementation AppDelegate
+@synthesize gi;
 
 NSString* const kSetUpdateNotification = @"SetUpdateNotification";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    gi = [[GameInit alloc] init];
+    [gi getUnitTechDataNEW];
+    
     return YES;
 }
 

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GameInit.h"
 
 // message to update GUI
 extern NSString* const kSetUpdateNotification;
@@ -14,7 +15,7 @@ extern NSString* const kSetUpdateNotification;
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
+@property (retain) GameInit* gi;
 
 @end
 

@@ -195,7 +195,7 @@ NSString* const kAvailTech = @"AvailTechKey";
 // not going to use this as store fixed (predetermined)
 - (void)saveTechData {
     
-    int numberOfUnits = [self count];
+    int numberOfUnits = (int)[self count];
     if (numberOfUnits <= 0) return;
     
     for (int i = 0; i < numberOfUnits; i++) {

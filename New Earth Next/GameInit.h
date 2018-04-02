@@ -22,4 +22,6 @@
 @property AvailTech* theStore;
 @property (retain) ModelProduction* aProdEng;
 
+-(void) getUnitTechDataNEW;
+
 @end

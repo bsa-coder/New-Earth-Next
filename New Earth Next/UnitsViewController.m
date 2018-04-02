@@ -186,6 +186,7 @@
     // Pass the selected object to the new view controller.
     if([segue.identifier isEqualToString:@"toUnitDetailViewController"])
     {
+        /*
         id destController = segue.destinationViewController;
 
         if ([destController respondsToSelector:@selector(setUnitInventory:)]) {
@@ -197,6 +198,7 @@
         if ([destController respondsToSelector:@selector(setMyGlobals:)]) {
             [destController setMyGlobals:self.theGlobals];
         }
+         */
 
         UnitsDetailViewController* destController2 = segue.destinationViewController;
         
