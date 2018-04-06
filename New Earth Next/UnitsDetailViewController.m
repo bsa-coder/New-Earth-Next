@@ -167,7 +167,7 @@
     labelUnitEnvelope.text = [NSString stringWithFormat: @"%ld m", (long)_aUnit.myEnvelope];
     labelUnitTypeClass.text = [NSString stringWithFormat: @"%u::%ld", _aUnit.myType, (long)_aUnit.myClass];
     labelUnitCost.text = [NSString stringWithFormat: @"%2.0f",_aUnit.myCost];
-    imageUnitIcon.image = [UIImage imageNamed:_aUnit.itemIcon];
+    imageUnitIcon.image = [UIImage imageNamed:_aUnit.getMyIcon];
     textUnitName.text = [NSString stringWithFormat: @"%@-%0.0f-%0.0f", _aUnit.myName, _theTapLocation.x, _theTapLocation.y];
     textUnitName2.text = [NSString stringWithFormat: @"%@-%0.0f-%0.0f", _aUnit.myName, _theTapLocation.x, _theTapLocation.y];
 }
@@ -213,8 +213,13 @@
 
 - (IBAction)placeTheNewUnit:(id)sender
 {
-    NSLog(@"++++++++++++++ clicked the PlaceTheNewUnit ++++++++++++++");
-    
+    NSLog(@"++++++++++++++ clicked the PlaceTheNewUnit ++++++++++++++(%@)", sender);
+//    if (sender == <UIBarButtonItem: 0x166e25d0>) {
+//        NSLog(@"++++++++++++++ clicked BuyIt WHouse ++++++++++++++(%@)", sender);
+//    } else {
+//        NSLog(@"++++++++++++++ clicked BuyIt Store  ++++++++++++++(%@)", sender);
+//    }
+        
     if (!_aUnit.myPlaced) {
         _aUnit.myLoc = [self theTapLocation];
         _aUnit.myLoc = self.theTapLocation;

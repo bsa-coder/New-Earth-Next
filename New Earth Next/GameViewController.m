@@ -51,26 +51,30 @@
     NSLog(@"%@ appeared, unitInv %@, availtec %@", [self class], self.aWarehouse, self.aStore);
 
     //imageView = myMapView.imageView;
-
+/*
     myStatusBar = [[AppStatusView alloc] init];
     myStatusBar.myAppStatusDel = self;
     [self.myEnvView addSubview:myStatusBar]; // added status bar to envelope layer
-    
+*/
     // Place the status bar
-    CGPoint myOrigin = CGPointMake(10.0, [[self view] window].frame.size.height-50.0-10.0);
+//TODO:  fix positioning the status bar (and add the background)
+//    CGPoint myOrigin = CGPointMake(10.0, [[self view] window].frame.size.height-50.0-10.0);
+    CGPoint myOrigin = CGPointMake(10.0, 0.0);
     CGRect myRect = CGRectMake( myOrigin.x, myOrigin.y, ([[self view] window].frame.size.width - 20.0), 50);
     self.myStatusBar.frame = myRect; //fixedFrame;
     
-    bool isVert = YES; // isVert = NO;
-    if (isVert) { [self placeVerticalBars]; } else { [self placeHorizontalBars]; }
+//    bool isVert = YES; // isVert = NO;
+//    if (isVert) { [self placeVerticalBars]; } else { [self placeHorizontalBars]; }
 
     contentSize = myMapView.image.size;
     theScrollView.contentSize = contentSize;
     [theScrollView addSubview:imageView];
     contentSize = theScrollView.contentSize;
     
-    [self placeGameButtons];
+//    [self placeGameButtons];
 
+    [self placeGameButtons];
+    
     if (self.aGlobals.dayOfContract > self.aGlobals.lengthOfContract) {
         UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"ALERT - Game Over!"
                                                                        message:@"The game is over and you ???"
@@ -106,6 +110,13 @@
     
     [self createGameButtons];
 
+    myStatusBar = [[AppStatusView alloc] init];
+    myStatusBar.myAppStatusDel = self;
+    [self.myEnvView addSubview:myStatusBar]; // added status bar to envelope layer
+    
+    bool isVert = YES; // isVert = NO;
+    if (isVert) { [self placeVerticalBars]; } else { [self placeHorizontalBars]; }
+
 //    myStatusBar = [[AppStatusView alloc] init];
 //    myStatusBar.myAppStatusDel = self;
 //    [self.myEnvView addSubview:myStatusBar]; // added status bar to envelope layer
@@ -118,6 +129,27 @@
 //    bool isVert = YES; // isVert = NO;
 //    if (isVert) { [self placeVerticalBars]; } else { [self placeHorizontalBars]; }
 }
+
+-(void) viewWillAppear:(BOOL)animated
+{
+    // do some stuff here
+    [super viewWillAppear:YES];
+    
+    center = [NSNotificationCenter defaultCenter];
+    
+    [center addObserver:self
+               selector:@selector(handleUpdateNotification:)
+                   name:kSetUpdateNotification
+                 object:nil];
+}
+
+-(void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:YES];
+    [self stopScreenUpdateTimer];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 
 -(IBAction)startNewGame
 {
@@ -351,27 +383,6 @@
     [self.myStatusBar addSubview:aBar];
 */    
 }
-
--(void) viewWillAppear:(BOOL)animated
-{
-    // do some stuff here
-    [super viewWillAppear:YES];
-
-    center = [NSNotificationCenter defaultCenter];
-    
-    [center addObserver:self
-               selector:@selector(handleUpdateNotification:)
-                   name:kSetUpdateNotification
-                 object:nil];
-}
-
--(void) viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:YES];
-    [self stopScreenUpdateTimer];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
 
 - (IBAction)handleTap: (UITapGestureRecognizer*) recognizer
 {

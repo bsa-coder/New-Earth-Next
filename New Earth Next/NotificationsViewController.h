@@ -16,15 +16,13 @@
 
 @interface NotificationsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 {
-//    UITableView* theTable;
     
 }
 
-//@property (strong, nonatomic) UITableView* tableView;
 @property (strong, nonatomic) UITableViewCell* tableViewCellLocal;
 @property (strong, nonatomic) UITableViewCell* tableViewCellRemote;
 
-//@property IBOutlet UITableView* theTable;
+@property (weak) IBOutlet UITableView* theTable;
 @property IBOutlet UITableViewCell* theCellLocal;
 @property IBOutlet UITableViewCell* theCellRemote;
 @property NSMutableArray* aTable;
@@ -34,7 +32,5 @@
 -(void) handleUpdateNotification:(NSNotification*) paramNotification;
 
 -(void) setNeNoteList:(NeNotifications*) noteList;
-
-//- (IBAction)placeTheNewUnit:(id)sender;
 
 @end

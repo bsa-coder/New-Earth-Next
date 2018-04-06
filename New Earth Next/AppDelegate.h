@@ -10,7 +10,7 @@
 #import "GameInit.h"
 
 // message to update GUI
-extern NSString* const kSetUpdateNotification;
+//extern NSString* const kSetUpdateNotification;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

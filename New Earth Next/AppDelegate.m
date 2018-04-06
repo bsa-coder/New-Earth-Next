@@ -15,12 +15,14 @@
 @implementation AppDelegate
 @synthesize gi;
 
-NSString* const kSetUpdateNotification = @"SetUpdateNotification";
+//NSString* const kSetUpdateNotification = @"SetUpdateNotification";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     gi = [[GameInit alloc] init];
+    [gi initTileList];
     [gi getUnitTechDataNEW];
+    [gi fillMapWithGeoData];
     
     return YES;
 }
@@ -29,6 +31,7 @@ NSString* const kSetUpdateNotification = @"SetUpdateNotification";
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+    [gi stopGameEngineTimer];
 }
 
 
@@ -45,11 +48,13 @@ NSString* const kSetUpdateNotification = @"SetUpdateNotification";
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [gi startGameEngineTimer];
 }
 
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [gi stopGameEngineTimer];
 }
 
 

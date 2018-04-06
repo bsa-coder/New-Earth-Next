@@ -79,10 +79,19 @@
     barConsume = CGRectMake(myWidth / 2.0f, myHeight / 2.0f, wideWidth * 0.4f, myHeight / 2.0f);
     barProduce = CGRectMake(myWidth / 2.0f, 0.0f, wideWidth * 0.4f * (makeRate / takeRate > 2 ? 2 : makeRate / takeRate), myHeight / 2.0f);
     barNew = CGRectMake(myWidth / 2.0f + myWidth * 0.4f * (makeRate / takeRate > 2 ? 2 : makeRate / takeRate), 0.0, wideWidth * 0.2 * (bakeRate / takeRate > 1 ? 1 : bakeRate / takeRate), myHeight / 2.0f);
-    UIFont* valueFont = [UIFont systemFontOfSize: 20];
+
+    UIFont* valueFont;
+    CGFloat defaultFontSize = (int)(15.0 / theScale);
+    if (defaultFontSize < 15.0) {
+        valueFont = [UIFont systemFontOfSize: (int)(8.0 / (theScale / 2.0))];
+    } else {
+        valueFont = [UIFont systemFontOfSize: (int)(15.0 / theScale)];
+    }
     [barLegend drawAtPoint:CGPointMake(2.0f, 0.0f)
             withAttributes:@{NSFontAttributeName: valueFont,
                              NSForegroundColorAttributeName: [UIColor blackColor]}];
+    yourLabel.adjustsFontForContentSizeCategory = YES;
+    yourLabel.text = barLegend;
 }
 
 -(void) horizontalBarNarrowTake: (CGFloat) takeRate Make: (CGFloat) makeRate Bake: (CGFloat) bakeRate atScale: (CGFloat) theScale
@@ -102,8 +111,13 @@
 //        -(UIScrollView*) statusScrollView:(AppStatusView*) requestor {return theScrollView;}
         if (!myScroll) {
             UIFont* valueFont = [UIFont systemFontOfSize: 20];
+            if (theScale > 2.5) {
+                valueFont = [UIFont systemFontOfSize: 10];
+            } else {
+                valueFont = [UIFont systemFontOfSize: 20];
+            }
             [barLegend drawAtPoint:CGPointMake(2.0f, 0.0f)
-                    withAttributes:@{NSFontAttributeName: valueFont, NSForegroundColorAttributeName: [UIColor blackColor]}];
+                    withAttributes:@{NSFontAttributeName: valueFont, NSForegroundColorAttributeName: [UIColor orangeColor]}];
         } else {
             if (myScroll.zoomScale == 1.0) {
                 UIFont* valueFont = [UIFont systemFontOfSize: 20];
@@ -111,7 +125,14 @@
                         withAttributes:@{NSFontAttributeName: valueFont, NSForegroundColorAttributeName: [UIColor blackColor]}];
             }
             else {
-                UIFont* valueFont = [UIFont systemFontOfSize: 20 / myScroll.zoomScale];
+                UIFont* valueFont;
+                CGFloat defaultFontSize = (int)(15.0 / myScroll.zoomScale);
+                if (defaultFontSize < 15.0) {
+                    valueFont = [UIFont systemFontOfSize: (int)(8.0 / (myScroll.zoomScale / 2.0))];
+                } else {
+                    valueFont = [UIFont systemFontOfSize: (int)(15.0 / myScroll.zoomScale)];
+                }
+//                NSLog(@"font size = %f", valueFont.pointSize);
                 [barLegend drawAtPoint:CGPointMake(2.0f, 0.0f)
                         withAttributes:@{NSFontAttributeName: valueFont, NSForegroundColorAttributeName: [UIColor blackColor]}];
                 
@@ -124,7 +145,13 @@
         }
     }
     else {
-        UIFont* valueFont = [UIFont systemFontOfSize: 20];
+        UIFont* valueFont;
+        CGFloat defaultFontSize = (int)(15.0 / theScale);
+        if (defaultFontSize < 15.0) {
+            valueFont = [UIFont systemFontOfSize: (int)(8.0 / (theScale / 2.0))];
+        } else {
+            valueFont = [UIFont systemFontOfSize: (int)(15.0 / theScale)];
+        }
         [barLegend drawAtPoint:CGPointMake(2.0f, 0.0f)
                 withAttributes:@{NSFontAttributeName: valueFont, NSForegroundColorAttributeName: [UIColor yellowColor]}];
     }
@@ -200,8 +227,8 @@
         else { barNewView.frame = barNew; }
         
         UIFont* valueFont2 = [UIFont systemFontOfSize: 20 / myScroll.zoomScale];
-        [barLegend drawAtPoint:CGPointMake(2.0f, 0.0f)
-                withAttributes:@{NSFontAttributeName: valueFont2, NSForegroundColorAttributeName: [UIColor blueColor]}];
+//        [barLegend drawAtPoint:CGPointMake(2.0f, 0.0f)
+//                withAttributes:@{NSFontAttributeName: valueFont2, NSForegroundColorAttributeName: [UIColor blueColor]}];
 
         /*
         UIFont* valueFont = [UIFont systemFontOfSize: 12 / myScroll.zoomScale];

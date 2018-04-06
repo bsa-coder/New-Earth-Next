@@ -45,7 +45,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-
+    /*
+    _center = [NSNotificationCenter defaultCenter];
+    [_center addObserver:self
+                selector:@selector(handleUpdateNotification:)
+                    name:kNENoteInsertNoteNotification
+                  object:nil];
+    [_center addObserver:self
+                selector:@selector(handleUpdateNotification:)
+                    name:kNENoteDeleteNoteNotification
+                  object:nil];
+     */
 }
 
 -(void) viewWillAppear:(BOOL)animated
@@ -61,12 +71,6 @@
     self.view.alpha = 1.0;
     self.view.backgroundColor = myBkgdColor;
 
-    _center = [NSNotificationCenter defaultCenter];
-    
-    [_center addObserver:self
-               selector:@selector(handleUpdateNotification:)
-                   name:kSetUpdateNotification
-                 object:nil];
 }
 
 -(void) viewWillDisappear:(BOOL)animated
@@ -92,8 +96,8 @@
 
 #pragma mark - Table view data source
 
--(void) handleUpdateNotification:(NSNotification*) paramNotification { [self updateUI]; }
--(void) updateUI {[theTable setNeedsDisplay];}
+//-(void) handleUpdateNotification:(NSNotification*) paramNotification { [self updateUI]; }
+//-(void) updateUI {[theTable setNeedsDisplay];}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 #warning Incomplete implementation, return the number of sections
@@ -325,47 +329,6 @@
             break;
     }
 }
-/*
--(void) configureCell:(UITableViewCell*) cell forIndexPath: (NSIndexPath*) indexPath
-{
-    NENotification* theNote = [self.neNoteList noteAtIndexPath:indexPath];
-    
-    if (theNote.remote) {
-        [self configureRemoteCell:(remoteTableViewCell*) cell forIndexPath:indexPath];
-    }
-    else
-    {
-        [self configureLocalCell:(localTableViewCell*) cell forIndexPath:indexPath];
-    }
-}
- */
-
-/*
--(void) configureLocalCell:(localTableViewCell*) cell forIndexPath: (NSIndexPath*) indexPath
-{
-    NENotification* theNote = [self.neNoteList noteAtIndexPath:indexPath];
-    cell.textLabel.text = [theNote message];
-    cell.noteColorView.backgroundColor = [self showMyColor: [theNote source]];
-    [cell.textLabel setAdjustsFontSizeToFitWidth:YES];
-    
-//    UIFont* labelFont = [UIFont systemFontOfSize:10.0f];
-//    [cell.textLabel setFont:labelFont];
-    [self configureCell: (UITableViewCell*) cell forType: theNote.type];
-}
-*/
-/*
--(void) configureRemoteCell:(remoteTableViewCell*) cell forIndexPath: (NSIndexPath*) indexPath
-{
-    NENotification* theNote = [self.neNoteList noteAtIndexPath:indexPath];
-    cell.textLabel.text = [theNote message];
-    cell.noteColorView.backgroundColor = [self showMyColor: [theNote source]];
-    [cell.textLabel setAdjustsFontSizeToFitWidth:YES];
-    
-//    UIFont* labelFont = [UIFont systemFontOfSize:10.0f];
-//    [cell.textLabel setFont:labelFont];
-    [self configureCell: (UITableViewCell*) cell forType: theNote.type];
-}
-*/
 
 -(UIColor*) showMyColor: (noteSource)myType
 {
@@ -476,7 +439,7 @@
                              usingBlock:^(NSNotification* note) {
 //                                 NSLog(@"noteBeganObserver");
                                  if ([self isViewLoaded]) {
-                                     [theTable beginUpdates];
+                                     [self.theTable beginUpdates];
                                  }
                              }];
     
@@ -493,8 +456,8 @@
                                              @"notifications's user infor dictionary");
                                     
                                     if ([_self isViewLoaded]) {
-                                        [theTable cellForRowAtIndexPath:indexPath];
-                                        [theTable insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                                        [self.theTable cellForRowAtIndexPath:indexPath];
+                                        [self.theTable insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
                                     }
                                 }];
     
@@ -510,7 +473,7 @@
                                             @"we should have an index path in the "
                                             @"notifications's user infor dictionary");
                                    if ([_self isViewLoaded]) {
-                                       [theTable deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                                       [self.theTable deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
                                    }
                                }];
     
@@ -520,7 +483,8 @@
                                       queue:mainQueue
                                       usingBlock:^(NSNotification* note){
 //                                          NSLog(@"noteChangeCompleteObserver");
-                                          [theTable endUpdates];
+                                          [self.theTable endUpdates];
+                                          [self.theTable setNeedsDisplay];
                                       }];
     
 }

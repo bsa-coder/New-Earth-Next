@@ -13,6 +13,23 @@
 #import "UnitInventory.h"
 #import "AvailTech.h"
 #import "ModelProduction.h"
+#import "NeNotifications.h"
+
+// message to update GUI
+extern NSString* const kSetUpdateNotification;
+
+// nags and updates from Corporate (Mars) like
+// weather updates, progress status, demands for
+// something
+extern NSString* const kCorporateNotification;
+
+// notes from on-earth sources like work complete,
+// something broken, need help
+extern NSString* const kSystemNotification;
+extern NSString* const kMessageTypeKey;
+extern NSString* const kMessageTextKey;
+extern NSString* const kMessageUrgencyKey;
+
 
 @interface GameInit : NSObject
 @property FileOps* fo;
@@ -21,7 +38,20 @@
 @property UnitInventory* theWarehouse;
 @property AvailTech* theStore;
 @property (retain) ModelProduction* aProdEng;
+@property (retain) NSNotification* updateNotification;
+@property (retain) NSNotification* corporateNotification;
+@property (retain) NSNotification* systemNotification;
+//@property (strong, nonatomic) NECalendar* myCalendar;
+@property (strong, nonatomic) NeNotifications* neNotes;
 
+@property (nonatomic, strong) NSTimer* gameEngineTimer;
+
+-(void) startGameEngineTimer;
+-(void) stopGameEngineTimer;
+-(void) gameEngine: (NSTimer*) gameTimer;
+
+-(void) initTileList;
 -(void) getUnitTechDataNEW;
+-(void) fillMapWithGeoData;
 
 @end

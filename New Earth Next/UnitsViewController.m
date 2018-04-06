@@ -181,12 +181,12 @@
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    NSLog(@"in prepareForSegue");
+    NSLog(@"in prepareForSegue UVC");
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     if([segue.identifier isEqualToString:@"toUnitDetailViewController"])
     {
-        /*
+        
         id destController = segue.destinationViewController;
 
         if ([destController respondsToSelector:@selector(setUnitInventory:)]) {
@@ -198,7 +198,7 @@
         if ([destController respondsToSelector:@selector(setMyGlobals:)]) {
             [destController setMyGlobals:self.theGlobals];
         }
-         */
+        
 
         UnitsDetailViewController* destController2 = segue.destinationViewController;
         

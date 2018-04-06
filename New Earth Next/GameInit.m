@@ -8,8 +8,17 @@
 
 #import "GameInit.h"
 
+NSString* const kSetUpdateNotification = @"SetUpdateNotification";
+NSString* const kCorporateNotification = @"MessageFromHome";
+NSString* const kSystemNotification = @"MessageFromTeam";
+NSString* const kMessageTypeKey = @"MsgType"; // construction, weather, yourelate, ...
+NSString* const kMessageTextKey = @"MsgText"; // message to display
+NSString* const kMessageUrgencyKey = @"MsgFire"; // color, icons, etc
+
 @implementation GameInit
 @synthesize fo, theWarehouse, theGlobals, theStore, aProdEng;
+@synthesize neNotes, updateNotification, corporateNotification, systemNotification;
+@synthesize gameEngineTimer;
 
 #pragma mark - Initialization Methods
 -(id)init
@@ -20,6 +29,29 @@
         theGlobals = [NewEarthGlobals sharedSelf];
         theWarehouse = [UnitInventory sharedSelf];
         theStore = [AvailTech sharedSelf];
+        neNotes = [NeNotifications sharedSelf]; 
+        aProdEng = [[ModelProduction alloc] init];
+        
+        NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                              @"construction", kMessageTypeKey,
+                              @"theMessage", kMessageTextKey,
+                              @"howImportantIsIt", kMessageUrgencyKey, nil];
+        
+        // this notification is called by the game engine to tell other windows do update
+        updateNotification =
+        [NSNotification notificationWithName:kSetUpdateNotification
+                                      object:self
+                                    userInfo: nil];
+        
+        corporateNotification =
+        [NSNotification notificationWithName:kCorporateNotification
+                                      object:self
+                                    userInfo: dict];
+        
+        systemNotification =
+        [NSNotification notificationWithName:kSystemNotification
+                                      object:self
+                                    userInfo: dict];
     }
     return self;
 }
@@ -146,6 +178,49 @@
 }
 
 #pragma mark - Map Tile Methods
+-(void) initTileList
+{
+    CGFloat width = theGlobals.width;// 1600.0; // CGRectGetWidth(self.frame);// * drawScale;-75
+    CGFloat height = theGlobals.height;// 2105.0; // CGRectGetHeight(self.frame);// * drawScale;-52
+    
+    __unused CGFloat gridXOrigin = theGlobals.gridXOrigin; // 171.0;
+    CGFloat gridYOrigin = theGlobals.gridYOrigin; // 182.0;
+    CGFloat gridSpacing = theGlobals.gridSpacing; // 100.0;
+    
+    //    CGFloat y = gridYOrigin;
+    
+    CGFloat tileX = 0;
+    CGFloat tileY = 0;
+    CGFloat rowStart = 0;
+    NSInteger theMapColCount = 0;
+    NSInteger theMapRowCount = 0;
+    
+    while (tileY <= height - gridSpacing) {
+        // this is rows
+        theMapColCount = 0;
+        
+        tileY = [aProdEng roundToThreePlaces:(theMapRowCount * gridSpacing + gridYOrigin)];
+        rowStart = [aProdEng startPositionForRow:tileY];
+        
+        while (tileX <= width - gridSpacing) {
+            // this is columns
+            tileX = [aProdEng roundToThreePlaces:(theMapColCount * gridSpacing + rowStart)];
+            
+            CGPoint tileVertex = CGPointMake(tileX, tileY);
+            GeoTile* nextTile = [[GeoTile alloc] initWithLocation:tileVertex];
+            [theGlobals.geoTileList setObject:nextTile forKey:nextTile.tileLocation];
+            //            NSLog(@"tileVertex: %@", NSStringFromCGPoint(tileVertex));
+            theMapColCount++;
+        }
+        
+        tileX = 0;
+        theMapRowCount++;
+    }
+    
+    NSLog(@"\n\nMAP: wide %ld  high %ld", (long)width, (long)height);
+    NSLog(@"MAP: rows %ld  cols %ld", (long)theMapRowCount, (long)theMapColCount);
+    NSLog(@"MAP: grid size %ld\n\n", (long)gridSpacing);
+}
 
 -(void) fillMapWithGeoData
 {
@@ -170,6 +245,7 @@
     
     // look for file containing map tile information
     mapTilePath = [fo getMapTilesDir];
+    result = [[NSFileManager defaultManager] createDirectoryAtPath: mapTilePath withIntermediateDirectories: NO attributes: nil error: &error];
     
     if (!result) { [self initBaseTiles]; return; }
     
@@ -325,6 +401,46 @@
                 [theGlobals.geoTileList setObject:aNewTile forKey:[aNewTile tileLocation]];
             }
         }
+    }
+}
+
+#pragma mark - game engine routine methods
+
+-(void) startGameEngineTimer
+{
+    self.gameEngineTimer = [NSTimer
+                            scheduledTimerWithTimeInterval:5.0
+                            target:self
+                            selector:@selector(gameEngine:)
+                            userInfo:nil repeats:YES];
+}
+
+-(void) stopGameEngineTimer
+{
+    if (self.gameEngineTimer != nil) {
+        [self.gameEngineTimer invalidate];
+    }
+}
+
+-(void) gameEngine: (NSTimer*) gameTimer
+{
+    NSLog(@"\n");
+    NSLog(@"-GE------------------ another day has passed (%d) (%lu) -----------", theGlobals.dayOfContract, (unsigned long)theWarehouse.laborers);
+    theGlobals.dayOfContract++;
+//    [aProdEng doProduction:theWarehouse];
+//    [theWarehouse updateMe];
+//    NSLog(@"warehouse has: %lu units", (unsigned long)[theWarehouse count]);
+//    int locLab = theWarehouse.laborers;
+//    NSLog(@"before myCalendar performanceOnDay");
+//    [myCalendar performanceOnDay:theGlobals.dayOfContract withMySettlers:locLab];
+    NSLog(@"before postNotification:updateNotification");
+    [[NSNotificationCenter defaultCenter] postNotification:updateNotification];
+    NSLog(@"after postNotification:updateNotification");
+    // checkTheWeather
+    // listenForCorporate
+    // listenForProgress
+    if (theGlobals.dayOfContract > theGlobals.lengthOfContract) {
+        [self stopGameEngineTimer];
     }
 }
 

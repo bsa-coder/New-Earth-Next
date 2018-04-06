@@ -564,6 +564,9 @@ CGFloat stockpileTotals[(stockType) 9]; // holds parts made by unit
 
     NSLog(@"in addUnit");
     
+    NSNotificationCenter* center = [NSNotificationCenter defaultCenter];
+    [center postNotificationName:kUnitInventoryBeginChangesNotification object:self];
+    
     CGPoint newPoint;
     if ((newTech.myLoc.x > 0)) {
         newPoint = newTech.myLoc;
@@ -579,9 +582,6 @@ CGFloat stockpileTotals[(stockType) 9]; // holds parts made by unit
 // update unit
     newTech.myLoc = newPoint;
 
-    NSNotificationCenter* center = [NSNotificationCenter defaultCenter];
-    [center postNotificationName:kUnitInventoryBeginChangesNotification object:self];
-    
 // add unit to unitInventory
 //    [self.unitInventory setObject:newTech forKey:NSStringFromCGPoint(newPoint)];
 //    [self insertUnit:newTech atLoc:NSStringFromCGPoint(newPoint)];
