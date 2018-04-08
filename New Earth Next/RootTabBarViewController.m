@@ -32,7 +32,7 @@
     
 //    [self addInitialUnit];
     
-    [self addMockData];
+//    [self addMockData];
     
     [self containersAreReady];
 }

@@ -14,6 +14,7 @@
 #import "AvailTech.h"
 #import "ModelProduction.h"
 #import "NeNotifications.h"
+#import "Calendar.h"
 
 // message to update GUI
 extern NSString* const kSetUpdateNotification;
@@ -37,11 +38,12 @@ extern NSString* const kMessageUrgencyKey;
 @property NewEarthGlobals* theGlobals;
 @property UnitInventory* theWarehouse;
 @property AvailTech* theStore;
+@property NECalendar* myCalendar;
 @property (retain) ModelProduction* aProdEng;
 @property (retain) NSNotification* updateNotification;
 @property (retain) NSNotification* corporateNotification;
 @property (retain) NSNotification* systemNotification;
-//@property (strong, nonatomic) NECalendar* myCalendar;
+@property (strong, nonatomic) id gameOverNotification;
 @property (strong, nonatomic) NeNotifications* neNotes;
 
 @property (nonatomic, strong) NSTimer* gameEngineTimer;
@@ -49,6 +51,7 @@ extern NSString* const kMessageUrgencyKey;
 -(void) startGameEngineTimer;
 -(void) stopGameEngineTimer;
 -(void) gameEngine: (NSTimer*) gameTimer;
+//-(void) handleGameOverNotification;
 
 -(void) initTileList;
 -(void) getUnitTechDataNEW;

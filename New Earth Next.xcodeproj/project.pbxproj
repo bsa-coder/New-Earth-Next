@@ -46,6 +46,7 @@
 		55D24577206E731C00EC8054 /* GameInit.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D24576206E731C00EC8054 /* GameInit.m */; };
 		55D2457A206EE7FD00EC8054 /* ModelProduction.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D24578206EE7FC00EC8054 /* ModelProduction.m */; };
 		55D2457D206F06DC00EC8054 /* RootTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D2457C206F06DB00EC8054 /* RootTabBarViewController.m */; };
+		55D24580207723C800EC8054 /* Calendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D2457E207723C700EC8054 /* Calendar.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -125,6 +126,8 @@
 		55D24579206EE7FD00EC8054 /* ModelProduction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelProduction.h; sourceTree = "<group>"; };
 		55D2457B206F06DB00EC8054 /* RootTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootTabBarViewController.h; sourceTree = "<group>"; };
 		55D2457C206F06DB00EC8054 /* RootTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootTabBarViewController.m; sourceTree = "<group>"; };
+		55D2457E207723C700EC8054 /* Calendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Calendar.m; sourceTree = "<group>"; };
+		55D2457F207723C800EC8054 /* Calendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Calendar.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,6 +196,8 @@
 				557680F32065DB5D00F88B18 /* NENotification.m */,
 				557680EF2065DAD200F88B18 /* NeNotifications.h */,
 				557680F02065DAD200F88B18 /* NeNotifications.m */,
+				55D2457F207723C800EC8054 /* Calendar.h */,
+				55D2457E207723C700EC8054 /* Calendar.m */,
 				557E85FE20608B8B009E8A11 /* GeoTile.h */,
 				557E85FC20608B8B009E8A11 /* GeoTile.m */,
 				557E86062060B4F8009E8A11 /* TileItem.h */,
@@ -309,6 +314,7 @@
 			files = (
 				557680FD2065F47D00F88B18 /* UnitsViewController.m in Sources */,
 				557E860420608D1A009E8A11 /* NewTech.m in Sources */,
+				55D24580207723C800EC8054 /* Calendar.m in Sources */,
 				557680D62063338500F88B18 /* UnitInventory.m in Sources */,
 				557E860020608B8D009E8A11 /* GeoTile.m in Sources */,
 				557680D02062036600F88B18 /* Envelope.m in Sources */,

@@ -17,8 +17,8 @@ NSString* const kMessageUrgencyKey = @"MsgFire"; // color, icons, etc
 
 @implementation GameInit
 @synthesize fo, theWarehouse, theGlobals, theStore, aProdEng;
-@synthesize neNotes, updateNotification, corporateNotification, systemNotification;
-@synthesize gameEngineTimer;
+@synthesize neNotes, updateNotification, corporateNotification, systemNotification, gameOverNotification;
+@synthesize gameEngineTimer, myCalendar;
 
 #pragma mark - Initialization Methods
 -(id)init
@@ -31,6 +31,7 @@ NSString* const kMessageUrgencyKey = @"MsgFire"; // color, icons, etc
         theStore = [AvailTech sharedSelf];
         neNotes = [NeNotifications sharedSelf]; 
         aProdEng = [[ModelProduction alloc] init];
+        myCalendar = [[NECalendar alloc] init];
         
         NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:
                               @"construction", kMessageTypeKey,
@@ -38,6 +39,12 @@ NSString* const kMessageUrgencyKey = @"MsgFire"; // color, icons, etc
                               @"howImportantIsIt", kMessageUrgencyKey, nil];
         
         // this notification is called by the game engine to tell other windows do update
+ 
+        gameOverNotification =
+        [NSNotification notificationWithName:kCalendarGameOverNotification
+                                      object:self
+                                    userInfo: nil];
+        
         updateNotification =
         [NSNotification notificationWithName:kSetUpdateNotification
                                       object:self
@@ -52,6 +59,14 @@ NSString* const kMessageUrgencyKey = @"MsgFire"; // color, icons, etc
         [NSNotification notificationWithName:kSystemNotification
                                       object:self
                                     userInfo: dict];
+
+        [[NSNotificationCenter defaultCenter]
+                                addObserver:self
+                                selector:@selector(handleGameOverNotification:)
+                                name:kCalendarGameOverNotification
+                                object:nil];
+        
+
     }
     return self;
 }
@@ -406,6 +421,12 @@ NSString* const kMessageUrgencyKey = @"MsgFire"; // color, icons, etc
 
 #pragma mark - game engine routine methods
 
+-(void) handleGameOverNotification: (NSNotification*) paramNotification 
+{
+    NSLog(@"must have received the GameOverNotification (GInit)");
+    [self stopGameEngineTimer];
+}
+
 -(void) startGameEngineTimer
 {
     self.gameEngineTimer = [NSTimer
@@ -430,17 +451,18 @@ NSString* const kMessageUrgencyKey = @"MsgFire"; // color, icons, etc
 //    [aProdEng doProduction:theWarehouse];
 //    [theWarehouse updateMe];
 //    NSLog(@"warehouse has: %lu units", (unsigned long)[theWarehouse count]);
-//    int locLab = theWarehouse.laborers;
+    int locLab = (int) theWarehouse.laborers;
 //    NSLog(@"before myCalendar performanceOnDay");
-//    [myCalendar performanceOnDay:theGlobals.dayOfContract withMySettlers:locLab];
-    NSLog(@"before postNotification:updateNotification");
+    [myCalendar performanceOnDay:theGlobals.dayOfContract withMySettlers: locLab];
+//    NSLog(@"before postNotification:updateNotification");
     [[NSNotificationCenter defaultCenter] postNotification:updateNotification];
-    NSLog(@"after postNotification:updateNotification");
+//    NSLog(@"after postNotification:updateNotification");
     // checkTheWeather
     // listenForCorporate
     // listenForProgress
     if (theGlobals.dayOfContract > theGlobals.lengthOfContract) {
-        [self stopGameEngineTimer];
+//        [self stopGameEngineTimer];
+        [[NSNotificationCenter defaultCenter] postNotification:gameOverNotification];
     }
 }
 

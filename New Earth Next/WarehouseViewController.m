@@ -22,6 +22,7 @@
 @property (strong, nonatomic) id docInsertedObserver;
 @property (strong, nonatomic) id docDeletedObserver;
 @property (strong, nonatomic) id docChangeCompleteObserver;
+@property (strong, nonatomic) id gameEndObserver;
 
 @property (strong, nonatomic) UnitInventory* unitInventory;
 @property (strong, nonatomic) AvailTech* availTech;
@@ -176,6 +177,14 @@
     }
 }
 
+-(void) handleGameOverNotification: (NSNotification*) paramNotification
+{
+    NSLog(@"must have received the GameOverNotification (Whous)");
+    // need to disable controls that shouldn't work after the game ends
+}
+
+#pragma mark - Notification Methods
+
 -(void) removeNotifications
 {
     NSNotificationCenter* center = [NSNotificationCenter defaultCenter];
@@ -184,6 +193,7 @@
     if (self.docInsertedObserver) { [center removeObserver:self.docInsertedObserver]; self.docInsertedObserver = nil; }
     if (self.docDeletedObserver) { [center removeObserver:self.docDeletedObserver]; self.docDeletedObserver = nil; }
     if (self.docChangeCompleteObserver) { [center removeObserver:self.docChangeCompleteObserver]; self.docChangeCompleteObserver = nil; }
+    if (self.gameEndObserver) { [center removeObserver:self.gameEndObserver]; self.gameEndObserver = nil; }
 }
 
 -(void) setupNotifications
@@ -238,6 +248,12 @@
                                           [_self.theTable endUpdates];
                                       }];
     
+    [center
+                            addObserver:self
+                            selector:@selector(handleGameOverNotification:)
+                            name:kCalendarGameOverNotification
+                            object:nil];
+
 }
 
 
