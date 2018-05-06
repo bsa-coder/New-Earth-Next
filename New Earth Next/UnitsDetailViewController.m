@@ -225,7 +225,8 @@
         _aUnit.myLoc = self.theTapLocation;
         _aUnit.myCreateDate = [NSDate date];
         _aUnit.myName = textUnitName.text;
-        _aUnit.myPlaced = YES;
+        _aUnit.myName = textUnitName2.text;
+//        _aUnit.myPlaced = YES;
         
         [_unitInventory addUnit:_aUnit];
         _theGlobals.bankAccountBalance -= _aUnit.myCost;

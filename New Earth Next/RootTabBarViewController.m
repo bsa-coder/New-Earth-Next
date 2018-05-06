@@ -63,7 +63,7 @@
     aUnit.myName = @"HQ - HOME";
     aUnit.myType = (itemType) home;
     aUnit.myStatus = isnew;
-    aUnit.myPlaced = YES;
+//    aUnit.myPlaced = YES;
     [aUnit fillStockBOMStruct:100 comp:100 supp:100 matl:100 powr:0 watr:100 air:0 food:100 labr:1];
     aUnit.myLoc = CGPointMake(500 * _neGlobals.mapScale,500 * _neGlobals.mapScale);
 

@@ -669,7 +669,7 @@ CGFloat stockpileTotals[(stockType) 9]; // holds parts made by unit
     HOME.myName = @"HQ - HOME";
     HOME.myType = (itemType) home;
     HOME.myStatus = isnew;
-    HOME.myPlaced = YES;
+//    HOME.myPlaced = YES;
     [HOME fillStockBOMStruct:100 comp:100 supp:100 matl:100 powr:0 watr:100 air:0 food:100 labr:1];
     HOME.myLoc = CGPointMake(500 * theGlobals.mapScale,500 * theGlobals.mapScale);
     

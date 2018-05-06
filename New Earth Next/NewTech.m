@@ -10,6 +10,7 @@
 #import "NENotification.h"
 #import "NeNotifications.h"
 #import "Globals.h"
+#import "ModelProduction.h"
 // At top of file
 
 
@@ -430,7 +431,6 @@ NSString* const klaborUsageKey = @"laborUsageKey";
 //        myTileItem.itemLabel.backgroundColor = [UIColor orangeColor];
 //        [myTileItem.itemLabel setCenter: CGPointMake(myTileItem.itemOutline.frame.size.width + theLoc.x,
 //                                                     myTileItem.itemOutline.frame.size.height + theLoc.y)];
-        
     }
 
     if (theScale > 1) { [self showMeSmallAtPoint: theLoc atScale: theScale inContext: context]; }
@@ -449,7 +449,6 @@ NSString* const klaborUsageKey = @"laborUsageKey";
     
     UIColor* theColorIs;
     CGRect bigRect;
-//    NSString* assetName = @"unknown";
     
     switch (myStatus) {
         case preparing:
@@ -556,11 +555,21 @@ NSString* const klaborUsageKey = @"laborUsageKey";
     tempX = theLoc.x;
     tempY = theLoc.y;
     
-    CGRect theRectToShow = CGRectMake(tempX-(mySize.width/2.0f)*theDrawScale, tempY-(mySize.height/2.0f)*theDrawScale, (mySize.width)*theDrawScale, (mySize.height)*theDrawScale);
+    CGFloat scaleVal = _myGlobals.mapScale;
+    
+    CGRect theRectToShow = CGRectMake(tempX-(mySize.width/2.0f*scaleVal)*theDrawScale, tempY-(mySize.height/2.0f*scaleVal)*theDrawScale, (mySize.width*scaleVal)*theDrawScale, (mySize.height*scaleVal)*theDrawScale);
+    
+    ModelProduction* mp = [[ModelProduction alloc] init];
+    CGPoint theDirLoc = [mp tileVertexForPosition:theLoc];
+    CGFloat theDir = [[_myGlobals.geoTileList objectForKey: NSStringFromCGPoint(theDirLoc)] slopeDir];
     
     if (theRectToShow.origin.x<0 || theRectToShow.origin.y<0) { return; }
     
     CGContextSaveGState(context);
+    // Rotate the context
+    CGContextTranslateCTM( context, 0.5f * theRectToShow.size.width, 0.5f * theRectToShow.size.height ) ;
+    CGContextRotateCTM(context, theDir * M_PI / 180);
+    
     CGContextBeginPath(context);
     CGContextAddRect(context, theRectToShow);
     
@@ -570,6 +579,10 @@ NSString* const klaborUsageKey = @"laborUsageKey";
     CGContextDrawPath(context, kCGPathFillStroke);
     
     CGContextRestoreGState(context);
+    itemIcon = @"Nothing";
+    UIImage* newIcon = [UIImage imageNamed:itemIcon];
+    myTileItem.imageIcon = newIcon;
+
 }
 
 -(void) showMyEnvelope:(id)myID atPoint:(CGPoint) theLoc atScale:(CGFloat) theScale inContext:(CGContextRef)context

@@ -14,7 +14,7 @@
  Add TOTAL STATUS (combine sustain scores for each resource into one value >=0 good <0 bad)
  Add CONTRACT DAY (number of days passed in contract)(maybe countdown is better) to control page
  Add ProgressToGoal (how close are we to the milestone)
- Add Warehouse page to show placed and unplaced units (maybe health, etc)
+ DONE: Add Warehouse page to show placed and unplaced units (maybe health, etc)
  DONE: Check Repair-Wearout in DoProduction (seems to stop) - number type wrong ... integer versus float
  Fix UnitName - and use it in notes (who gave notice) (old format was TYPE+LOC)
  Fix MapScaleOnReturn - after buying unit and returning to map the zoomscale = 1 and not last value

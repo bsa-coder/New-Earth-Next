@@ -11,8 +11,9 @@
 @implementation AppStatusBarView
 // @synthesize barThickness, consumption, production, prodThickness, newProduction, netSustain, itemTypeColor, barPosition;
 @synthesize consumption, production, newProduction, itemTypeColor, barPosition;
-@synthesize barNew, barConsume, barProduce, myArea, barLegend, yourLabel, layout, myAppStatBarItemDel; //, myAppStatBarItemVCDel;
+@synthesize barNew, barConsume, barProduce, myArea, barLegend, recLabel, yourLabel, layout, myAppStatBarItemDel; //, myAppStatBarItemVCDel;
 @synthesize barConsumeView, barNewView, barProduceView, barLegendView, myScrollDel;
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
 -(id) initAtPosition: (CGPoint) theLoc withSize: (CGRect) theRect withType: (UIColor*) myColor withLegend: (NSString*) myLegend layoutType: (int) theLayout
 {
@@ -61,12 +62,21 @@
         
         if (!barNewView) { barNewView = [[UIView alloc] initWithFrame:barNew]; }
         else { barNewView.frame = barNew; }
+        
+        if (!yourLabel) { yourLabel = [[UILabel alloc] initWithFrame:recLabel]; }
+        else { yourLabel.frame = recLabel; }
+        
+        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"10.0")) {
+            // code here
+        yourLabel.adjustsFontForContentSizeCategory = YES;
+        }
+        yourLabel.text = barLegend;
+        [yourLabel setTextAlignment: NSTextAlignmentCenter];
 
         [self addSubview:barConsumeView];
         [self addSubview:barProduceView];
         [self addSubview:barNewView];
-//        [self addSubview:barLegendView];
-        
+        [self addSubview:yourLabel];
     }
     
     return self;
@@ -80,6 +90,8 @@
     barProduce = CGRectMake(myWidth / 2.0f, 0.0f, wideWidth * 0.4f * (makeRate / takeRate > 2 ? 2 : makeRate / takeRate), myHeight / 2.0f);
     barNew = CGRectMake(myWidth / 2.0f + myWidth * 0.4f * (makeRate / takeRate > 2 ? 2 : makeRate / takeRate), 0.0, wideWidth * 0.2 * (bakeRate / takeRate > 1 ? 1 : bakeRate / takeRate), myHeight / 2.0f);
 
+    recLabel = CGRectMake(0.0, 0.0, myWidth / 2.0f, myHeight);
+/*
     UIFont* valueFont;
     CGFloat defaultFontSize = (int)(15.0 / theScale);
     if (defaultFontSize < 15.0) {
@@ -87,11 +99,13 @@
     } else {
         valueFont = [UIFont systemFontOfSize: (int)(15.0 / theScale)];
     }
-    [barLegend drawAtPoint:CGPointMake(2.0f, 0.0f)
-            withAttributes:@{NSFontAttributeName: valueFont,
-                             NSForegroundColorAttributeName: [UIColor blackColor]}];
-    yourLabel.adjustsFontForContentSizeCategory = YES;
-    yourLabel.text = barLegend;
+ */
+//    [barLegend drawAtPoint:CGPointMake(2.0f, 0.0f)
+//            withAttributes:@{NSFontAttributeName: valueFont,
+//                             NSForegroundColorAttributeName: [UIColor blackColor]}];
+//    yourLabel.adjustsFontForContentSizeCategory = YES;
+//    yourLabel.text = barLegend;
+//    yourLabel.backgroundColor = [UIColor orangeColor];
 }
 
 -(void) horizontalBarNarrowTake: (CGFloat) takeRate Make: (CGFloat) makeRate Bake: (CGFloat) bakeRate atScale: (CGFloat) theScale
@@ -100,6 +114,8 @@
     barProduce = CGRectMake(0.0f, myHeight / 2.0f, myWidth * 0.4f * (makeRate / takeRate > 2 ? 2 : makeRate / takeRate), myHeight / 4.0f);
     barNew = CGRectMake(myWidth * 0.4f * (makeRate / takeRate > 2 ? 2 : makeRate / takeRate), myHeight / 2.0f, myWidth * 0.2 * (bakeRate / takeRate > 1 ? 1 : bakeRate / takeRate), myHeight / 4.0f);
 
+    recLabel = CGRectMake(0.0, 0.0, myWidth, myHeight / 2.0f);
+/*
 // this text displayed on main screen and map (and so double vision on map, hmmm)
     if (myAppStatBarItemDel) {
         
@@ -155,6 +171,10 @@
         [barLegend drawAtPoint:CGPointMake(2.0f, 0.0f)
                 withAttributes:@{NSFontAttributeName: valueFont, NSForegroundColorAttributeName: [UIColor yellowColor]}];
     }
+    */
+//    yourLabel.adjustsFontForContentSizeCategory = YES;
+//    yourLabel.text = barLegend;
+//    yourLabel.backgroundColor = [UIColor blueColor];
 }
 
 -(void) verticalBarTake: (CGFloat) takeRate Make: (CGFloat) makeRate Bake: (CGFloat) bakeRate atScale: (CGFloat) theScale
@@ -165,10 +185,16 @@
     barProduce = [self scaleTheFixedFrame:barProduce usingView:theScale];
     barNew = CGRectMake(0.0, myHeight * 0.8, myWidth, myHeight * 0.2 * (bakeRate / takeRate > 1 ? 1 : bakeRate / takeRate));
     barNew = [self scaleTheFixedFrame:barNew usingView:theScale];
+    recLabel = CGRectMake(0.0, myHeight / 4.0, myWidth, myHeight / 2.0);
+    recLabel = [self scaleTheFixedFrame:recLabel usingView:theScale];
+    
     UIFont* valueFont = [UIFont systemFontOfSize: 10];
     [barLegend drawAtPoint:barConsume.origin
             withAttributes:@{NSFontAttributeName: valueFont,
                              NSForegroundColorAttributeName: [UIColor blackColor]}];
+    yourLabel.adjustsFontForContentSizeCategory = YES;
+    yourLabel.text = barLegend;
+    yourLabel.backgroundColor = [UIColor redColor];
 }
 
 -(void) updateLayoutAtScale: (CGFloat) theViewScale
@@ -226,7 +252,13 @@
         if (!barNewView) { barNewView = [[UIView alloc] initWithFrame:barNew]; }
         else { barNewView.frame = barNew; }
         
-        UIFont* valueFont2 = [UIFont systemFontOfSize: 20 / myScroll.zoomScale];
+        UIFont* valueFont2 = [UIFont systemFontOfSize: 12 / myScroll.zoomScale];
+        
+        if (!yourLabel) { yourLabel = [[UILabel alloc] initWithFrame:recLabel]; }
+        else { yourLabel.frame = recLabel; }
+        
+        yourLabel.font = valueFont2;
+
 //        [barLegend drawAtPoint:CGPointMake(2.0f, 0.0f)
 //                withAttributes:@{NSFontAttributeName: valueFont2, NSForegroundColorAttributeName: [UIColor blueColor]}];
 

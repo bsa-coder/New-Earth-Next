@@ -57,6 +57,8 @@
 @property CGRect barNew;
 @property CGRect barConsume;
 @property CGRect barProduce;
+    @property CGRect recLabel;
+    
 @property UILabel* yourLabel;
 @property int layout;
 

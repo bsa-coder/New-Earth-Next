@@ -455,7 +455,8 @@
 
 -(void) scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale{
 //    NSLog(@"the zoom scale was: %f\n", scale);
-//    myScale = scale;
+    //TODO: does this affect anything by not being 1 all the time?
+    myScale = scale;
     
 // TODO: not executed ... was used for debugging ... eliminate eventually
     if (scale>5.0) { scrollView.zoomScale = 5.0; } else if (scale < 0.5) { scrollView.zoomScale = 0.5; } // max 5.0 min 0.5

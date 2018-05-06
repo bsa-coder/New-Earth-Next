@@ -169,7 +169,7 @@
     if (!aNewUnit.myPlaced) {
         aNewUnit.myLoc = [self theTapLocation];
         aNewUnit.myCreateDate = [NSDate date];
-        aNewUnit.myPlaced = YES;
+//        aNewUnit.myPlaced = YES;
         
         [_unitInventory addUnit:aNewUnit];
         _theGlobals.bankAccountBalance -= aNewUnit.myCost;

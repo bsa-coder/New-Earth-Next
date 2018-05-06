@@ -23,6 +23,10 @@ extern int const kVertical;
 
 @property (retain) IBOutlet AppStatusView* myStatusBar;
 
+@property (retain) IBOutlet UIProgressView* gameProgress;
+@property (retain) IBOutlet UILabel* gameBalance;
+
+
 @property (retain) AppStatusItem* aStatusBarItem01;
 @property (retain) AppStatusItem* aStatusBarItem02;
 @property (retain) AppStatusItem* aStatusBarItem03;
@@ -55,7 +59,7 @@ extern int const kVertical;
 //@property NewEarthGlobals* myGlobals;
 @property UIScrollView* theScrollView;
 @property UIView* myView;
-@property (retain) IBOutlet UIProgressView* gameProgress;
+    @property CGFloat gameProgressAmount;
 
 @property CGFloat barHeight;
 @property CGFloat barWidth;
@@ -69,6 +73,7 @@ extern int const kVertical;
 -(void) startScreenUpdateTimer;
 -(void) stopScreenUpdateTimer;
 -(void) screenUpdateTimer: (NSTimer*) updateTimer;
+-(void) handleUpdateNotification:(NSNotification*) paramNotification;
 //-(UIScrollView*) statusScrollView:(AppStatusView*) requestor;
 
 @end

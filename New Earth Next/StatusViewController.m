@@ -31,7 +31,7 @@ int const kVertical = 2;
 @synthesize aStatusBarItem01, aStatusBarItem02, aStatusBarItem03, aStatusBarItem04, aStatusBarItem05, aStatusBarItem06;
 @synthesize aStatusBarItem07, aStatusBarItem08, aStatusBarItem09, aStatusBarItem10, aStatusBarItem11, aStatusBarItem12;
 @synthesize aStatusBar01, aStatusBar02, aStatusBar03, aStatusBar04, aStatusBar05, aStatusBar06;
-@synthesize aStatusBar07, aStatusBar08, aStatusBar09, aStatusBar10, aStatusBar11, aStatusBar12, myStatusRoom, myStatusBar, gameProgress;
+@synthesize aStatusBar07, aStatusBar08, aStatusBar09, aStatusBar10, aStatusBar11, aStatusBar12, myStatusRoom, myStatusBar, gameProgress, gameBalance, gameProgressAmount;
 @synthesize barHeight, barWidth, margin, minMargin, minBarHeight, layout, screenUpdateTimer;
 
 -(IBAction) quitApp: (id) sender
@@ -122,6 +122,17 @@ int const kVertical = 2;
     gameProgress.progress = (float) _globals.dayOfContract / _globals.lengthOfContract;
 
 //    [self startScreenUpdateTimer];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(handleUpdateNotification:)
+                                                 name:kSetUpdateNotification
+                                               object:nil];
+
+}
+
+-(void) handleUpdateNotification:(NSNotification*) paramNotification
+{
+    NSLog(@"got update message");
+    [self updateUI];
 }
 
 -(void)viewWillLayoutSubviews
@@ -182,7 +193,7 @@ int const kVertical = 2;
 }
 
 -(void) setUnitInventory:(UnitInventory *)unitInventory { _unitInventory = unitInventory; }
--(void) setMyGlobals:(NewEarthGlobals *)globals { _globals = globals; }
+-(void) setTheGlobals:(NewEarthGlobals *)globals { _globals = globals; }
 
 /*
 #pragma mark - Navigation
@@ -689,7 +700,12 @@ int const kVertical = 2;
 -(void) updateUI
 {
     [self.myStatusBar setNeedsDisplay];
+    __unused CGFloat tempValue = (float) _globals.dayOfContract / _globals.lengthOfContract;
     gameProgress.progress = (float) _globals.dayOfContract / _globals.lengthOfContract;
+    NSNumber* theBal = [NSNumber numberWithDouble:_globals.bankAccountBalance];
+    NSNumberFormatter* nf = [[NSNumberFormatter alloc] init];
+    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
+    gameBalance.text = [nf stringFromNumber: theBal];
 }
 
 -(void) calcStatusBarSizeForLayout: (int) thisLayout

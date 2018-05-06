@@ -128,6 +128,8 @@
 		55D2457C206F06DB00EC8054 /* RootTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootTabBarViewController.m; sourceTree = "<group>"; };
 		55D2457E207723C700EC8054 /* Calendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Calendar.m; sourceTree = "<group>"; };
 		55D2457F207723C800EC8054 /* Calendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Calendar.h; sourceTree = "<group>"; };
+		D2063CCF209BE890008F585A /* New Earth Next.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "New Earth Next.entitlements"; sourceTree = "<group>"; };
+		D225497F2087F7290028C6E3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +162,7 @@
 		551C255B205F0AA4007D8987 /* New Earth Next */ = {
 			isa = PBXGroup;
 			children = (
+				D2063CCF209BE890008F585A /* New Earth Next.entitlements */,
 				551C255C205F0AA4007D8987 /* AppDelegate.h */,
 				551C255D205F0AA4007D8987 /* AppDelegate.m */,
 				551C255F205F0AA4007D8987 /* RootViewController.h */,
@@ -273,6 +276,11 @@
 					551C2558205F0AA4007D8987 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -359,9 +367,11 @@
 			isa = PBXVariantGroup;
 			children = (
 				551C2569205F0AA4007D8987 /* Base */,
+				D225497F2087F7290028C6E3 /* en */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
+			path = "New Earth Next";
+			sourceTree = SOURCE_ROOT;
 		};
 		551C256D205F0AA4007D8987 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -369,7 +379,8 @@
 				551C256E205F0AA4007D8987 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
+			path = "New Earth Next";
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXVariantGroup section */
 
@@ -406,6 +417,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 4EPTA2P3JC;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -461,6 +473,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 4EPTA2P3JC;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -482,6 +495,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4EPTA2P3JC;
 				INFOPLIST_FILE = "New Earth Next/Info.plist";
@@ -489,6 +503,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bigdogtools.New-Earth-Next";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -497,6 +512,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4EPTA2P3JC;
 				INFOPLIST_FILE = "New Earth Next/Info.plist";
@@ -504,6 +520,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bigdogtools.New-Earth-Next";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

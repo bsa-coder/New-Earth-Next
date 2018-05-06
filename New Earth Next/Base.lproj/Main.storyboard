@@ -229,7 +229,7 @@
                                 </constraints>
                                 <items>
                                     <navigationItem title="Warehouse" id="3RO-bc-wvr">
-                                        <barButtonItem key="rightBarButtonItem" title="Place It" id="5tG-fe-iwD"/>
+                                        <barButtonItem key="rightBarButtonItem" title="Place It" id="5tG-fe-iwD" userLabel="buttonPlaceIt"/>
                                     </navigationItem>
                                 </items>
                             </navigationBar>

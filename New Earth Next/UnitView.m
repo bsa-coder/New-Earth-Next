@@ -40,11 +40,14 @@
         for (NSInteger i = 0; i < [theUnits count]; i++) {
             NSIndexPath* indexPath = [NSIndexPath indexPathForRow:i inSection:0];
             aUnit = [theUnits unitAtIndexPath:indexPath];
-            if (aUnit) {
+            if (aUnit && !aUnit.myPlaced) {
                 theUnitLocation = aUnit.myLoc;
                 [aUnit placeMe:aUnit atPoint:theUnitLocation atScale:theViewScale inContext:thisContext];
                 [self addSubview: aUnit.myTileItem.itemOutline];
 //                [self addSubview: aUnit.myTileItem.itemLabel];
+                aUnit.myPlaced = YES;
+            } else if (aUnit) {
+                [aUnit placeMe:aUnit atPoint:aUnit.myLoc atScale:theViewScale inContext:thisContext];
             }
         }
     }

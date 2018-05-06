@@ -183,7 +183,7 @@ NSString* const kMessageUrgencyKey = @"MsgFire"; // color, icons, etc
     aUnit.myName = @"HQ - HOME";
     aUnit.myType = (itemType) home;
     aUnit.myStatus = isnew;
-    aUnit.myPlaced = YES;
+//    aUnit.myPlaced = YES;
     [aUnit fillStockBOMStruct:100 comp:100 supp:100 matl:100 powr:0 watr:100 air:0 food:100 labr:1];
     aUnit.myLoc = CGPointMake(500 * theGlobals.mapScale, 500 * theGlobals.mapScale);
     [theWarehouse addUnit:aUnit];
@@ -448,8 +448,8 @@ NSString* const kMessageUrgencyKey = @"MsgFire"; // color, icons, etc
     NSLog(@"\n");
     NSLog(@"-GE------------------ another day has passed (%d) (%lu) -----------", theGlobals.dayOfContract, (unsigned long)theWarehouse.laborers);
     theGlobals.dayOfContract++;
-//    [aProdEng doProduction:theWarehouse];
-//    [theWarehouse updateMe];
+    [aProdEng doProduction:theWarehouse];
+    [theWarehouse updateMe];
 //    NSLog(@"warehouse has: %lu units", (unsigned long)[theWarehouse count]);
     int locLab = (int) theWarehouse.laborers;
 //    NSLog(@"before myCalendar performanceOnDay");

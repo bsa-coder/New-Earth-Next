@@ -41,22 +41,17 @@
     //    CGPoint theOrigin = itemOutline.frame.origin;
     
     // **** position of label
-    UIFont* valueFont = [UIFont systemFontOfSize: 14];
+    UIFont* valueFont = [UIFont systemFontOfSize: 10];
     NSString* myString = [NSString stringWithFormat:@"%0.0ld", (long)itemValue];
     
-    __unused CGRect tempThing = CGRectMake(
-                                           itemOutline.center.x,
-                                           itemOutline.center.y,
-                                           itemOutline.frame.size.width+100,
-                                           itemOutline.frame.size.height);
-    
-    itemLabel = [[UILabel alloc] initWithFrame:theOutline];
+    if (!itemLabel) {itemLabel = [[UILabel alloc] initWithFrame:theOutline];}
     
     [itemLabel setTextColor: [UIColor greenColor]];
     [itemLabel setBackgroundColor: [UIColor clearColor]];
-    //    [itemLabel setBackgroundColor: [UIColor whiteColor]];
+//[itemLabel setBackgroundColor: [UIColor whiteColor]];
     [itemLabel setFont: valueFont];
     [itemLabel setText: myString];
+    [itemLabel setTextAlignment:NSTextAlignmentCenter];
     [itemLabel setCenter: CGPointMake(itemOutline.frame.origin.x + itemIcon.frame.size.width, itemOutline.frame.origin.y + itemIcon.frame.size.height)];
     
     __unused CGPoint labelOrigin = itemLabel.frame.origin;
@@ -88,18 +83,13 @@
     UIFont* valueFont = [UIFont systemFontOfSize: 7];
     NSString* myString = [NSString stringWithFormat:@"%0.0ld", (long)itemValue];
     
-    __unused CGRect tempThing = CGRectMake(
-                                           itemOutline.center.x,
-                                           itemOutline.center.y,
-                                           itemOutline.frame.size.width+100,
-                                           itemOutline.frame.size.height);
-    
-    itemLabel = [[UILabel alloc] initWithFrame:theOutline];
-    
+    if (!itemLabel) {itemLabel = [[UILabel alloc] initWithFrame:theOutline];}
+
     [itemLabel setTextColor: [UIColor blackColor]];
     [itemLabel setBackgroundColor: [UIColor clearColor]];
     [itemLabel setFont: valueFont];
     [itemLabel setText: myString];
+    [itemLabel setTextAlignment:NSTextAlignmentCenter];
     [itemLabel setCenter: CGPointMake(itemOutline.frame.origin.x, itemOutline.frame.origin.y)];
     
     __unused CGPoint labelOrigin = itemLabel.frame.origin;
