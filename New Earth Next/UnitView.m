@@ -40,7 +40,8 @@
         for (NSInteger i = 0; i < [theUnits count]; i++) {
             NSIndexPath* indexPath = [NSIndexPath indexPathForRow:i inSection:0];
             aUnit = [theUnits unitAtIndexPath:indexPath];
-            if (aUnit && !aUnit.myPlaced) {
+//            if (aUnit && !aUnit.myPlaced) {
+            if (aUnit) {
                 theUnitLocation = aUnit.myLoc;
                 [aUnit placeMe:aUnit atPoint:theUnitLocation atScale:theViewScale inContext:thisContext];
                 [self addSubview: aUnit.myTileItem.itemOutline];

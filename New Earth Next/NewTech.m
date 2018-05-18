@@ -419,18 +419,8 @@ NSString* const klaborUsageKey = @"laborUsageKey";
     else {
         [myTileItem showMeAtLoc:theLoc atScale:theDrawScale inContext:context];
         
-//        myTileItem.itemOutline.center = theLoc;
-        
-//        CGPoint outLineOrigin = myTileItem.itemOutline.frame.origin;
-//        CGPoint itemIconOrigin = myTileItem.itemIcon.frame.origin;
         [myTileItem.itemIcon setImage:anIcon];
-        myTileItem.itemLabel.text = [NSString stringWithFormat:@"%0.0f", myHealth];
-        
-//        [myTileItem showMeAtLoc:theLoc atScale: theDrawScale inContext: context];
-//        myTileItem.itemOutline.center = theLoc;
-//        myTileItem.itemLabel.backgroundColor = [UIColor orangeColor];
-//        [myTileItem.itemLabel setCenter: CGPointMake(myTileItem.itemOutline.frame.size.width + theLoc.x,
-//                                                     myTileItem.itemOutline.frame.size.height + theLoc.y)];
+        myTileItem.itemLabel.text = [NSString stringWithFormat:@"%0.0f", myHealth];        
     }
 
     if (theScale > 1) { [self showMeSmallAtPoint: theLoc atScale: theScale inContext: context]; }
@@ -455,6 +445,7 @@ NSString* const klaborUsageKey = @"laborUsageKey";
             //            NSLog(@"i am preparing"); // color, shape, image
             theColorIs = [UIColor colorWithRed:0.678 green:1.0 blue:0.184 alpha:1.0];
 //            theColorIs = [UIColor lightGrayColor];
+            theColorIs = [UIColor greenColor];
             bigRect = CGRectMake(0, 0, 25, 25);
             itemIcon = @"Image-1";
             break;
@@ -462,6 +453,7 @@ NSString* const klaborUsageKey = @"laborUsageKey";
         case cleaning:
             //            NSLog(@"i am preparing"); // color, shape, image
             theColorIs = [UIColor colorWithRed:0.678 green:1.0 blue:0.184 alpha:1.0];
+            theColorIs = [UIColor brownColor];
             bigRect = CGRectMake(0, 0, 25, 25);
             itemIcon = @"StageCleanIcon";
             break;
@@ -469,35 +461,38 @@ NSString* const klaborUsageKey = @"laborUsageKey";
         case clearing:
             //            NSLog(@"i am preparing"); // color, shape, image
             theColorIs = [UIColor colorWithRed:0.627 green:0.322 blue:0.176 alpha:0.75];
+            theColorIs = [UIColor redColor];
             bigRect = CGRectMake(0, 0, 25, 25);
             itemIcon = @"StageClearIcon";
-            break;
-            
-        case connecting:
-            //            NSLog(@"i am preparing"); // color, shape, image
-            theColorIs = [UIColor colorWithRed:1.0 green:1.0 blue:0.6 alpha:1.0];
-            bigRect = CGRectMake(0, 0, 25, 25);
-            itemIcon = @"StageConnectIcon";
             break;
             
         case smoothing:
             //            NSLog(@"i am preparing"); // color, shape, image
             theColorIs = [UIColor colorWithRed:0.678 green:1.0 blue:0.184 alpha:1.0];
+            theColorIs = [UIColor orangeColor];
             bigRect = CGRectMake(0, 0, 25, 25);
             itemIcon = @"StageSmoothIcon";
             break;
             
         case building:
 //            NSLog(@"i am building"); // color, shape, image
-            theColorIs = [UIColor whiteColor];
+            theColorIs = [UIColor blueColor];
             bigRect = CGRectMake(0, 0, 25, 25);
             itemIcon = @"StageBuildIcon";
             break;
             
+        case connecting:
+            //            NSLog(@"i am preparing"); // color, shape, image
+            theColorIs = [UIColor colorWithRed:1.0 green:1.0 blue:0.6 alpha:1.0];
+            theColorIs = [UIColor yellowColor];
+            bigRect = CGRectMake(0, 0, 25, 25);
+            itemIcon = @"StageConnectIcon";
+            break;
+            
         case operating:
 //            NSLog(@"i am operating"); // color, shape, image
-//            theColorIs = [self showMyColor];
             theColorIs = [UIColor clearColor];
+//            theColorIs = [UIColor magentaColor];
             bigRect = CGRectMake(0, 0, 25, 25);
             itemIcon = [self getMyIcon];
             break;
@@ -505,7 +500,7 @@ NSString* const klaborUsageKey = @"laborUsageKey";
         case repairingHalf:
             //            NSLog(@"i am repairing"); // color, shape, image
             theColorIs = [UIColor colorWithRed:1.0 green:0.078 blue:0.576 alpha:1.0]; // hot pink
-//            theColorIs = [UIColor orangeColor];
+            theColorIs = [UIColor grayColor];
             bigRect = CGRectMake(0, 0, 25, 25);
             itemIcon = @"Image-2";
             break;
@@ -513,29 +508,26 @@ NSString* const klaborUsageKey = @"laborUsageKey";
         case repairingFull:
             //            NSLog(@"i am repairing"); // color, shape, image
             theColorIs = [UIColor colorWithRed:1.0 green:0.078 blue:0.576 alpha:0.5]; // hot pink
-//            theColorIs = [UIColor cyanColor];
+            theColorIs = [UIColor blackColor];
             bigRect = CGRectMake(0, 0, 25, 25);
             itemIcon = @"Image-3";
             break;
             
         default:
-            theColorIs = [UIColor redColor];//[self showMyColor];
+            theColorIs = [UIColor whiteColor];//[self showMyColor];
             bigRect = CGRectMake(0, 0, 25, 25);
             break;
     }
     
-    UIImage* newIcon = [UIImage imageNamed:itemIcon];
-    myTileItem.imageIcon = newIcon;
-    
     CGFloat tempX = theLoc.x;
     CGFloat tempY = theLoc.y;
     
-//    CGRect theRectToShow = CGRectMake(tempX-(bigRect.size.width/2.0f), tempY-(bigRect.size.height/2.0f), (bigRect.size.width), (bigRect.size.height));
     CGRect theRectToShow = CGRectMake(tempX-(bigRect.size.width/2.0f)*theDrawScale, tempY-(bigRect.size.height/2.0f)*theDrawScale, (bigRect.size.width)*theDrawScale, (bigRect.size.height)*theDrawScale);
     
     if (theRectToShow.origin.x<0 || theRectToShow.origin.y<0) { return; }
     
     CGContextSaveGState(context);
+    
     CGContextBeginPath(context);
     CGContextAddRect(context, theRectToShow);
     
@@ -545,6 +537,9 @@ NSString* const klaborUsageKey = @"laborUsageKey";
     CGContextDrawPath(context, kCGPathFillStroke);
     
     CGContextRestoreGState(context);
+    
+    UIImage* newIcon = [UIImage imageNamed:itemIcon];
+    myTileItem.imageIcon = newIcon;
 }
 
 -(void) showMeSmallAtPoint: (CGPoint)theLoc atScale: (CGFloat)theDrawScale inContext: (CGContextRef)context
@@ -561,14 +556,14 @@ NSString* const klaborUsageKey = @"laborUsageKey";
     
     ModelProduction* mp = [[ModelProduction alloc] init];
     CGPoint theDirLoc = [mp tileVertexForPosition:theLoc];
-    CGFloat theDir = [[_myGlobals.geoTileList objectForKey: NSStringFromCGPoint(theDirLoc)] slopeDir];
+    __unused CGFloat theDir = [[_myGlobals.geoTileList objectForKey: NSStringFromCGPoint(theDirLoc)] slopeDir];
     
     if (theRectToShow.origin.x<0 || theRectToShow.origin.y<0) { return; }
     
     CGContextSaveGState(context);
     // Rotate the context
-    CGContextTranslateCTM( context, 0.5f * theRectToShow.size.width, 0.5f * theRectToShow.size.height ) ;
-    CGContextRotateCTM(context, theDir * M_PI / 180);
+//    CGContextTranslateCTM( context, 0.5f * theRectToShow.size.width, 0.5f * theRectToShow.size.height ) ;
+//    CGContextRotateCTM(context, theDir * M_PI / 180);
     
     CGContextBeginPath(context);
     CGContextAddRect(context, theRectToShow);

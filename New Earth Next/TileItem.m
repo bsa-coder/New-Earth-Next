@@ -110,43 +110,8 @@
     __unused CGFloat tempX = theLoc.x;
     __unused CGFloat tempY = theLoc.y;
     
-//    CGRect theRectToShow = CGRectMake(tempX, tempY, itemOutline.frame.size.width/theDrawScale, itemOutline.frame.size.height/theDrawScale);
-//    CGRect theRectToShow = CGRectMake(
-//                                      tempX - 25 / 2.0f,
-//                                      tempY - 25 / 2.0f,
-//                                      (25 + 25 / 2.0f)*theDrawScale,
-//                                      (25 + 25 / 2.0f)*theDrawScale
-//                                      );
-    
-//    CGRect bigRect = CGRectMake(0, 0, 25, 25);
-//    CGRect theRectToShow = CGRectMake(tempX-(bigRect.size.width/2.0f)*theDrawScale, tempY-(bigRect.size.height/2.0f)*theDrawScale, (bigRect.size.width)*theDrawScale, (bigRect.size.height)*theDrawScale);
-
-//    UIFont* valueFont = [UIFont systemFontOfSize: 30 / theDrawScale];
     NSString* myString = [NSString stringWithFormat:@"%0.0ld", (long)itemValue];
 
-/*
-    if(!itemLabel) {
-        CGRect tempThing = CGRectMake(
-                                      itemOutline.frame.size.width,
-                                      itemOutline.frame.size.height,
-                                      itemOutline.frame.size.width,
-                                      itemOutline.frame.size.height);
-        
-        itemLabel = [[UILabel alloc] initWithFrame:tempThing];
-        
-        [itemLabel setTextColor: [UIColor greenColor]];
-        [itemLabel setBackgroundColor: [UIColor clearColor]];
-        [itemLabel setBackgroundColor: [UIColor whiteColor]];
-        [itemLabel setFont: valueFont];
-        [itemLabel setText: myString];
-        [itemLabel setCenter:CGPointMake(itemOutline.center.x + itemOutline.frame.size.width, itemOutline.center.y)];
-//        [itemLabel setCenter: itemOutline.center];
-        
-        [itemOutline addSubview: itemLabel];
-    }
-    else
-    {
- */
     itemOutline.contentMode = UIViewContentModeScaleAspectFit;
     [itemLabel setText: myString];
 }

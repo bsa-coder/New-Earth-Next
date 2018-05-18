@@ -31,7 +31,7 @@ int const kVertical = 2;
 @synthesize aStatusBarItem01, aStatusBarItem02, aStatusBarItem03, aStatusBarItem04, aStatusBarItem05, aStatusBarItem06;
 @synthesize aStatusBarItem07, aStatusBarItem08, aStatusBarItem09, aStatusBarItem10, aStatusBarItem11, aStatusBarItem12;
 @synthesize aStatusBar01, aStatusBar02, aStatusBar03, aStatusBar04, aStatusBar05, aStatusBar06;
-@synthesize aStatusBar07, aStatusBar08, aStatusBar09, aStatusBar10, aStatusBar11, aStatusBar12, myStatusRoom, myStatusBar, gameProgress, gameBalance, gameProgressAmount;
+@synthesize aStatusBar07, aStatusBar08, aStatusBar09, aStatusBar10, aStatusBar11, aStatusBar12, myStatusRoom, myStatusBar, gameProgress, milestoneProgress, goalProgress, gameBalance, gameProgressAmount;
 @synthesize barHeight, barWidth, margin, minMargin, minBarHeight, layout, screenUpdateTimer;
 
 -(IBAction) quitApp: (id) sender
@@ -706,6 +706,21 @@ int const kVertical = 2;
     NSNumberFormatter* nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
     gameBalance.text = [nf stringFromNumber: theBal];
+    
+    NECalendar* nec = [[NECalendar alloc] init];
+    NSMutableArray* goals = nec.milestoneList;
+    CGPoint firstGoal = [goals[1] CGPointValue];
+    NSInteger nextGoal = firstGoal.y;
+    NSInteger nextDur = firstGoal.x;
+    NSInteger theCount = goals.count;
+    CGPoint lastGoal = [goals[theCount-1] CGPointValue];
+    NSInteger contractGoal = lastGoal.y;
+    NSInteger contractDur = lastGoal.x;
+    
+    gameProgress.progress = (float) _globals.dayOfContract / contractDur;
+    milestoneProgress.progress = (float) _globals.dayOfContract / nextDur;
+    goalProgress.progress = (float) nextGoal / contractGoal;
+    _globals.lengthOfContract = (int) contractDur;
 }
 
 -(void) calcStatusBarSizeForLayout: (int) thisLayout

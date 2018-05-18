@@ -11,6 +11,7 @@
 #import "AppStatusView.h"
 #import "AppStatusBarView.h"
 #import "StatusRoom.h"
+#import "Calendar.h"
 //#import "Globals.h"
 
 extern int const kHorizNarrow;
@@ -24,6 +25,10 @@ extern int const kVertical;
 @property (retain) IBOutlet AppStatusView* myStatusBar;
 
 @property (retain) IBOutlet UIProgressView* gameProgress;
+@property (retain) IBOutlet UIProgressView* milestoneProgress;
+@property (retain) IBOutlet UIProgressView* goalProgress;
+
+
 @property (retain) IBOutlet UILabel* gameBalance;
 
 

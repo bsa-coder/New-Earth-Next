@@ -33,6 +33,16 @@ NSString* const kMessageUrgencyKey = @"MsgFire"; // color, icons, etc
         aProdEng = [[ModelProduction alloc] init];
         myCalendar = [[NECalendar alloc] init];
         
+        NSMutableArray* goals = myCalendar.milestoneList;
+        CGPoint firstGoal = [goals[1] CGPointValue];
+        NSInteger nextGoal = firstGoal.y;
+        NSInteger nextDur = firstGoal.x;
+        NSInteger theCount = goals.count;
+        CGPoint lastGoal = [goals[theCount-1] CGPointValue];
+        NSInteger contractGoal = lastGoal.y;
+        NSInteger contractDur = lastGoal.x;
+        theGlobals.lengthOfContract = (int) contractDur;
+        
         NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:
                               @"construction", kMessageTypeKey,
                               @"theMessage", kMessageTextKey,
@@ -460,7 +470,7 @@ NSString* const kMessageUrgencyKey = @"MsgFire"; // color, icons, etc
     // checkTheWeather
     // listenForCorporate
     // listenForProgress
-    if (theGlobals.dayOfContract > theGlobals.lengthOfContract) {
+    if (theGlobals.dayOfContract >= theGlobals.lengthOfContract) {
 //        [self stopGameEngineTimer];
         [[NSNotificationCenter defaultCenter] postNotification:gameOverNotification];
     }

@@ -492,6 +492,16 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="rYH-Ei-SBL">
+                                <rect key="frame" x="209" y="500" width="150" height="2"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="progressTintColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </progressView>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="8dw-Xr-bgv">
+                                <rect key="frame" x="209" y="480" width="150" height="2"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="progressTintColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </progressView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -512,6 +522,8 @@
                     <connections>
                         <outlet property="gameBalance" destination="p0V-d6-Wx7" id="nHC-p4-RkM"/>
                         <outlet property="gameProgress" destination="TGT-Gt-t9o" id="QW7-2b-EAP"/>
+                        <outlet property="goalProgress" destination="8dw-Xr-bgv" id="Ist-DK-X2J"/>
+                        <outlet property="milestoneProgress" destination="rYH-Ei-SBL" id="2ce-21-ixB"/>
                         <outlet property="myStatusBar" destination="WhK-AC-M0d" id="Wa4-64-BKq"/>
                         <outlet property="myStatusRoom" destination="nQD-UF-vWw" id="nXo-cl-eWF"/>
                     </connections>
