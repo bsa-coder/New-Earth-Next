@@ -31,7 +31,7 @@ int const kVertical = 2;
 @synthesize aStatusBarItem01, aStatusBarItem02, aStatusBarItem03, aStatusBarItem04, aStatusBarItem05, aStatusBarItem06;
 @synthesize aStatusBarItem07, aStatusBarItem08, aStatusBarItem09, aStatusBarItem10, aStatusBarItem11, aStatusBarItem12;
 @synthesize aStatusBar01, aStatusBar02, aStatusBar03, aStatusBar04, aStatusBar05, aStatusBar06;
-@synthesize aStatusBar07, aStatusBar08, aStatusBar09, aStatusBar10, aStatusBar11, aStatusBar12, myStatusRoom, myStatusBar, gameProgress, milestoneProgress, goalProgress, gameBalance, gameProgressAmount;
+@synthesize aStatusBar07, aStatusBar08, aStatusBar09, aStatusBar10, aStatusBar11, aStatusBar12, myStatusRoom, myStatusBar, gameProgress, milestoneProgress, goalProgress, gameBalance, gameProgressAmount, quitButton;
 @synthesize barHeight, barWidth, margin, minMargin, minBarHeight, layout, screenUpdateTimer;
 
 -(IBAction) quitApp: (id) sender
@@ -126,13 +126,27 @@ int const kVertical = 2;
                                              selector:@selector(handleUpdateNotification:)
                                                  name:kSetUpdateNotification
                                                object:nil];
-
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(handleGameOverNotification:)
+                                                 name:kCalendarGameOverNotification
+                                               object:nil];
+    
 }
 
 -(void) handleUpdateNotification:(NSNotification*) paramNotification
 {
-    NSLog(@"got update message");
+    NSLog(@"received the UpdateNotification (Stat)");
     [self updateUI];
+}
+
+-(void) handleGameOverNotification: (NSNotification*) paramNotification
+{
+    NSLog(@"must have received the GameOverNotification (Stats)");
+    [self quitButton].backgroundColor = [UIColor greenColor];
+    [self quitButton].titleLabel.text = @"Done";
+
+//    [self stopGameEngineTimer];
 }
 
 -(void)viewWillLayoutSubviews
@@ -707,7 +721,7 @@ int const kVertical = 2;
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
     gameBalance.text = [nf stringFromNumber: theBal];
     
-    NECalendar* nec = [[NECalendar alloc] init];
+    NECalendar* nec = [NECalendar sharedSelf];
     NSMutableArray* goals = nec.milestoneList;
     CGPoint firstGoal = [goals[1] CGPointValue];
     NSInteger nextGoal = firstGoal.y;

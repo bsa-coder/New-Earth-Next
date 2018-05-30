@@ -30,6 +30,18 @@ CGPoint milestonesA[5]; // point of x=dayOfContract y=settlers
 @synthesize onSchedule, farBehindSchedule, theWarehouse, theMessage;
 //@synthesize gi;
 
+#pragma mark - Singleton Methods
++(id)sharedSelf
+{
+    static NECalendar *sharedCalendar = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedCalendar = [[self alloc] init];
+    });
+    return sharedCalendar;
+}
+
+#pragma mark - Initialization
 -(id) init
 {
     self = [super init];
@@ -74,6 +86,8 @@ CGPoint milestonesA[5]; // point of x=dayOfContract y=settlers
     return self;
 }
 
+#pragma mark - Methods
+
 -(void) performanceOnDay: (int) thisDay withMySettlers: (int) settlers
 {
     CGFloat planAngleToMilestone = 0; // angle from last to next milestone
@@ -92,7 +106,8 @@ CGPoint milestonesA[5]; // point of x=dayOfContract y=settlers
 //    actAngleToMilestone = [self angleFromPoint: myStatus toPoint: milestonesA[1]];
 //    distanceToMilestone = [self distFromPoint:myStatus toPoint:milestonesA[1]];
     
-    if ([_milestoneList count] < 2) { NSLog(@"\n\n\n******* GAME OVER ... GAME OVER ... GAME OVER *******\n\n\n");
+    if (([_milestoneList count] < 2) && (_myGlobals.sustainScore >= 0))
+    { NSLog(@"\n\n\n******* GAME OVER ... GAME OVER ... GAME OVER *******\n\n\n");
         [[NSNotificationCenter defaultCenter] postNotificationName:kCalendarGameOverNotification
                                                             object:self
                                                           userInfo:nil];
@@ -124,6 +139,7 @@ CGPoint milestonesA[5]; // point of x=dayOfContract y=settlers
     NSDate* testDate = [_myGlobals.dateOfLastMessage dateByAddingTimeInterval: (twentyFourHours * 27.0)]; // increased from 1 week to be less verbose
     
     BOOL makeMessage = [[eventDate laterDate: testDate] isEqualToDate:eventDate];
+    
     if (makeMessage) { _myGlobals.dateOfLastMessage = eventDate; }
     
     // sector A: plan angle decrease to 0 ... 0 better end
@@ -183,7 +199,8 @@ CGPoint milestonesA[5]; // point of x=dayOfContract y=settlers
 
 
         // get rid of milestone
-        if ([_milestoneList count] == 2) { NSLog(@"******* GAME OVER ... GAME OVER ... GAME OVER *******");
+        if (([_milestoneList count] == 2) && (_myGlobals.sustainScore <= 0))
+        { NSLog(@"******* GAME OVER ... GAME OVER ... GAME OVER *******");
             [[NSNotificationCenter defaultCenter] postNotificationName:kCalendarGameOverNotification
                                   object:self
                                 userInfo:nil];
@@ -191,7 +208,8 @@ CGPoint milestonesA[5]; // point of x=dayOfContract y=settlers
 
             return;
         } // game over
-        else if ([_milestoneList count] > 2) { [_milestoneList removeObjectAtIndex:0]; }
+        else if ([_milestoneList count] > 2)
+        { [_milestoneList removeObjectAtIndex:0]; }
         else { NSLog(@"Should never get here."); return; }
         
         if ([_myGlobals.progressSector  isEqual: @"C"]) {
@@ -218,7 +236,8 @@ CGPoint milestonesA[5]; // point of x=dayOfContract y=settlers
         // met the milestone
         // get rid of milestone
         if ([_milestoneList count] == 2) { return; } // game over
-        else if ([_milestoneList count] > 2) { [_milestoneList removeObjectAtIndex:0]; }
+        else if ([_milestoneList count] > 2)
+        { [_milestoneList removeObjectAtIndex:0]; }
         else { NSLog(@"Should never get here."); return; }
         
         NSLog(@"in Sector D: planAng = %0.4f actAng = %0.4f dist = %0.0f", planAngleToMilestone, actAngleToMilestone, distanceToMilestone);

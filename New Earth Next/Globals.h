@@ -61,6 +61,8 @@ extern NSString* const kGdateOfLastMessageKey;
 @property NSString* progressSector; // this is the calendar sector toward meeting milestone
 @property NSDate* dateOfLastMessage; // use this to limit the number of messages (otherwise everyone every day)
 
+@property CGFloat sustainScore; // from unitinventory
+
 -(NSString*) resourceName: (stockType) theType;
 -(void) saveContents;
 +(id)sharedSelf;

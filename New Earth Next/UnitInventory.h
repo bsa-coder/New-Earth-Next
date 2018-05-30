@@ -53,6 +53,8 @@ extern NSString* const kUnitInventoryNotificationIndexPathKey;
 
 @property (nonatomic, readonly) NSUInteger count;
 @property (nonatomic, readonly) NSUInteger laborers;
+//@property (nonatomic, readonly) CGFloat resourceRate;
+//@property (nonatomic, readonly) CGFloat runoutRate;
 
 //@property (strong, nonatomic) NSMutableDictionary* unitInventory;
 //@property (strong, nonatomic) NSMutableArray* unitInventoryList;

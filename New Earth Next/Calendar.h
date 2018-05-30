@@ -44,5 +44,6 @@ extern NSString* const kCalendarNotificationIndexPathKey;
 
 //-(float)checkTheCalendarOnDay:(int) theDay withLabor: (int) theLaborers;
 -(void) performanceOnDay: (int) thisDay withMySettlers: (int) settlers;
++(id)sharedSelf;
 
 @end

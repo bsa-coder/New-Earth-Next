@@ -27,6 +27,7 @@ extern int const kVertical;
 @property (retain) IBOutlet UIProgressView* gameProgress;
 @property (retain) IBOutlet UIProgressView* milestoneProgress;
 @property (retain) IBOutlet UIProgressView* goalProgress;
+@property (retain) IBOutlet UIButton* quitButton;
 
 
 @property (retain) IBOutlet UILabel* gameBalance;

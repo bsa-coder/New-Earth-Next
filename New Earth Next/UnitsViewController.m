@@ -224,7 +224,7 @@
         aNewUnit.myLoc = [self theTapLocation];
 //        aNewUnit.myLoc = [(GameViewController*)(self.presentingViewController) theTapLocation];
         aNewUnit.myCreateDate = [NSDate date];
-//        aNewUnit.myName = theNewUnitName.text;
+        aNewUnit.myName = [NSString stringWithFormat: @"%@-%0.0f-%0.0f", aNewUnit.myName, _theTapLocation.x, _theTapLocation.y];
 
         [_unitInventory addUnit:aNewUnit];
         _theGlobals.bankAccountBalance -= aNewUnit.myCost;
@@ -328,8 +328,6 @@
                             selector:@selector(handleGameEndNotification:)
                             name:kCalendarGameOverNotification
                             object:nil];
-    
-
-}
+    }
 
 @end

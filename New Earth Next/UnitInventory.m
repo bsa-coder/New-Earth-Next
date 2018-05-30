@@ -8,6 +8,7 @@
 
 #import "UnitInventory.h"
 #import "NewTech.h"
+#import "ModelProduction.h"
 
 NSString* const kUnitInventoryBeginChangesNotification = @"UnitInventoryBeginChangesNotification";
 NSString* const kUnitInventoryInsertEntryNotification = @"UnitInventoryInsertEntryNotification";
@@ -20,6 +21,8 @@ NSString* const kUnitInventoryNotificationIndexPathKey = @"UnitInventoryNotifica
 NSString* const kUnitInventoryKey = @"UnitInventoryKey";
 NSString* const kUnitInventoryListKey = @"UnitInventoryListKey";
 CGFloat stockpileTotals[(stockType) 9]; // holds parts made by unit
+CGFloat resourceRate[(stockType) 9]; // holds the net rate of creating a resource
+CGFloat runoutRate[(stockType) 9]; // holds the number of days until running out of a resource
 
 @interface UnitInventory()
 @property (strong, nonatomic) NSMutableArray* unitInventoryList;
@@ -55,12 +58,12 @@ CGFloat stockpileTotals[(stockType) 9]; // holds parts made by unit
 
 -(void) updateMe
 {
-    [self howsMySustain];
+//    [self howsMySustain];
 
     [self clearNonConsumables];
     [self makeThings];
     [self fixThings];
-    [self howsMySustain];
+    theGlobals.sustainScore = [self howsMySustain];
 }
 
 // run this before making/taking resources (labor/power allocated, not created)
@@ -70,9 +73,316 @@ CGFloat stockpileTotals[(stockType) 9]; // holds parts made by unit
     stockpileTotals[laborStock] = 0.0;
 }
 
--(void) howsMySustain
+-(CGFloat) howsMySustain
 {
+    return [self calcMySustainTest];
+}
+
+-(CGFloat) calcMySustainTest
+{
+    
+    // calculate the amount of resources used in a day by each unit (for production and repair) (reduces resources)
+    
+    // clear array
+    memset(resourceRate, 0, sizeof(resourceRate));
+    memset(stockpileTotals, 0, sizeof(stockpileTotals));
+
     NewTech* tempUnit = [NewTech alloc];
+    ModelProduction* mp = [[ModelProduction alloc] init];
+    __unused CGFloat tempStuffOuter[(stockType) 9];
+    
+    // calc net daily production rate for each resource
+    for (int i = 0; i<_unitInventoryList.count; i++)
+    {
+        tempUnit = _unitInventoryList[i];
+        //        NSLog(@"%@",[tempUnit printMyStores]);
+        
+//        NSLog(@"\n\n ------- %@ ------- (netRate) \n", tempUnit.myName);
+        
+        // the unit must be working to produce so skip if it isn't
+        if (tempUnit.myStatus != operating && tempUnit.myStatus != repairingFull && tempUnit.myStatus != repairingHalf) {
+            continue;
+        }
+        
+        CGFloat produceFactor = 1.0;
+        
+        if (tempUnit.myStatus == repairingHalf) { produceFactor = 0.5; }
+        
+        for (stockType j=0; j<sizeof(stockpileTotals)/sizeof(CGFloat); j++) {
+            
+            CGFloat amountUsed = 0;
+            CGFloat amountForRepair = 0;
+            CGFloat amountMade = 0;
+            
+            switch (j) {
+                case structureStock: //0
+                case componentStock: //1
+                case supplyStock: //2
+                case materialStock: //3
+                case foodStock: //7
+                    amountUsed = [mp roundToThreePlaces: [tempUnit.takerBOM[j] floatValue] * tempUnit.myProduceRate];
+                    amountForRepair = [mp roundToThreePlaces: [tempUnit.repairBOM[j] floatValue] * tempUnit.myRepairRate / 100.0];
+                    amountMade = [mp roundToThreePlaces: [tempUnit.makerBOM[j] floatValue] * tempUnit.myProduceRate * produceFactor];
+                    
+                    resourceRate[j] += amountMade - amountUsed - amountForRepair;
+                    
+                    break;
+                    
+                case powerStock: //4
+                case waterStock: //5
+                case airStock: //6
+                case laborStock: //8
+                case happinessStock: //9
+                    amountUsed = [mp roundToThreePlaces: [tempUnit.takerBOM[j] floatValue] * tempUnit.myProduceRate];
+                    amountForRepair = [mp roundToThreePlaces: [tempUnit.repairBOM[j] floatValue] * tempUnit.myRepairRate / 100.0];
+                    amountMade = [mp roundToThreePlaces: [tempUnit.makerBOM[j] floatValue] * tempUnit.myProduceRate * produceFactor];
+                    
+                    resourceRate[j] += amountMade - amountUsed - amountForRepair;
+
+                    break;
+                    
+                default:
+                    break;
+            }
+//            NSLog(@"iter: %d  + %0.1f -u %0.1f -r %0.1f = %0.1f tot: %0.1f", j, amountMade, amountUsed, amountForRepair, amountMade-amountUsed-amountForRepair, resourceRate[j]);
+        }
+//        NSLog(@"\n\n - working - \n\n");
+
+    }
+    //    NSLog(@"Take str:%0.1f comp:%0.1f sup:%0.1f mat:%0.1f power:%0.1f water:%0.1f air:%0.1f food:%0.1f lab:%0.1f oth:%0.1f", Resource00, Resource01, Resource02, Resource03, Resource04, Resource05, Resource06, Resource07, Resource08, Resource09);
+    
+    /*
+     plant, // plant food
+     meat, // animal food (fish, poultry, etc.)
+     air, // generates breathable air
+     water, // generates potable water
+     mine, // mining, etc to get minerals
+     power, // converts input to useable power
+     waste, // waste treatment
+     civil, // services police, fire, admin
+     home, // homestead
+     tree, // trees ... non food producing but may provide lumber or fruit
+     fab // generates components, supplies, structure material
+     */
+    
+    // Calculate the amount of resources produced by the units (factor for health status)
+    // get the resources at each unit and add to the stockpile total (to have the complete inventory of the resource)
+    
+    for (int i = 0; i<_unitInventoryList.count; i++)
+    {
+        tempUnit = _unitInventoryList[i];
+//        NSLog(@"\n\n ------- %@ ------- (stock) \n", tempUnit.myName);
+        
+        if (tempUnit.myStatus != operating && tempUnit.myStatus != repairingHalf) {
+            NSLog(@"------- %@ ------- (stock)", tempUnit.myName);
+            continue;
+        }
+        
+        CGFloat tempStuff[(stockType) 9];
+        CGFloat makeBomItem = 0;
+        CGFloat produceRate = 0;
+        
+        for (stockType j=0; j<sizeof(stockpileTotals)/sizeof(CGFloat); j++) {
+            switch (j) {
+                case structureStock: //0
+                case componentStock: //1
+                case supplyStock: //2
+                case materialStock: //3
+                case foodStock: //7
+                    makeBomItem = [tempUnit.makerBOM[j] floatValue];
+                    produceRate = tempUnit.myProduceRate;
+                    tempStuff[j] = makeBomItem * produceRate;
+                    stockpileTotals[j] += [tempUnit.myStockpiles[j] floatValue]; break;
+                    
+                case powerStock: //4
+                case waterStock: //5
+                case airStock: //6
+                case laborStock: //8
+                case happinessStock: //9
+                    makeBomItem = [tempUnit.makerBOM[j] floatValue];
+                    produceRate = tempUnit.myProduceRate;
+                    tempStuff[j] = makeBomItem * produceRate;
+                    stockpileTotals[j] += tempStuff[j]; break;
+
+                default:
+                    break;
+            }
+//            NSLog(@"iter: %d  bom %0.1f * rate %0.1f = %0.1f tot: %0.1f", j, makeBomItem, produceRate, tempStuff[j], stockpileTotals[j]);
+        }
+//        NSLog(@"\n\n - working - \n\n");
+    }
+    
+    CGFloat numberNegative = 0.0;
+    CGFloat numberPositive = 0.0;
+    
+    for (int i=0; i<sizeof(stockpileTotals)/sizeof(CGFloat); i++)
+    {
+        if ([mp roundToThreePlaces: resourceRate[i]] == 0) {
+            runoutRate[i] = 10000;
+        } else {
+            runoutRate[i] = stockpileTotals[i] / [mp roundToThreePlaces: resourceRate[i]];
+        }
+        
+        if ([mp roundToThreePlaces: resourceRate[i]] < 0) {
+            numberNegative += 1.0;
+        } else {
+            numberPositive += 1.0;
+        }
+        NSLog(@"it: %d  %0.1f / %0.1f = rte %0.1f +%0.0f -%0.0f", i, stockpileTotals[i], resourceRate[i], runoutRate[i], numberPositive, numberNegative);
+    }
+    NSLog(@"\n\n --- \n\n");
+    
+    NSLog(@"sustain: %0.0f ", numberNegative);
+    return numberNegative;
+    
+}
+
+-(CGFloat) calcMySustainNew
+{
+    
+// calculate the amount of resources used in a day by each unit (for production and repair) (reduces resources)
+    memset(resourceRate, 0, sizeof(resourceRate));
+    
+    NewTech* tempUnit = [NewTech alloc];
+    ModelProduction* mp = [[ModelProduction alloc] init];
+    
+    // calc net daily production rate for each resource
+    for (int i = 0; i<_unitInventoryList.count; i++)
+    {
+        tempUnit = _unitInventoryList[i];
+//        NSLog(@"%@",[tempUnit printMyStores]);
+        
+        // the unit must be working to produce so skip if it isn't
+        if (tempUnit.myStatus != operating && tempUnit.myStatus != repairingFull && tempUnit.myStatus != repairingHalf) {
+            continue;
+        }
+        
+        CGFloat produceFactor = 1.0;
+        
+        if (tempUnit.myStatus == repairingHalf) {
+            produceFactor = 0.5;
+        }
+        
+        CGFloat tempStuff[(stockType) 9];
+        
+        for (stockType j=0; j<sizeof(stockpileTotals)/sizeof(CGFloat); j++) {
+            switch (j) {
+                case structureStock: //0
+                case componentStock: //1
+                case supplyStock: //2
+                case materialStock: //3
+                case foodStock: //7
+                    tempStuff[j] -= [tempUnit.takerBOM[j] floatValue] * tempUnit.myProduceRate;
+                    tempStuff[j] -= [tempUnit.repairBOM[j] floatValue] * tempUnit.myRepairRate / 100.0;
+                    tempStuff[j] += [tempUnit.makerBOM[j] floatValue] * tempUnit.myProduceRate * produceFactor;
+
+                    resourceRate[j] += [mp roundToThreePlaces: tempStuff[j]];
+                    
+                    break;
+                    
+                case powerStock: //4
+                case waterStock: //5
+                case airStock: //6
+                case laborStock: //8
+                case happinessStock: //9
+                    tempStuff[j] -= [tempUnit.takerBOM[j] floatValue] * tempUnit.myProduceRate;
+                    tempStuff[j] -= [tempUnit.repairBOM[j] floatValue] * tempUnit.myRepairRate / 100.0;
+                    tempStuff[j] += [tempUnit.makerBOM[j] floatValue] * tempUnit.myProduceRate * produceFactor;
+
+                    resourceRate[j] += [mp roundToThreePlaces: tempStuff[j]];
+
+                    break;
+                    
+                default:
+                    break;
+            }
+        }
+    }
+//    NSLog(@"Take str:%0.1f comp:%0.1f sup:%0.1f mat:%0.1f power:%0.1f water:%0.1f air:%0.1f food:%0.1f lab:%0.1f oth:%0.1f", Resource00, Resource01, Resource02, Resource03, Resource04, Resource05, Resource06, Resource07, Resource08, Resource09);
+
+    /*
+    plant, // plant food
+    meat, // animal food (fish, poultry, etc.)
+    air, // generates breathable air
+    water, // generates potable water
+    mine, // mining, etc to get minerals
+    power, // converts input to useable power
+    waste, // waste treatment
+    civil, // services police, fire, admin
+    home, // homestead
+    tree, // trees ... non food producing but may provide lumber or fruit
+    fab // generates components, supplies, structure material
+*/
+    
+// Calculate the amount of resources produced by the units (factor for health status)
+// get the resources at each unit and add to the stockpile total (to have the complete inventory of the resource)
+    
+    for (int i = 0; i<_unitInventoryList.count; i++)
+    {
+        tempUnit = _unitInventoryList[i];
+        if (tempUnit.myStatus != operating && tempUnit.myStatus != repairingHalf) {
+            continue;
+        }
+        
+        CGFloat tempStuff[(stockType) 9];
+        
+        for (stockType j=0; j<sizeof(stockpileTotals)/sizeof(CGFloat); j++) {
+            switch (j) {
+                case structureStock: //0
+                case componentStock: //1
+                case supplyStock: //2
+                case materialStock: //3
+                case foodStock: //7
+                    tempStuff[j] += [tempUnit.makerBOM[j] floatValue] * tempUnit.myProduceRate;
+                    stockpileTotals[j] = tempStuff[j]; break;
+                    
+                case powerStock: //4
+                case waterStock: //5
+                case airStock: //6
+                case laborStock: //8
+                case happinessStock: //9
+                    tempStuff[j] += [tempUnit.makerBOM[j] floatValue] * tempUnit.myProduceRate;
+                    stockpileTotals[j] = tempStuff[j]; break;
+
+                default:
+                    break;
+            }
+        }
+    }
+    
+    CGFloat numberNegative = 0.0;
+    CGFloat numberPositive = 0.0;
+    
+    for (int i=0; i<sizeof(stockpileTotals)/sizeof(CGFloat); i++)
+    {
+        if ([mp roundToThreePlaces: resourceRate[i]] == 0) {
+            runoutRate[i] = 10000;
+        } else {
+            runoutRate[i] = stockpileTotals[i] / [mp roundToThreePlaces: resourceRate[i]];
+        }
+        
+        if ([mp roundToThreePlaces: resourceRate[i]] < 0) {
+            numberNegative += 1.0;
+        } else {
+            numberPositive += 1.0;
+        }
+    }
+    
+    return numberNegative;
+    
+}
+
+-(CGFloat) howsMySustainOld
+{
+    
+    // calculate the amount of resources used in a day by each unit (for production and repair) (reduces resources)
+    
+    NewTech* tempUnit = [NewTech alloc];
+    
+    //    CGFloat* resourceRate;
+    //    CGFloat resourceRate[9];
+    //    CGFloat runoutRate[9];
+    
     CGFloat Resource00 = 0;
     CGFloat Resource01 = 0;
     CGFloat Resource02 = 0;
@@ -87,7 +397,7 @@ CGFloat stockpileTotals[(stockType) 9]; // holds parts made by unit
     for (int i = 0; i<_unitInventoryList.count; i++)
     {
         tempUnit = _unitInventoryList[i];
-//        NSLog(@"%@",[tempUnit printMyStores]);
+        //        NSLog(@"%@",[tempUnit printMyStores]);
         
         if (tempUnit.myStatus != operating && tempUnit.myStatus != repairingFull && tempUnit.myStatus != repairingHalf) {
             continue;
@@ -96,53 +406,83 @@ CGFloat stockpileTotals[(stockType) 9]; // holds parts made by unit
         for (int j=0; j<sizeof(stockpileTotals)/sizeof(CGFloat); j++) {
             switch (j) {
                 case 0://struct
-                    Resource00 += [tempUnit.takerBOM[j] floatValue] * tempUnit.myProduceRate;
-                    Resource00 += [tempUnit.repairBOM[j] floatValue] * tempUnit.myWearoutRate / 100.0;
+                    Resource00 -= [tempUnit.takerBOM[j] floatValue] * tempUnit.myProduceRate;
+                    Resource00 -= [tempUnit.repairBOM[j] floatValue] * tempUnit.myWearoutRate / 100.0;
+                    
+                    resourceRate[j] = Resource00;
+                    
                     break;
                     
                 case 1://comp
-                    Resource01 += [tempUnit.takerBOM[j] floatValue] * tempUnit.myProduceRate;
-                    Resource01 += [tempUnit.repairBOM[j] floatValue] * tempUnit.myWearoutRate / 100.0;
+                    Resource01 -= [tempUnit.takerBOM[j] floatValue] * tempUnit.myProduceRate;
+                    Resource01 -= [tempUnit.repairBOM[j] floatValue] * tempUnit.myWearoutRate / 100.0;
+                    
+                    resourceRate[j] = Resource01;
+                    
                     break;
                     
                 case 2://supp
-                    Resource02 += [tempUnit.takerBOM[j] floatValue] * tempUnit.myProduceRate;
-                    Resource02 += [tempUnit.repairBOM[j] floatValue] * tempUnit.myWearoutRate / 100.0;
+                    Resource02 -= [tempUnit.takerBOM[j] floatValue] * tempUnit.myProduceRate;
+                    Resource02 -= [tempUnit.repairBOM[j] floatValue] * tempUnit.myWearoutRate / 100.0;
+                    
+                    resourceRate[j] = Resource02;
+                    
                     break;
                     
                 case 3://matl
-                    Resource03 += [tempUnit.takerBOM[j] floatValue] * tempUnit.myProduceRate;
-                    Resource03 += [tempUnit.repairBOM[j] floatValue] * tempUnit.myWearoutRate / 100.0;
+                    Resource03 -= [tempUnit.takerBOM[j] floatValue] * tempUnit.myProduceRate;
+                    Resource03 -= [tempUnit.repairBOM[j] floatValue] * tempUnit.myWearoutRate / 100.0;
+                    
+                    resourceRate[j] = Resource03;
+                    
                     break;
                     
                 case 4://power
-                    Resource04 += [tempUnit.takerBOM[j] floatValue] * tempUnit.myProduceRate;
-                    Resource04 += [tempUnit.repairBOM[j] floatValue] * tempUnit.myWearoutRate / 100.0;
+                    Resource04 -= [tempUnit.takerBOM[j] floatValue] * tempUnit.myProduceRate;
+                    Resource04 -= [tempUnit.repairBOM[j] floatValue] * tempUnit.myWearoutRate / 100.0;
+                    
+                    resourceRate[j] = Resource04;
+                    
                     break;
                     
                 case 5://water
-                    Resource05 += [tempUnit.takerBOM[j] floatValue] * tempUnit.myProduceRate;
-                    Resource05 += [tempUnit.repairBOM[j] floatValue] * tempUnit.myWearoutRate / 100.0;
+                    Resource05 -= [tempUnit.takerBOM[j] floatValue] * tempUnit.myProduceRate;
+                    Resource05 -= [tempUnit.repairBOM[j] floatValue] * tempUnit.myWearoutRate / 100.0;
+                    
+                    resourceRate[j] = Resource05;
+                    
                     break;
                     
                 case 6://air
-                    Resource06 += [tempUnit.takerBOM[j] floatValue] * tempUnit.myProduceRate;
-                    Resource06 += [tempUnit.repairBOM[j] floatValue] * tempUnit.myWearoutRate / 100.0;
+                    Resource06 -= [tempUnit.takerBOM[j] floatValue] * tempUnit.myProduceRate;
+                    Resource06 -= [tempUnit.repairBOM[j] floatValue] * tempUnit.myWearoutRate / 100.0;
+                    
+                    resourceRate[j] = Resource06;
+                    
                     break;
                     
                 case 7://food
-                    Resource07 += [tempUnit.takerBOM[j] floatValue] * tempUnit.myProduceRate;
-                    Resource07 += [tempUnit.repairBOM[j] floatValue] * tempUnit.myWearoutRate / 100.0;
+                    Resource07 -= [tempUnit.takerBOM[j] floatValue] * tempUnit.myProduceRate;
+                    Resource07 -= [tempUnit.repairBOM[j] floatValue] * tempUnit.myWearoutRate / 100.0;
+                    
+                    resourceRate[j] = Resource07;
+                    
                     break;
                     
                 case 8://labor
-                    Resource08 += [tempUnit.takerBOM[j] floatValue] * tempUnit.myProduceRate;
-                    Resource08 += [tempUnit.repairBOM[j] floatValue] * tempUnit.myWearoutRate / 100.0;
+                    Resource08 -= [tempUnit.takerBOM[j] floatValue] * tempUnit.myProduceRate;
+                    Resource08 -= [tempUnit.repairBOM[j] floatValue] * tempUnit.myWearoutRate / 100.0;
+                    
+                    resourceRate[j] = Resource08;
+                    
                     break;
                     
                 case 9:
-                    Resource09 += [tempUnit.takerBOM[j] floatValue] * tempUnit.myProduceRate;
-                    Resource09 += [tempUnit.repairBOM[j] floatValue] * tempUnit.myWearoutRate / 100.0;
+                    Resource09 -= [tempUnit.takerBOM[j] floatValue] * tempUnit.myProduceRate;
+                    Resource09 -= [tempUnit.repairBOM[j] floatValue] * tempUnit.myWearoutRate / 100.0;
+                    
+                    resourceRate[j] = Resource09;
+                    
                     break;
                     
                 default:
@@ -150,7 +490,9 @@ CGFloat stockpileTotals[(stockType) 9]; // holds parts made by unit
             }
         }
     }
-//    NSLog(@"Take str:%0.1f comp:%0.1f sup:%0.1f mat:%0.1f power:%0.1f water:%0.1f air:%0.1f food:%0.1f lab:%0.1f oth:%0.1f", Resource00, Resource01, Resource02, Resource03, Resource04, Resource05, Resource06, Resource07, Resource08, Resource09);
+    //    NSLog(@"Take str:%0.1f comp:%0.1f sup:%0.1f mat:%0.1f power:%0.1f water:%0.1f air:%0.1f food:%0.1f lab:%0.1f oth:%0.1f", Resource00, Resource01, Resource02, Resource03, Resource04, Resource05, Resource06, Resource07, Resource08, Resource09);
+    
+    // Calculate the amount of resources produced by the units (factor for health status)
     
     Resource00 = 0;
     Resource01 = 0;
@@ -162,6 +504,8 @@ CGFloat stockpileTotals[(stockType) 9]; // holds parts made by unit
     Resource07 = 0;
     Resource08 = 0;
     Resource09 = 0;
+    
+    ModelProduction* mp = [[ModelProduction alloc] init];
     
     for (int i = 0; i<_unitInventoryList.count; i++)
     {
@@ -179,34 +523,74 @@ CGFloat stockpileTotals[(stockType) 9]; // holds parts made by unit
         for (int j=0; j<sizeof(stockpileTotals)/sizeof(CGFloat); j++) {
             switch (j) {
                 case 0: //structure
-                    Resource00 += [tempUnit.makerBOM[j] floatValue] * tempUnit.myProduceRate * produceFactor; break;
+                    Resource00 += [tempUnit.makerBOM[j] floatValue] * tempUnit.myProduceRate * produceFactor;
+                    
+                    resourceRate[j] += [mp roundToThreePlaces: Resource00];
+                    
+                    break;
                     
                 case 1: //comp
-                    Resource01 += [tempUnit.makerBOM[j] floatValue] * tempUnit.myProduceRate * produceFactor; break;
+                    Resource01 += [tempUnit.makerBOM[j] floatValue] * tempUnit.myProduceRate * produceFactor;
+                    
+                    resourceRate[j] += [mp roundToThreePlaces: Resource01];
+                    
+                    break;
                     
                 case 2: //supplies
-                    Resource02 += [tempUnit.makerBOM[j] floatValue] * tempUnit.myProduceRate * produceFactor; break;
+                    Resource02 += [tempUnit.makerBOM[j] floatValue] * tempUnit.myProduceRate * produceFactor;
+                    
+                    resourceRate[j] += [mp roundToThreePlaces: Resource02];
+                    
+                    break;
                     
                 case 3: //materials
-                    Resource03 += [tempUnit.makerBOM[j] floatValue] * tempUnit.myProduceRate * produceFactor; break;
+                    Resource03 += [tempUnit.makerBOM[j] floatValue] * tempUnit.myProduceRate * produceFactor;
+                    
+                    resourceRate[j] += [mp roundToThreePlaces: Resource03];
+                    
+                    break;
                     
                 case 4: //power
-                    Resource04 += [tempUnit.makerBOM[j] floatValue] * tempUnit.myProduceRate * produceFactor; break;
+                    Resource04 += [tempUnit.makerBOM[j] floatValue] * tempUnit.myProduceRate * produceFactor;
+                    
+                    resourceRate[j] += [mp roundToThreePlaces: Resource04];
+                    
+                    break;
                     
                 case 5: //water
-                    Resource05 += [tempUnit.makerBOM[j] floatValue] * tempUnit.myProduceRate * produceFactor; break;
+                    Resource05 += [tempUnit.makerBOM[j] floatValue] * tempUnit.myProduceRate * produceFactor;
+                    
+                    resourceRate[j] += [mp roundToThreePlaces: Resource05];
+                    
+                    break;
                     
                 case 6: //air
-                    Resource06 += [tempUnit.makerBOM[j] floatValue] * tempUnit.myProduceRate * produceFactor; break;
+                    Resource06 += [tempUnit.makerBOM[j] floatValue] * tempUnit.myProduceRate * produceFactor;
+                    
+                    resourceRate[j] += [mp roundToThreePlaces: Resource06];
+                    
+                    break;
                     
                 case 7: //food
-                    Resource07 += [tempUnit.makerBOM[j] floatValue] * tempUnit.myProduceRate * produceFactor; break;
+                    Resource07 += [tempUnit.makerBOM[j] floatValue] * tempUnit.myProduceRate * produceFactor;
+                    
+                    resourceRate[j] += [mp roundToThreePlaces: Resource07];
+                    
+                    break;
                     
                 case 8: //labor
-                    Resource08 += [tempUnit.makerBOM[j] floatValue]; break;
+                    Resource08 += [tempUnit.makerBOM[j] floatValue];
+                    
+                    resourceRate[j] += [mp roundToThreePlaces: Resource08];
+                    
+                    break;
                     
                 case 9:
-                    Resource09 += [tempUnit.makerBOM[j] floatValue] * tempUnit.myProduceRate * produceFactor; break;
+                    Resource09 += [tempUnit.makerBOM[j] floatValue] * tempUnit.myProduceRate * produceFactor;
+                    
+                    resourceRate[j] += [mp roundToThreePlaces: Resource09];
+                    
+                    break;
                     
                 default:
                     break;
@@ -214,8 +598,10 @@ CGFloat stockpileTotals[(stockType) 9]; // holds parts made by unit
         }
     }
     
-//    NSLog(@"Make str:%0.1f comp:%0.1f sup:%0.1f mat:%0.1f power:%0.1f water:%0.1f air:%0.1f food:%0.1f lab:%0.1f oth:%0.1f", Resource00, Resource01, Resource02, Resource03, Resource04, Resource05, Resource06, Resource07, Resource08, Resource09);
-
+    //    NSLog(@"Make str:%0.1f comp:%0.1f sup:%0.1f mat:%0.1f power:%0.1f water:%0.1f air:%0.1f food:%0.1f lab:%0.1f oth:%0.1f", Resource00, Resource01, Resource02, Resource03, Resource04, Resource05, Resource06, Resource07, Resource08, Resource09);
+    
+    // get the resources at each unit and add to the stockpile total (to have the complete inventory of the resource)
+    
     Resource00 = 0;
     Resource01 = 0;
     Resource02 = 0;
@@ -272,19 +658,25 @@ CGFloat stockpileTotals[(stockType) 9]; // holds parts made by unit
         }
     }
     
-    /*
-     stockpileTotals[structureStock] = Resource00;
-     stockpileTotals[componentStock] = Resource01;
-     stockpileTotals[supplyStock] = Resource02;
-     stockpileTotals[materialStock] = Resource03;
-     stockpileTotals[powerStock] = Resource04;
-     stockpileTotals[waterStock] = Resource05;
-     stockpileTotals[airStock] = Resource06;
-     stockpileTotals[foodStock] = Resource07;
-     stockpileTotals[laborStock] = Resource08;
-     */
+    CGFloat numberNegative = 0.0;
+    CGFloat numberPositive = 0.0;
     
-//    NSLog(@"Stck str:%0.1f comp:%0.1f sup:%0.1f mat:%0.1f power:%0.1f water:%0.1f air:%0.1f food:%0.1f lab:%0.1f oth:%0.1f", Resource00, Resource01, Resource02, Resource03, Resource04, Resource05, Resource06, Resource07, Resource08, Resource09);
+    for (int i=0; i<sizeof(stockpileTotals)/sizeof(CGFloat); i++)
+    {
+        if ([mp roundToThreePlaces: resourceRate[i]] == 0) {
+            runoutRate[i] = 10000;
+        } else {
+            runoutRate[i] = stockpileTotals[i] / [mp roundToThreePlaces: resourceRate[i]];
+        }
+        
+        if ([mp roundToThreePlaces: resourceRate[i]]<0) {
+            numberNegative += 1.0;
+        } else {
+            numberPositive += 1.0;
+        }
+    }
+    
+    return numberNegative;
     
 }
 

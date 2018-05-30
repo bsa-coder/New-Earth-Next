@@ -31,8 +31,9 @@ NSString* const kMessageUrgencyKey = @"MsgFire"; // color, icons, etc
         theStore = [AvailTech sharedSelf];
         neNotes = [NeNotifications sharedSelf]; 
         aProdEng = [[ModelProduction alloc] init];
-        myCalendar = [[NECalendar alloc] init];
-        
+//        myCalendar = [[NECalendar alloc] init];
+        myCalendar = [NECalendar sharedSelf];
+
         NSMutableArray* goals = myCalendar.milestoneList;
         CGPoint firstGoal = [goals[1] CGPointValue];
         NSInteger nextGoal = firstGoal.y;

@@ -542,7 +542,7 @@ NSString* const klaborUsageKey = @"laborUsageKey";
     myTileItem.imageIcon = newIcon;
 }
 
--(void) showMeSmallAtPoint: (CGPoint)theLoc atScale: (CGFloat)theDrawScale inContext: (CGContextRef)context
+-(void) showMeSmallAtPoint2: (CGPoint)theLoc atScale: (CGFloat)theDrawScale inContext: (CGContextRef)context
 {
     CGFloat tempX = [self roundToTens: theLoc.x];
     CGFloat tempY = [self roundToTens: theLoc.y];
@@ -578,6 +578,95 @@ NSString* const klaborUsageKey = @"laborUsageKey";
     UIImage* newIcon = [UIImage imageNamed:itemIcon];
     myTileItem.imageIcon = newIcon;
 
+}
+
+//-(void) drawRect:(CGSize) mySize rotated:(CGFloat) tileSlopeDir around:(CGPoint) myLoc atScale: (CGFloat)theDrawScale inContext: (CGContextRef)context
+-(void) showMeSmallAtPoint: (CGPoint)theLoc atScale: (CGFloat)theDrawScale inContext: (CGContextRef)context
+{
+    CGFloat scaleVal = _myGlobals.mapScale;
+    ModelProduction* mp = [[ModelProduction alloc] init];
+    
+    CGPoint temp = [mp tileVertexForPosition: myLoc];
+    GeoTile* theTile = (GeoTile*)[_myGlobals.geoTileList objectForKey: NSStringFromCGPoint(temp)];
+    CGFloat tileSlopeDir = theTile.slopeDir * M_PI / 180.0;
+
+    // transform mySize so X <= y
+    CGSize localSize;
+    if (self.mySize.width > self.mySize.height) {
+        localSize = CGSizeMake(self.mySize.height, self.mySize.width);
+    } else {localSize = self.mySize;}
+    
+    // calculate the radius of rotation
+    CGFloat theRadius = 0.5 * theDrawScale * scaleVal * sqrt(
+                                   pow((double) mySize.height, 2.0) +
+                                   pow((double) mySize.width, 2.0)
+                                   );
+    
+    // calculate angle to first vertex
+    CGFloat theAngle = atan(localSize.height / localSize.width);
+
+    // calculate vertexes
+    double X1 = theRadius * cos(theAngle + tileSlopeDir);
+    double Y1 = theRadius * sin(theAngle + tileSlopeDir);
+    double X2 = theRadius * cos(M_PI - theAngle + tileSlopeDir);
+    double Y2 = theRadius * sin(M_PI - theAngle + tileSlopeDir);
+    CGPoint ptA = CGPointMake( X1+myLoc.x, Y1+myLoc.y);
+    CGPoint ptB = CGPointMake( X2+myLoc.x, Y2+myLoc.y);
+    CGPoint ptC = CGPointMake( -X1+myLoc.x, -Y1+myLoc.y);
+    CGPoint ptD = CGPointMake( -X2+myLoc.x, -Y2+myLoc.y);
+    
+/*
+    CGPoint points[4];
+    points[0] = ptA;
+    points[1] = ptB;
+    points[2] = ptC;
+    points[3] = ptD;
+ 
+    // 3
+    CGMutablePathRef cgPath = CGPathCreateMutable();
+    CGPathAddLines(cgPath, &CGAffineTransformIdentity, points, sizeof points / sizeof *points);
+    CGPathCloseSubpath(cgPath);
+    UIBezierPath *path = [UIBezierPath bezierPathWithCGPath:cgPath];
+ */
+
+    // draw Bezier curve for new Rect (... ooh this should return the rect)
+    UIBezierPath* thePath = [UIBezierPath bezierPath];
+    [thePath setLineWidth: 3.0];
+    [thePath stroke];
+    [thePath setLineCapStyle: kCGLineCapSquare];
+    [thePath moveToPoint:ptA];
+    [thePath addLineToPoint:ptB];
+    [thePath addLineToPoint:ptC];
+    [thePath addLineToPoint:ptD];
+    [thePath closePath];
+    
+    // 4
+    CAShapeLayer *shape = [CAShapeLayer layer];
+    shape.path = thePath.CGPath;
+    shape.fillColor = [self showMyColor].CGColor;
+    
+//    shape.path = path.CGPath;
+//    shape.fillColor = [UIColor colorWithRed:255/255.0 green:20/255.0 blue:147/255.0 alpha:1].CGColor;
+    // 5
+//    [self.view.layer addSublayer:shape];
+    CGContextSaveGState(context);
+    // Rotate the context
+    //    CGContextTranslateCTM( context, 0.5f * theRectToShow.size.width, 0.5f * theRectToShow.size.height ) ;
+    //    CGContextRotateCTM(context, theDir * M_PI / 180);
+    
+    CGContextBeginPath(context);
+    CGContextAddPath(context, thePath.CGPath);
+    
+    [[self showMyColor] setFill];
+    [[self showMyColor] setStroke];
+    
+    CGContextDrawPath(context, kCGPathFillStroke);
+    
+    CGContextRestoreGState(context);
+    itemIcon = @"Nothing";
+    UIImage* newIcon = [UIImage imageNamed:itemIcon];
+    myTileItem.imageIcon = newIcon;
+    
 }
 
 -(void) showMyEnvelope:(id)myID atPoint:(CGPoint) theLoc atScale:(CGFloat) theScale inContext:(CGContextRef)context

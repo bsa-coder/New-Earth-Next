@@ -108,7 +108,8 @@ typedef enum
     airStock,
     foodStock,
     laborStock,
-    happinessStock
+    happinessStock,
+    noneStock
 
 }stockType;
 
