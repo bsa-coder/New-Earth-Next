@@ -70,6 +70,7 @@
 
             }
             else {
+                [thisTile drawBackgroundInContext:thisContext forView:self];
                 [thisTile drawResourceViewInContext:thisContext forView:self];
                 [thisTile drawTerrainViewInContext:thisContext forView:self];
 

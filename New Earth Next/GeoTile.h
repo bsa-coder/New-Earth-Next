@@ -104,6 +104,7 @@
 
 -(void) drawResourceViewInContext: (CGContextRef) context forView: (UIView*) theView;
 -(void) drawTerrainViewInContext: (CGContextRef) context forView: (UIView*) theView;
+-(void) drawBackgroundInContext: (CGContextRef) context forView: (UIView*) theView;
 
 -(void) addEntry:(NewTech*) unitEntry;
 -(NSIndexPath*) indexPathForEntry:(NewTech*) unitEntry;
