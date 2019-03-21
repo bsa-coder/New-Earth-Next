@@ -78,6 +78,8 @@ NSString* const kMessageUrgencyKey = @"MsgFire"; // color, icons, etc
                                 object:nil];
         
 
+        PlacementEnvelope* pe = [[PlacementEnvelope alloc] init];
+        pe = nil;
     }
     return self;
 }
@@ -117,8 +119,17 @@ NSString* const kMessageUrgencyKey = @"MsgFire"; // color, icons, etc
                     NSLog(@"path: %@", pathToUnit);
                 }
                 else {
-                    NewTech* newTech = [[NewTech alloc] initWithSaveString: fileContents];
-                    [theWarehouse addUnit: newTech];
+                    // check type ... if capacity type unit create CapTech else NewTech
+                    NSArray *lineArr = [fileContents componentsSeparatedByString:@"\t"];
+                    if ((itemType) [lineArr[4] intValue] == (itemType) power || (itemType) [lineArr[4] intValue] == (itemType) air || (itemType) [lineArr[4] intValue] == (itemType) water) {
+                        CapTech* newTech = [[CapTech alloc] initWithSaveString: fileContents];
+                        [theWarehouse addUnit: newTech];
+                    }
+                    else
+                    {
+                        NewTech* newTech = [[NewTech alloc] initWithSaveString: fileContents];
+                        [theWarehouse addUnit: newTech];
+                    }
                 }
             }
         }

@@ -11,6 +11,7 @@
 #import "NENotification.h"
 #import "NeNotifications.h"
 #import "Globals.h"
+#import "PathFinder.h"
 
 @interface ModelProduction()
 @property NENotification* theMessage;
@@ -20,7 +21,7 @@
 @end
 
 @implementation ModelProduction
-@synthesize Units; //, theGlobals;
+@synthesize Units;//, gi; //, theGlobals;
 
 #pragma mark-Initialization methods
 
@@ -30,6 +31,7 @@
     if (self) {
         _myGlobals =  [NewEarthGlobals sharedSelf];
         _neNotes = [NeNotifications sharedSelf];
+//        gi = [[GameInit alloc] init];
 
 //        theGlobals = [[NewEarthGlobals alloc] init];
     }
@@ -277,6 +279,92 @@
     }
     return cleanScore;
 }
+-(void) doConnectToUnit:(NewTech*) aUnit from: (UnitInventory*) myUnits
+{
+    // connect to power
+    if (aUnit.sources[0] == nil) {
+        // find nearest power source
+        CapTech* theSource = [self findNearestPowerSourceTo:aUnit from: (UnitInventory*) myUnits];
+        if (theSource == nil) { return; } // look again later
+        
+        // if here ... set power source of unit
+        aUnit.sources[0] = theSource;
+        
+        // create path to power source
+        PathFinder* pf = [[PathFinder alloc] init];
+        
+        UIBezierPath* bp = [pf simplePathFrom:aUnit.myLoc to:theSource.myLoc width:4.0];
+        // if here ... set power source path of unit
+         aUnit.pathsToSources[0] = bp;
+        
+        // calculate the delay (for really long distances)
+        double temp = [self distanceFrom:aUnit.myLoc to:[aUnit.sources[0] myLoc]];
+        aUnit.delays[0] = [NSNumber numberWithInt:(int)(temp / aUnit.myConnectRate > 100.0 ? 100 - temp / aUnit.myConnectRate : 0)] ;
+
+        return; // did work finding source ... next day will start working
+    } else {
+        if (aUnit.delays[0] < 0) { aUnit.delays[0] = [NSNumber numberWithInt: (int)[aUnit.delays[0] intValue] + 1];}
+        if (aUnit.delays[0] >= 0) { aUnit.myConnected += aUnit.myConnectRate; }
+    }
+    
+    /*
+    // connect to water
+    if (aUnit.sources[1] == nil) {
+        // find nearest power source
+        CapTech* theSource = [self findNearestPowerSourceTo:aUnit];
+        if (theSource == nil) { return; } // look again later
+        
+        // if here ... set power source of unit
+        // aUnit.powerSource = theSource;
+        
+        // create path to power source
+        PathFinder* pf = [[PathFinder alloc] init];
+        
+        UIBezierPath* bp = [pf simplePathFrom:aUnit.myLoc to:theSource.myLoc width:4.0];
+        // if here ... set power source path of unit
+        aUnit.pathsToSources[1] = bp;
+
+        // calculate the delay (for really long distances)
+        double temp = [self distanceFrom:aUnit.myLoc to:[aUnit.sources[1] myLoc]];
+        aUnit.delays[1] = [NSNumber numberWithInt:(int)(temp / aUnit.myConnectRate > 100.0 ? 100 - temp / aUnit.myConnectRate : 0)] ;
+
+        return; // did work finding source ... next day will start working
+    } else {
+        if (aUnit.delays[1] < 0) { aUnit.delays[1] = [NSNumber numberWithInt: (int)[aUnit.delays[1] intValue] + 1];}
+        if (aUnit.delays[1] >= 0) { aUnit.myConnected += aUnit.myConnectRate; }
+    }
+    */
+
+    
+    
+}
+
+-(CapTech*) findNearestPowerSourceTo:(NewTech*) aUnit from: (UnitInventory*) myUnits
+{
+    CapTech* theSource = nil;
+    double closestDist = 1000000.0;
+    
+    for (int i = 0; i < myUnits.count; i++) {
+        NSIndexPath* nsPath = [NSIndexPath indexPathForRow:i inSection:0];
+        CapTech* nt = (CapTech*)[myUnits unitAtIndexPath:nsPath];
+        
+        if (nt.myType == (itemType) power) {
+            double dist = [self distanceFrom:aUnit.myLoc to:nt.myLoc];
+            if (dist < closestDist) {
+                closestDist = dist;
+                theSource = nt;
+            }
+        }
+    }
+    return theSource;
+}
+
+-(double) distanceFrom:(CGPoint) theStart to:(CGPoint) theEnd
+{
+    double theResult = 0.0;
+    theResult = sqrt(pow(theStart.x-theEnd.x, 2.0) + pow(theStart.y - theEnd.y, 2.0));
+    return theResult;
+}
 
 -(void) doSitePreparation:(NewTech*)aUnit
 {
@@ -314,13 +402,15 @@
 
         if (aUnit.mySmooth < 0) { aUnit.mySmooth = 0; }
     }
+    /*
     else {
-        aUnit.myConnected -= aUnit.myConnectRate;
+        aUnit.myConnected += aUnit.myConnectRate;
         if (aUnit.myConnected <=0) { // connect to utilities for operation
             aUnit.myConnected = 0;
             aUnit.myStatus = building;
         }
     }
+    */
 }
 
 -(void) doUnitProduction:(NewTech*) aUnit
@@ -380,20 +470,10 @@
             }
             break;
             
-        case connecting:
-            // increment preparation fields (clean, clear, smooth, connect)
-            [self doSitePreparation: aUnit];
-            if (aUnit.myConnected <= 0) {
-                aUnit.myStatus = building;
-                _theMessage.message = [NSString stringWithFormat: @"%@ site connected to power.", aUnit.myName];
-                _theMessage.type = info;
-            }
-            break;
-            
         case preparing:
             // increment preparation fields (clean, clear, smooth, connect)
             [self doSitePreparation: aUnit];
-            if (aUnit.myClean + aUnit.myClear + aUnit.mySmooth + aUnit.myConnected <= 0) {
+            if (aUnit.myClean + aUnit.myClear + aUnit.mySmooth <= 0) {
                 aUnit.myStatus = building;
                 _theMessage.message = [NSString stringWithFormat: @"Site preparation complete, %@ is building.", aUnit.myName];
                 _theMessage.type = info;
@@ -405,9 +485,19 @@
             aUnit.myHealth += aUnit.myBuildRate;
             if (aUnit.myHealth >= 100) {
                 aUnit.myHealth = 100;
-                aUnit.myStatus = operating;
-                _theMessage.message = [NSString stringWithFormat: @"%@ is now operating.", aUnit.myName];
+                aUnit.myStatus = connecting;
+                _theMessage.message = [NSString stringWithFormat: @"%@ is now connecting.", aUnit.myName];
                 _theMessage.type = statusGood;
+            }
+            break;
+            
+        case connecting:
+            // increment preparation fields (clean, clear, smooth, connect)
+            [self doSitePreparation: aUnit];
+            if (aUnit.myConnected >= 100) {
+                aUnit.myStatus = operating;
+                _theMessage.message = [NSString stringWithFormat: @"%@ site connected and now operating.", aUnit.myName];
+                _theMessage.type = info;
             }
             break;
             

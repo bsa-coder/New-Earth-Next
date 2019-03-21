@@ -2,19 +2,21 @@
 //  GameInit.h
 //  New Earth Next
 //
-//  Created by David Alexander on 3/30/18.
+//  Created by Scott Alexander on 3/30/18.
 //  Copyright © 2018 Big Dog Tools. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import "FileOps.h"
 #import "NewTech.h"
+#import "CapTech.h"
 #import "Globals.h"
 #import "UnitInventory.h"
 #import "AvailTech.h"
 #import "ModelProduction.h"
 #import "NeNotifications.h"
 #import "Calendar.h"
+#import "PlacementEnvelope.h"
 
 // message to update GUI
 extern NSString* const kSetUpdateNotification;

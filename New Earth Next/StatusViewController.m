@@ -66,14 +66,14 @@ int const kVertical = 2;
     
     if (!theScrollView) { theScrollView = [[UIScrollView alloc] init]; }
 
-    CGPoint myOrigin = CGPointMake(0.0, 20.0);
+    CGPoint myOrigin = CGPointMake(0.0, 40.0);
     CGRect myRect;
     
     if ([[self view] window].frame.size.height > [[self view] window].frame.size.width) {
-        myRect = CGRectMake( myOrigin.x, myOrigin.y, 170.0, [[self view] window].frame.size.height-50.0 - 20.0);
+        myRect = CGRectMake( myOrigin.x, myOrigin.y, 170.0, [[self view] window].frame.size.height-50.0 - 40.0);
         layout = 0;
     } else {
-        myRect = CGRectMake( myOrigin.x, myOrigin.y, 320.0, [[self view] window].frame.size.height-50.0 - 20.0);
+        myRect = CGRectMake( myOrigin.x, myOrigin.y, 320.0, [[self view] window].frame.size.height-50.0 - 40.0);
         layout = 1;
     }
     

@@ -228,7 +228,7 @@ CGFloat runoutRate[(stockType) 9]; // holds the number of days until running out
         } else {
             numberPositive += 1.0;
         }
-        NSLog(@"it: %d  %0.1f / %0.1f = rte %0.1f +%0.0f -%0.0f", i, stockpileTotals[i], resourceRate[i], runoutRate[i], numberPositive, numberNegative);
+//        NSLog(@"it: %d  %0.1f / %0.1f = rte %0.1f +%0.0f -%0.0f", i, stockpileTotals[i], resourceRate[i], runoutRate[i], numberPositive, numberNegative);
     }
     NSLog(@"\n\n --- \n\n");
     

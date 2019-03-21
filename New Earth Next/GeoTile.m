@@ -403,7 +403,7 @@ NSString* const kInstalledUnitList = @"InstalledUnitListKey";
     if ([self valueOfResourcesAndToxins] == 0) { return; }
     
     CGFloat theScale = 1.0;
-    CGFloat theDrawScale = theScale * _theGlobals.mapScale;
+    __unused CGFloat theDrawScale = theScale * _theGlobals.mapScale;
     
     CGFloat tileX = CGPointFromString(tileLocation).x;
     CGFloat tileY = CGPointFromString(tileLocation).y;
@@ -419,20 +419,13 @@ NSString* const kInstalledUnitList = @"InstalledUnitListKey";
     CGFloat theMax3 = (theMax1 > theMax2 ? theMax1 : theMax2);
     
     double myAlpha = theMax3 / 2000.0;
-//    myAlpha = 1.0;
 
-    /*
-    if (theMax3 == toxin01) { theBackgroundColor = [UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:myAlpha]; } //org
-    else if (theMax3 == toxin02) { theBackgroundColor = [UIColor colorWithRed:0.0 green:1.0 blue:0.0 alpha:myAlpha]; } //brn
-    else if (theMax3 == toxin03) { theBackgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:1.0 alpha:myAlpha]; } //olv
-    else {theBackgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:0.0 alpha:myAlpha]; } //rose
-     */
-    if (theMax3 == toxin01) { theBackgroundColor = [UIColor colorWithRed:1.0 green:0.6 blue:0.0 alpha:myAlpha]; } //org
-    else if (theMax3 == toxin02) { theBackgroundColor = [UIColor colorWithRed:0.6 green:0.2 blue:0.0 alpha:myAlpha]; } //brn
-    else if (theMax3 == toxin03) { theBackgroundColor = [UIColor colorWithRed:0.4 green:0.4 blue:0.2 alpha:myAlpha]; } //olv
-    else {theBackgroundColor = [UIColor colorWithRed:1.0 green:0.2 blue:0.0 alpha:myAlpha]; } //rose
+    if (theMax3 == toxin01)         { theBackgroundColor = [UIColor colorWithRed:1.0 green:0.6 blue:0.0 alpha:myAlpha]; } //org
+    else if (theMax3 == toxin02)    { theBackgroundColor = [UIColor colorWithRed:0.6 green:0.2 blue:0.0 alpha:myAlpha]; } //brn
+    else if (theMax3 == toxin03)    { theBackgroundColor = [UIColor colorWithRed:0.4 green:0.4 blue:0.2 alpha:myAlpha]; } //olv
+    else                            { theBackgroundColor = [UIColor colorWithRed:1.0 green:0.2 blue:0.0 alpha:myAlpha]; } //rose
 
-     CGContextRef thisContext = UIGraphicsGetCurrentContext();
+    CGContextRef thisContext = UIGraphicsGetCurrentContext();
     thisContext = UIGraphicsGetCurrentContext();
     
     CGContextSaveGState(context);
@@ -449,18 +442,6 @@ NSString* const kInstalledUnitList = @"InstalledUnitListKey";
     CGContextSetFillColorWithColor(context, theBackgroundColor.CGColor);
     CGContextFillPath(context);
     
-/*
-    [terrainToxinTileItem showMeAtLoc:terrainToxinTileItem.itemLocation atScale:theDrawScale inContext:context];
-    [theView addSubview: terrainToxinTileItem.itemOutline];
-    terrainToxinTileItem.itemOutline.center = CGPointMake(colTwoX + theOffset, rowTwoY + theOffset + theOffset);
-    terrainToxinTileItem.itemValue = toxin01 + toxin02 + toxin03 + toxin04;
-    
-    UIImage* newIcon;
-    if (theMax3 == toxin01) { newIcon = toxin01TileItem.itemIcon.image; }
-    else if (theMax3 == toxin02) { newIcon = toxin02TileItem.itemIcon.image; }
-    else if (theMax3 == toxin03) { newIcon = toxin03TileItem.itemIcon.image; }
-    else {newIcon = toxin04TileItem.itemIcon.image; }
-*/
     CGContextDrawPath(context, kCGPathFillStroke);
     CGContextRestoreGState(context);
     

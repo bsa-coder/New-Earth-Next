@@ -74,6 +74,15 @@
 @property float myHealth;
 @property float myEnvelope;
 
+@property (strong, nonatomic) NSMutableArray* delays;
+@property (strong, nonatomic) NSMutableArray* sources;
+@property (strong, nonatomic) NSMutableArray* pathsToSources;
+/*
+ array[0] = power
+ array[0] = water
+ array[0] = air
+ */
+
 @property NSInteger myClean; // amount of cleaning (toxic materials) before smoothing
 @property NSInteger myClear; // amount of clearing (rocks trees) before cleaning
 @property NSInteger mySmooth; // leveling site before building

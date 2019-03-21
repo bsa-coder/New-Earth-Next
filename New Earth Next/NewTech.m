@@ -11,6 +11,7 @@
 #import "NeNotifications.h"
 #import "Globals.h"
 #import "ModelProduction.h"
+#import "CapTech.h"
 // At top of file
 
 
@@ -66,6 +67,7 @@ NSString* const klaborUsageKey = @"laborUsageKey";
 @synthesize makerBOM, takerBOM, repairBOM, myStockpiles;
 @synthesize myClass;
 @synthesize myTileItem;
+@synthesize delays, sources, pathsToSources;
 
 #pragma mark - Initialization methods
 
@@ -130,6 +132,10 @@ NSString* const klaborUsageKey = @"laborUsageKey";
         [self fillTakerBOMStruct:0 comp:0 supp:0 matl:0 powr:0 watr:0 air:0 food:0 labr:0];
         [self fillMakerBOMStruct:0 comp:0 supp:0 matl:0 powr:0 watr:0 air:0 food:0 labr:0];
         [self fillRepairBOMStruct:0 comp:0 supp:0 matl:0 powr:0 watr:0 air:0 food:0 labr:0];
+        
+        int delays[3] = {0, 0, 0};
+        CapTech* sources[3] = {nil,nil,nil};
+        UIBezierPath* pathsToSources[3] = {nil,nil,nil};
     }
     _theMessage = [[NENotification alloc] initNotificationOnDay:0 from:fromPlant type:info content:@"" date:nil isRemote:NO];
     _myGlobals = [NewEarthGlobals sharedSelf];
@@ -173,6 +179,9 @@ NSString* const klaborUsageKey = @"laborUsageKey";
         takerBOM = [[NSMutableArray alloc] initWithArray:origUnit.takerBOM];
         makerBOM = [[NSMutableArray alloc] initWithArray:origUnit.makerBOM];
         repairBOM = [[NSMutableArray alloc] initWithArray:origUnit.repairBOM];
+        int delays[3] = {0, 0, 0};
+        CapTech* sources[3] = {nil,nil,nil};
+        UIBezierPath* pathsToSources[3] = {nil,nil,nil};
     }
     _theMessage = [[NENotification alloc] initNotificationOnDay:0 from:fromPlant type:info content:@"" date:nil isRemote:NO];
     _myGlobals = [NewEarthGlobals sharedSelf];
@@ -205,7 +214,7 @@ NSString* const klaborUsageKey = @"laborUsageKey";
     [aNewUnit fillMakerBOMStruct:0 comp:0 supp:0 matl:0 powr:0 watr:0 air:0 food:0 labr:0];
     [aNewUnit fillRepairBOMStruct:0 comp:0 supp:0 matl:0 powr:0 watr:0 air:0 food:0 labr:0];
     [aNewUnit fillMakerBOMStruct:0 comp:0 supp:0 matl:0 powr:0 watr:0 air:0 food:0 labr:0];
-    
+        
     return aNewUnit;
 }
 
@@ -408,12 +417,13 @@ NSString* const klaborUsageKey = @"laborUsageKey";
     // need to save context before doing stuff
     mapScale = 118.29 / 1000;
     
-    CGFloat theDrawScale = theScale * mapScale;
-    
+//    CGFloat theDrawScale = theScale * mapScale;
+    CGFloat theDrawScale = mapScale;
+
     UIImage* anIcon = [UIImage imageNamed:itemIcon];
 
     if (anIcon != nil) { NSLog(@"loaded image: %@", itemIcon); [myTileItem changeMyIcon: anIcon]; }
-    else { NSLog(@"failed loading: <<%@>> for %@", itemIcon, [self getMyType]); }
+//    else { NSLog(@"failed loading: <<%@>> for %@", itemIcon, [self getMyType]); }
     
     if(!myTileItem) { NSLog(@"no myTileItem in placeMe"); myTileItem = [[TileItem alloc] initAtLocation: theLoc ofType: anIcon withStartingValue: myHealth]; }
     else {
@@ -445,7 +455,7 @@ NSString* const klaborUsageKey = @"laborUsageKey";
             //            NSLog(@"i am preparing"); // color, shape, image
             theColorIs = [UIColor colorWithRed:0.678 green:1.0 blue:0.184 alpha:1.0];
 //            theColorIs = [UIColor lightGrayColor];
-            theColorIs = [UIColor greenColor];
+//            theColorIs = [UIColor greenColor];
             bigRect = CGRectMake(0, 0, 25, 25);
             itemIcon = @"Image-1";
             break;
@@ -453,7 +463,7 @@ NSString* const klaborUsageKey = @"laborUsageKey";
         case cleaning:
             //            NSLog(@"i am preparing"); // color, shape, image
             theColorIs = [UIColor colorWithRed:0.678 green:1.0 blue:0.184 alpha:1.0];
-            theColorIs = [UIColor brownColor];
+//            theColorIs = [UIColor brownColor];
             bigRect = CGRectMake(0, 0, 25, 25);
             itemIcon = @"StageCleanIcon";
             break;
@@ -461,7 +471,7 @@ NSString* const klaborUsageKey = @"laborUsageKey";
         case clearing:
             //            NSLog(@"i am preparing"); // color, shape, image
             theColorIs = [UIColor colorWithRed:0.627 green:0.322 blue:0.176 alpha:0.75];
-            theColorIs = [UIColor redColor];
+//            theColorIs = [UIColor redColor];
             bigRect = CGRectMake(0, 0, 25, 25);
             itemIcon = @"StageClearIcon";
             break;
@@ -469,7 +479,7 @@ NSString* const klaborUsageKey = @"laborUsageKey";
         case smoothing:
             //            NSLog(@"i am preparing"); // color, shape, image
             theColorIs = [UIColor colorWithRed:0.678 green:1.0 blue:0.184 alpha:1.0];
-            theColorIs = [UIColor orangeColor];
+//            theColorIs = [UIColor orangeColor];
             bigRect = CGRectMake(0, 0, 25, 25);
             itemIcon = @"StageSmoothIcon";
             break;
@@ -477,6 +487,7 @@ NSString* const klaborUsageKey = @"laborUsageKey";
         case building:
 //            NSLog(@"i am building"); // color, shape, image
             theColorIs = [UIColor blueColor];
+            theColorIs = [UIColor colorWithRed:0.0 green:0.0 blue:1.0 alpha:0.5]; // hot pink
             bigRect = CGRectMake(0, 0, 25, 25);
             itemIcon = @"StageBuildIcon";
             break;
@@ -484,7 +495,7 @@ NSString* const klaborUsageKey = @"laborUsageKey";
         case connecting:
             //            NSLog(@"i am preparing"); // color, shape, image
             theColorIs = [UIColor colorWithRed:1.0 green:1.0 blue:0.6 alpha:1.0];
-            theColorIs = [UIColor yellowColor];
+//            theColorIs = [UIColor yellowColor];
             bigRect = CGRectMake(0, 0, 25, 25);
             itemIcon = @"StageConnectIcon";
             break;
@@ -499,8 +510,8 @@ NSString* const klaborUsageKey = @"laborUsageKey";
             
         case repairingHalf:
             //            NSLog(@"i am repairing"); // color, shape, image
-            theColorIs = [UIColor colorWithRed:1.0 green:0.078 blue:0.576 alpha:1.0]; // hot pink
-            theColorIs = [UIColor grayColor];
+            theColorIs = [UIColor colorWithRed:1.0 green:0.078 blue:0.576 alpha:0.5]; // hot pink
+//            theColorIs = [UIColor grayColor];
             bigRect = CGRectMake(0, 0, 25, 25);
             itemIcon = @"Image-2";
             break;
@@ -508,7 +519,7 @@ NSString* const klaborUsageKey = @"laborUsageKey";
         case repairingFull:
             //            NSLog(@"i am repairing"); // color, shape, image
             theColorIs = [UIColor colorWithRed:1.0 green:0.078 blue:0.576 alpha:0.5]; // hot pink
-            theColorIs = [UIColor blackColor];
+//            theColorIs = [UIColor blackColor];
             bigRect = CGRectMake(0, 0, 25, 25);
             itemIcon = @"Image-3";
             break;
@@ -522,6 +533,12 @@ NSString* const klaborUsageKey = @"laborUsageKey";
     CGFloat tempX = theLoc.x;
     CGFloat tempY = theLoc.y;
     
+    if (myStatus == operating) {
+        myColorIs = [self showMyColor];
+    } else {
+        myColorIs = theColorIs;
+    }
+    
     CGRect theRectToShow = CGRectMake(tempX-(bigRect.size.width/2.0f)*theDrawScale, tempY-(bigRect.size.height/2.0f)*theDrawScale, (bigRect.size.width)*theDrawScale, (bigRect.size.height)*theDrawScale);
     
     if (theRectToShow.origin.x<0 || theRectToShow.origin.y<0) { return; }
@@ -529,7 +546,7 @@ NSString* const klaborUsageKey = @"laborUsageKey";
     CGContextSaveGState(context);
     
     CGContextBeginPath(context);
-    CGContextAddRect(context, theRectToShow);
+//    CGContextAddRect(context, theRectToShow);
     
     [theColorIs setFill];
     [theColorIs setStroke];
@@ -597,11 +614,16 @@ NSString* const klaborUsageKey = @"laborUsageKey";
     } else {localSize = self.mySize;}
     
     // calculate the radius of rotation
+    CGFloat theRadius = 0.5 * scaleVal * sqrt(
+                                                             pow((double) mySize.height, 2.0) +
+                                                             pow((double) mySize.width, 2.0)
+                                                             );
+/*
     CGFloat theRadius = 0.5 * theDrawScale * scaleVal * sqrt(
-                                   pow((double) mySize.height, 2.0) +
-                                   pow((double) mySize.width, 2.0)
-                                   );
-    
+                                                             pow((double) mySize.height, 2.0) +
+                                                             pow((double) mySize.width, 2.0)
+                                                             );
+*/
     // calculate angle to first vertex
     CGFloat theAngle = atan(localSize.height / localSize.width);
 
@@ -672,10 +694,12 @@ NSString* const klaborUsageKey = @"laborUsageKey";
 -(void) showMyEnvelope:(id)myID atPoint:(CGPoint) theLoc atScale:(CGFloat) theScale inContext:(CGContextRef)context
 {
     // need to save context before doing stuff
-    mapScale = 118.29 / 1000;
+    CGFloat scaleVal = _myGlobals.mapScale;
+//    mapScale = 118.29 / 1000;
     
-    CGFloat theDrawScale = theScale * mapScale;
-    
+//    CGFloat theDrawScale = theScale * mapScale;
+    CGFloat theDrawScale = scaleVal;
+
     // round the pick location
     CGFloat tempX = [self roundToTens: theLoc.x];// * theScale;
     CGFloat tempY = [self roundToTens: theLoc.y];// * theScale;
@@ -683,17 +707,33 @@ NSString* const klaborUsageKey = @"laborUsageKey";
     tempX = theLoc.x;// * theScale;
     tempY = theLoc.y;// * theScale;
     
+    CGRect envRect = CGRectMake(tempX-(myEnvelope/2.0f)*theDrawScale, tempY-(myEnvelope/2.0f)*theDrawScale, (myEnvelope)*theDrawScale, (myEnvelope)*theDrawScale);
+    CGFloat dashPattern[] = {4, 2, 4, 2}; // points of line - space - line - space
+
+    CGColorRef tempColor = myColorIs.CGColor;
+    const CGFloat* colorParts =  CGColorGetComponents(tempColor);
+
     CGContextSaveGState(context);
     
-    // draw the envelop first
-    CGContextAddEllipseInRect(context, CGRectMake(tempX-(myEnvelope/2.0f)*theDrawScale, tempY-(myEnvelope/2.0f)*theDrawScale, (myEnvelope)*theDrawScale, (myEnvelope)*theDrawScale));
-    
-    CGFloat dashPattern[] = {4, 2, 4, 2}; // points of line - space - line - space
-    CGContextSetLineDash(context, 3, dashPattern, 4);
+    // draw the envelope first
+    [myColorIs setFill];
+    [[UIColor colorWithRed:colorParts[0] green:colorParts[1] blue:colorParts[2] alpha:0.5] setFill];
 
-    [[UIColor whiteColor] setFill];
+    CGContextFillEllipseInRect(context, envRect);
     [[UIColor whiteColor] setStroke];
-    CGContextSetLineWidth(context, 2.0);
+    CGContextSetAlpha(context, 0.4);
+    CGContextDrawPath(context, kCGPathStroke);
+    CGContextRestoreGState(context);
+
+/*******************************************************/;
+    
+    CGContextSaveGState(context);
+    
+    // draw the envelope first
+    CGContextAddEllipseInRect(context, envRect);
+    CGContextSetLineDash(context, 3, dashPattern, 4);
+    [[UIColor whiteColor] setStroke];
+    CGContextSetLineWidth(context, 1.0);
     CGContextDrawPath(context, kCGPathStroke);
     CGContextRestoreGState(context);
 }

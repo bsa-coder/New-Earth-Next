@@ -134,7 +134,9 @@
 {
     // do some stuff here
     [super viewWillAppear:YES];
-    
+    theScrollView.zoomScale = _aGlobals.currentZoomScale;
+    theScrollView.contentOffset = _aGlobals.currentViewCenter;
+
     center = [NSNotificationCenter defaultCenter];
     
     [center addObserver:self
@@ -427,6 +429,11 @@
     // Pass the selected object to the new view controller.
     
     if ([segue.identifier isEqualToString:@"fromMapToStore"]) {
+        
+        // save current zoomscale and view center point
+        _aGlobals.currentZoomScale = theScrollView.zoomScale;
+        _aGlobals.currentViewCenter = theScrollView.contentOffset;
+        
         UnitsViewController* controller = segue.destinationViewController;
         if ([controller respondsToSelector:@selector(setAvailTech:)]) {
             [controller setAvailTech:self.aStore];

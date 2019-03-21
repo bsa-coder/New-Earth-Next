@@ -20,7 +20,9 @@
     self.contentMode = UIViewContentModeRedraw;
     self.opaque = NO;
     self.backgroundColor = [UIColor clearColor];
-    
+//    self.zoomScale = 0.5;
+//    self.contentOffset = CGPointMake(0,0);
+//    NSLog(@"zoomscale = %0.4f offset = %@", self.zoomScale, NSStringFromCGPoint(self.contentOffset));
 }
 
 

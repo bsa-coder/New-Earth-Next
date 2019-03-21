@@ -28,11 +28,12 @@
 
 @interface NotificationsViewController()
 {
-    UITableView* theTable;
+//    UITableView* theTable;
 }
 @end
 
 @implementation NotificationsViewController
+@synthesize theTable;
 //@synthesize tableView, tableViewCellLocal, tableViewCellRemote;
 
 // delete this after TESTING!

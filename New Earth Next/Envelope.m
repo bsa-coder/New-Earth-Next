@@ -41,19 +41,18 @@
     {
         aUnit = [[NewTech alloc] init];
     }
-    /*
-    theUnits = [myEnvDelegate unitsToDrawEnv:self];
     
-    if ([theUnits count] > 0) {
-        for (NSInteger i = 0; i < [theUnits count]; i++) {
+    _theUnits = [myEnvDelegate unitsToDrawEnv:self];
+    
+    if ([_theUnits count] > 0) {
+        for (NSInteger i = 0; i < [_theUnits count]; i++) {
             NSIndexPath* indexPath = [NSIndexPath indexPathForRow:i inSection:0];
-            aUnit = [theUnits unitAtIndexPath:indexPath];
+            aUnit = [_theUnits unitAtIndexPath:indexPath];
             theUnitLocation = aUnit.myLoc;
             [aUnit showMyEnvelope:aUnit atPoint:theUnitLocation atScale:theViewScale inContext:thisContext];
-
         }
     }
-    */
+    
     theTiles = [myEnvDelegate tilesToDrawEnv:self];
     if(theTiles)
     {

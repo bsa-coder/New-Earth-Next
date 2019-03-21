@@ -9,25 +9,39 @@
 #import <Foundation/Foundation.h>
 
 /* TODO list 2017-08-28
- Add bank account to control page
+ 
+ Newly placed units start with health = 100 ... but should grow to 100 while being built
+ Change fill color of ENVELOPE to get rid of the square
+ Change table views of warehouse and store to be parent>>detail view and back
+ Allow the user to place the HQ themselves
+ Expand the active map from the small development screen
+ Add weather and seasons
+ Add internet links to units (to see technology available)
+ Add internet links to tiles (to see what 'bad' looks like)
+ Add animation for stages
+ Add pathfinding for power and roads
+ Add lines to power sources
+ Add cost of distance
+ 
  Add good-better-best to store/detail selection (so list isn't giant)
  Add TOTAL STATUS (combine sustain scores for each resource into one value >=0 good <0 bad)
  Add CONTRACT DAY (number of days passed in contract)(maybe countdown is better) to control page
  Add ProgressToGoal (how close are we to the milestone)
- DONE: Add Warehouse page to show placed and unplaced units (maybe health, etc)
- DONE: Check Repair-Wearout in DoProduction (seems to stop) - number type wrong ... integer versus float
  Fix UnitName - and use it in notes (who gave notice) (old format was TYPE+LOC)
- Fix MapScaleOnReturn - after buying unit and returning to map the zoomscale = 1 and not last value
- Add BuyIt to Detail page
  Change Detail:DONE to return to Store (and stay there)
- Change BuyIt unit placement orientation so rotated perpendicular to slope
  Save GameState on exit (write to file so can open at last state)
  Add END/QUIT to stop the game (or restart it)
  Add Open Last (to open game from exit state)
- DONE: Fix MapZoomScale for status bar when zooming
  Add TotalStatus to ???
+ DONE: Add Warehouse page to show placed and unplaced units (maybe health, etc)
+ DONE: Check Repair-Wearout in DoProduction (seems to stop) - number type wrong ... integer versus float
+ DONE: Fix MapScaleOnReturn - after buying unit and returning to map the zoomscale = 1 and not last value
+ DONE: Add BuyIt to Detail page
+ DONE: Change BuyIt unit placement orientation so rotated perpendicular to slope
+ DONE: Fix MapZoomScale for status bar when zooming
  DONE: Fix bug - in landscape, buyit puts unit in the wrong position (far to the right and maybe down a bit)
- 
+ DONE: Add bank account to control page
+
  */
 
 

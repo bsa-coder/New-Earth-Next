@@ -47,6 +47,9 @@
 		55D2457A206EE7FD00EC8054 /* ModelProduction.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D24578206EE7FC00EC8054 /* ModelProduction.m */; };
 		55D2457D206F06DC00EC8054 /* RootTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D2457C206F06DB00EC8054 /* RootTabBarViewController.m */; };
 		55D24580207723C800EC8054 /* Calendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D2457E207723C700EC8054 /* Calendar.m */; };
+		D29B4BBA20CCCD0D00C26A10 /* PathFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = D29B4BB920CCCD0D00C26A10 /* PathFinder.m */; };
+		D29B4BBD20CCD25400C26A10 /* PlacementEnvelope.m in Sources */ = {isa = PBXBuildFile; fileRef = D29B4BBC20CCD25400C26A10 /* PlacementEnvelope.m */; };
+		D29B4BC020DB16CB00C26A10 /* CapTech.m in Sources */ = {isa = PBXBuildFile; fileRef = D29B4BBF20DB16CB00C26A10 /* CapTech.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -130,6 +133,12 @@
 		55D2457F207723C800EC8054 /* Calendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Calendar.h; sourceTree = "<group>"; };
 		D2063CCF209BE890008F585A /* New Earth Next.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "New Earth Next.entitlements"; sourceTree = "<group>"; };
 		D225497F2087F7290028C6E3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D29B4BB820CCCD0D00C26A10 /* PathFinder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PathFinder.h; sourceTree = "<group>"; };
+		D29B4BB920CCCD0D00C26A10 /* PathFinder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PathFinder.m; sourceTree = "<group>"; };
+		D29B4BBB20CCD25400C26A10 /* PlacementEnvelope.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlacementEnvelope.h; sourceTree = "<group>"; };
+		D29B4BBC20CCD25400C26A10 /* PlacementEnvelope.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlacementEnvelope.m; sourceTree = "<group>"; };
+		D29B4BBE20DB16CB00C26A10 /* CapTech.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CapTech.h; sourceTree = "<group>"; };
+		D29B4BBF20DB16CB00C26A10 /* CapTech.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CapTech.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,6 +228,8 @@
 				557680D42063338500F88B18 /* UnitInventory.m */,
 				557E860320608D1A009E8A11 /* NewTech.h */,
 				557E860220608D19009E8A11 /* NewTech.m */,
+				D29B4BBE20DB16CB00C26A10 /* CapTech.h */,
+				D29B4BBF20DB16CB00C26A10 /* CapTech.m */,
 				551C2562205F0AA4007D8987 /* DataViewController.h */,
 				551C2563205F0AA4007D8987 /* DataViewController.m */,
 				551C2565205F0AA4007D8987 /* ModelController.h */,
@@ -233,6 +244,10 @@
 				557680F92065F43200F88B18 /* UnitsDetailViewController.m */,
 				557680F52065EF7000F88B18 /* WarehouseViewController.h */,
 				557680F62065EF7000F88B18 /* WarehouseViewController.m */,
+				D29B4BB820CCCD0D00C26A10 /* PathFinder.h */,
+				D29B4BB920CCCD0D00C26A10 /* PathFinder.m */,
+				D29B4BBB20CCD25400C26A10 /* PlacementEnvelope.h */,
+				D29B4BBC20CCD25400C26A10 /* PlacementEnvelope.m */,
 				551C2585205F6B0E007D8987 /* Globals.h */,
 				551C2584205F6B0D007D8987 /* Globals.m */,
 				551C256B205F0AA4007D8987 /* Assets.xcassets */,
@@ -270,7 +285,7 @@
 		551C2551205F0AA4007D8987 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Big Dog Tools";
 				TargetAttributes = {
 					551C2558205F0AA4007D8987 = {
@@ -328,6 +343,7 @@
 				557680D02062036600F88B18 /* Envelope.m in Sources */,
 				551C2580205F1DCC007D8987 /* GameView.m in Sources */,
 				557680E220634D0000F88B18 /* AppStatusView.m in Sources */,
+				D29B4BBA20CCCD0D00C26A10 /* PathFinder.m in Sources */,
 				557680FA2065F43300F88B18 /* UnitsDetailViewController.m in Sources */,
 				557680D32062078400F88B18 /* UnitView.m in Sources */,
 				557680F12065DAD300F88B18 /* NeNotifications.m in Sources */,
@@ -351,9 +367,11 @@
 				551C2564205F0AA4007D8987 /* DataViewController.m in Sources */,
 				557680EE2065DA2B00F88B18 /* NotificationsViewController.m in Sources */,
 				551C2583205F1DCC007D8987 /* MapView.m in Sources */,
+				D29B4BBD20CCD25400C26A10 /* PlacementEnvelope.m in Sources */,
 				557E860120608B8D009E8A11 /* ItemEnums.m in Sources */,
 				55D2457A206EE7FD00EC8054 /* ModelProduction.m in Sources */,
 				55D2457D206F06DC00EC8054 /* RootTabBarViewController.m in Sources */,
+				D29B4BC020DB16CB00C26A10 /* CapTech.m in Sources */,
 				551C2586205F6B0E007D8987 /* Globals.m in Sources */,
 				55D24574206E6FC500EC8054 /* FileOps.m in Sources */,
 				551C255E205F0AA4007D8987 /* AppDelegate.m in Sources */,
@@ -399,6 +417,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -406,6 +425,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -455,6 +475,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -462,6 +483,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;

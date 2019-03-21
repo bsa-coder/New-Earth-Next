@@ -24,7 +24,7 @@
 @interface MapView : UIImageView
 {
     CGPoint theUnitLocation;
-    CGFloat theViewScale;
+//    CGFloat theViewScale;
 }
 
 @property (assign, nonatomic) CGFloat gridSpacing;

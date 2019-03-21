@@ -24,7 +24,7 @@ NSString* const kGprogressSectorKey = @"kGprogressSector";
 NSString* const kGdateOfLastMessageKey = @"kGdateOfLastMessage";
 
 @implementation NewEarthGlobals
-@synthesize bankAccountBalance, gridSpacing, gridXOrigin, gridYOrigin, geoTileList, numberOfHomesteadsActual, numberOfHomesteadsTarget, height, width, mapScale, tileX, tileY, tileSize, theCount, dayOfContract, lengthOfContract, isRunning, sustainScore;
+@synthesize bankAccountBalance, gridSpacing, gridXOrigin, gridYOrigin, geoTileList, numberOfHomesteadsActual, numberOfHomesteadsTarget, height, width, mapScale, tileX, tileY, tileSize, theCount, dayOfContract, lengthOfContract, isRunning, sustainScore, currentZoomScale, currentViewCenter;
 // After @implementation
 @synthesize docPath = _docPath;
 
@@ -62,6 +62,9 @@ NSString* const kGdateOfLastMessageKey = @"kGdateOfLastMessage";
         dayOfContract = 0;
         lengthOfContract = 10; // 50;
         isRunning = NO;
+        
+        currentZoomScale = 1.0;
+        currentViewCenter = CGPointMake(0, 0);
         
         geoTileList = [[NSMutableDictionary alloc] initWithCapacity:20];
     }

@@ -63,6 +63,10 @@ extern NSString* const kGdateOfLastMessageKey;
 
 @property CGFloat sustainScore; // from unitinventory
 
+// properties to return mapview to last position
+@property CGFloat currentZoomScale;
+@property CGPoint currentViewCenter;
+
 -(NSString*) resourceName: (stockType) theType;
 -(void) saveContents;
 +(id)sharedSelf;

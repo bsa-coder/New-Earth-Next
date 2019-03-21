@@ -2,7 +2,7 @@
 //  ModelProduction.h
 //  junk
 //
-//  Created by David Alexander on 7/23/16.
+//  Created by Scott Alexander on 7/23/16.
 //  Copyright © 2016 Big Dog Tools. All rights reserved.
 //
 
@@ -13,11 +13,13 @@
 #import "ItemEnums.h"
 #import "UnitInventory.h"
 #import "GeoTile.h"
+//#import "GameInit.h"
 //#import "AppDelegate.h"
 
 @interface ModelProduction : NSObject
 
 @property NSMutableDictionary* Units;
+//@property GameInit* gi;
 //@property NewEarthGlobals* theGlobals;
 
 -(CGFloat) roundToThreePlaces: (CGFloat) theFloat;
