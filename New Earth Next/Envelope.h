@@ -11,6 +11,7 @@
 #import "UnitInventory.h"
 #import "GeoTile.h"
 #import "Globals.h"
+#import "CapTech.h"
 
 @class Envelope;
 
@@ -19,6 +20,7 @@
 -(float) scaleForDrawingEnv: (Envelope*) requestor;
 -(UnitInventory*) unitsToDrawEnv:(Envelope*) requestor;
 -(NSMutableDictionary*) tilesToDrawEnv:(Envelope*) requestor;
+-(NSMutableArray*) itemsToDrawEnv:(Envelope*) requestor;
 -(CGFloat) gridSpacingEnv: (Envelope*) requestor;
 
 

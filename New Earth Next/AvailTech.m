@@ -62,7 +62,7 @@ NSString* const kAvailTech = @"AvailTechKey";
     
     [self addUnit:PLANT];
     
-    NewTech* MEAT = [[NewTech alloc] initWithType:(itemType) meat withLoc:CGPointMake(-10, 0) withID:0 withSize:CGSizeMake(48, 50) withHealth:100 onDate:[NSDate date] withCost:100000.00 withColor:[UIColor greenColor] withStatus:isnew withName:@"MEAT" wasPlaced:NO withClean:0 withClear:0 withSmooth:0 withConnected:100 withBuildRate:1 withRepairRate:15 withProduceRate:1 withWearoutRate:0.00025 withCleanRate:5000 withClearRate:100 withSmoothRate:100 withConnectRate:100 withEnvelope:100.0];
+    NewTech* MEAT = [[NewTech alloc] initWithType:(itemType) meat withLoc:CGPointMake(-10, 0) withID:0 withSize:CGSizeMake(48, 50) withHealth:100 onDate:[NSDate date] withCost:100000.00 withColor:[UIColor greenColor] withStatus:isnew withName:@"MEAT" wasPlaced:NO withClean:0 withClear:0 withSmooth:0 withConnected:0 withBuildRate:1 withRepairRate:15 withProduceRate:1 withWearoutRate:0.00025 withCleanRate:5000 withClearRate:100 withSmoothRate:100 withConnectRate:100 withEnvelope:100.0];
      
     [MEAT fillTakerBOMStruct:0.0 comp:0.0 supp:.1 matl:0.0 powr:1 watr:20 air:0.0 food:9.1 labr:.1];
     [MEAT fillMakerBOMStruct:0.0 comp:0.0 supp:0.0 matl:2.3 powr:0.0 watr:.04 air:0.0 food:5 labr:0.0];
@@ -70,7 +70,7 @@ NSString* const kAvailTech = @"AvailTechKey";
     
     [self addUnit:MEAT];
     
-    NewTech* AIR = [[NewTech alloc] initWithType:(itemType) air withLoc:CGPointMake(-20, 0) withID:0 withSize:CGSizeMake(8, 50) withHealth:100 onDate:[NSDate date] withCost:100000.00 withColor:[UIColor greenColor] withStatus:isnew withName:@"AIR" wasPlaced:NO withClean:0 withClear:0 withSmooth:0 withConnected:100 withBuildRate:1 withRepairRate:15 withProduceRate:1 withWearoutRate:0.00025 withCleanRate:5000 withClearRate:100 withSmoothRate:100 withConnectRate:100 withEnvelope:50.0];
+    NewTech* AIR = [[NewTech alloc] initWithType:(itemType) air withLoc:CGPointMake(-20, 0) withID:0 withSize:CGSizeMake(8, 50) withHealth:100 onDate:[NSDate date] withCost:100000.00 withColor:[UIColor greenColor] withStatus:isnew withName:@"AIR" wasPlaced:NO withClean:0 withClear:0 withSmooth:0 withConnected:0 withBuildRate:1 withRepairRate:15 withProduceRate:1 withWearoutRate:0.00025 withCleanRate:5000 withClearRate:100 withSmoothRate:100 withConnectRate:100 withEnvelope:50.0];
     
     [AIR fillTakerBOMStruct:0.0 comp:0.0 supp:.5 matl:0.0 powr:1 watr:0.0 air:0.0 food:0.0 labr:0.0];
     [AIR fillMakerBOMStruct:0.0 comp:0.0 supp:0.0 matl:0.0 powr:0.0 watr:0.0 air:25 food:0.0 labr:0.0];
@@ -78,7 +78,7 @@ NSString* const kAvailTech = @"AvailTechKey";
     
     [self addUnit:AIR];
     
-    NewTech* MINE = [[NewTech alloc] initWithType:(itemType) mine withLoc:CGPointMake(-30, 0) withID:0 withSize:CGSizeMake(80, 120) withHealth:100 onDate:[NSDate date] withCost:100000.00 withColor:[UIColor greenColor] withStatus:isnew withName:@"MINE" wasPlaced:NO withClean:0 withClear:0 withSmooth:0 withConnected:100 withBuildRate:1 withRepairRate:15 withProduceRate:1 withWearoutRate:0.000125 withCleanRate:5000 withClearRate:100 withSmoothRate:100 withConnectRate:100 withEnvelope:216.0];
+    NewTech* MINE = [[NewTech alloc] initWithType:(itemType) mine withLoc:CGPointMake(-30, 0) withID:0 withSize:CGSizeMake(80, 120) withHealth:100 onDate:[NSDate date] withCost:100000.00 withColor:[UIColor greenColor] withStatus:isnew withName:@"MINE" wasPlaced:NO withClean:0 withClear:0 withSmooth:0 withConnected:0 withBuildRate:1 withRepairRate:15 withProduceRate:1 withWearoutRate:0.000125 withCleanRate:5000 withClearRate:100 withSmoothRate:100 withConnectRate:100 withEnvelope:216.0];
     
     [MINE fillTakerBOMStruct:0.0 comp:0.0 supp:1 matl:0.0 powr:5 watr:0.0 air:0.0 food:0.0 labr:.2];
     [MINE fillMakerBOMStruct:0.0 comp:0.0 supp:0.0 matl:100 powr:0.0 watr:.66 air:0.0 food:0.0 labr:0.0];
@@ -102,7 +102,7 @@ NSString* const kAvailTech = @"AvailTechKey";
     
     [self addUnit:POWER00];
     
-    NewTech* WATER = [[NewTech alloc] initWithType:(itemType) water withLoc:CGPointMake(-50, 0) withID:0 withSize:CGSizeMake(8, 50) withHealth:100 onDate:[NSDate date] withCost:100000.00 withColor:[UIColor greenColor] withStatus:isnew withName:@"WATER" wasPlaced:NO withClean:0 withClear:0 withSmooth:0 withConnected:100 withBuildRate:1 withRepairRate:15 withProduceRate:1 withWearoutRate:0.00025 withCleanRate:5000 withClearRate:100 withSmoothRate:100 withConnectRate:100 withEnvelope:50.0];
+    NewTech* WATER = [[NewTech alloc] initWithType:(itemType) water withLoc:CGPointMake(-50, 0) withID:0 withSize:CGSizeMake(8, 50) withHealth:100 onDate:[NSDate date] withCost:100000.00 withColor:[UIColor greenColor] withStatus:isnew withName:@"WATER" wasPlaced:NO withClean:0 withClear:0 withSmooth:0 withConnected:0 withBuildRate:1 withRepairRate:15 withProduceRate:1 withWearoutRate:0.00025 withCleanRate:5000 withClearRate:100 withSmoothRate:100 withConnectRate:100 withEnvelope:50.0];
     
     [WATER fillTakerBOMStruct:0.0 comp:0.0 supp:0.5 matl:0.0 powr:4.0 watr:0.0 air:0.0 food:0.0 labr:0.0];
     [WATER fillMakerBOMStruct:0.0 comp:0.0 supp:0.0 matl:0.0 powr:0.0 watr:10000 air:0.0 food:0.0 labr:0.0];
@@ -110,7 +110,7 @@ NSString* const kAvailTech = @"AvailTechKey";
     
     [self addUnit:WATER];
     
-    NewTech* WASTE = [[NewTech alloc] initWithType:(itemType) waste withLoc:CGPointMake(-50, 0) withID:0 withSize:CGSizeMake(100, 200) withHealth:100 onDate:[NSDate date] withCost:100000.00 withColor:[UIColor greenColor] withStatus:isnew withName:@"WASTE" wasPlaced:NO withClean:0 withClear:0 withSmooth:0 withConnected:100 withBuildRate:1 withRepairRate:15 withProduceRate:1 withWearoutRate:0.000125 withCleanRate:5000 withClearRate:100 withSmoothRate:100 withConnectRate:1 withEnvelope:450.0];
+    NewTech* WASTE = [[NewTech alloc] initWithType:(itemType) waste withLoc:CGPointMake(-50, 0) withID:0 withSize:CGSizeMake(100, 200) withHealth:100 onDate:[NSDate date] withCost:100000.00 withColor:[UIColor greenColor] withStatus:isnew withName:@"WASTE" wasPlaced:NO withClean:0 withClear:0 withSmooth:0 withConnected:0 withBuildRate:1 withRepairRate:15 withProduceRate:1 withWearoutRate:0.000125 withCleanRate:5000 withClearRate:100 withSmoothRate:100 withConnectRate:1 withEnvelope:450.0];
     
     [WASTE fillTakerBOMStruct:0.0 comp:0.0 supp:.05 matl:60 powr:5 watr:0.0 air:0.0 food:0.0 labr:.1];
     [WASTE fillMakerBOMStruct:0.0 comp:0.0 supp:0 matl:50 powr:0.0 watr:0 air:0.0 food:0.0 labr:0.0];
@@ -118,7 +118,7 @@ NSString* const kAvailTech = @"AvailTechKey";
     
     [self addUnit:WASTE];
     
-    NewTech* CIVIL = [[NewTech alloc] initWithType:(itemType) civil withLoc:CGPointMake(-70, 0) withID:0 withSize:CGSizeMake(48, 50) withHealth:100 onDate:[NSDate date] withCost:100000.00 withColor:[UIColor greenColor] withStatus:isnew withName:@"CIVIL" wasPlaced:NO withClean:0 withClear:0 withSmooth:0 withConnected:100 withBuildRate:1 withRepairRate:15 withProduceRate:1 withWearoutRate:0.00025 withCleanRate:5000 withClearRate:100 withSmoothRate:100 withConnectRate:100 withEnvelope:100.0];
+    NewTech* CIVIL = [[NewTech alloc] initWithType:(itemType) civil withLoc:CGPointMake(-70, 0) withID:0 withSize:CGSizeMake(48, 50) withHealth:100 onDate:[NSDate date] withCost:100000.00 withColor:[UIColor greenColor] withStatus:isnew withName:@"CIVIL" wasPlaced:NO withClean:0 withClear:0 withSmooth:0 withConnected:0 withBuildRate:1 withRepairRate:15 withProduceRate:1 withWearoutRate:0.00025 withCleanRate:5000 withClearRate:100 withSmoothRate:100 withConnectRate:100 withEnvelope:100.0];
     
     [CIVIL fillTakerBOMStruct:0.0 comp:0.0 supp:.2 matl:0.0 powr:.2 watr:1 air:5 food:0.0 labr:.2];
     [CIVIL fillMakerBOMStruct:0.0 comp:0.0 supp:0.0 matl:0.0 powr:0.0 watr:0.0 air:0.0 food:0.0 labr:0];
@@ -137,7 +137,7 @@ NSString* const kAvailTech = @"AvailTechKey";
     
     [self addUnit:TREE];
     
-    NewTech* FAB = [[NewTech alloc] initWithType:(itemType) fab withLoc:CGPointMake(-100, 0) withID:0 withSize:CGSizeMake(80, 80) withHealth:100 onDate:[NSDate date] withCost:70000.00 withColor:[UIColor greenColor] withStatus:isnew withName:@"FAB" wasPlaced:NO withClean:0 withClear:0 withSmooth:0 withConnected:100 withBuildRate:2 withRepairRate:5 withProduceRate:3 withWearoutRate:0.00025 withCleanRate:5000 withClearRate:100 withSmoothRate:100 withConnectRate:100 withEnvelope:160];
+    NewTech* FAB = [[NewTech alloc] initWithType:(itemType) fab withLoc:CGPointMake(-100, 0) withID:0 withSize:CGSizeMake(80, 80) withHealth:100 onDate:[NSDate date] withCost:70000.00 withColor:[UIColor greenColor] withStatus:isnew withName:@"FAB" wasPlaced:NO withClean:0 withClear:0 withSmooth:0 withConnected:0 withBuildRate:2 withRepairRate:5 withProduceRate:3 withWearoutRate:0.00025 withCleanRate:5000 withClearRate:100 withSmoothRate:100 withConnectRate:100 withEnvelope:160];
     
     [FAB fillTakerBOMStruct:0.0 comp:0.0 supp:0 matl:75 powr:4 watr:1 air:0.0 food:0.0 labr:.5];
     [FAB fillMakerBOMStruct:10 comp:30 supp:20 matl:0 powr:0.0 watr:0 air:0.0 food:0.0 labr:0.0];

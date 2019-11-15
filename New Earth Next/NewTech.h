@@ -10,6 +10,7 @@
 #import <uikit/uikit.h>
 #import "ItemEnums.h"
 #import "TileItem.h"
+#import "segment.h"
 
 @interface NewTech : NSObject <NSCoding>
 {
@@ -74,9 +75,9 @@
 @property float myHealth;
 @property float myEnvelope;
 
-@property (strong, nonatomic) NSMutableArray* delays;
-@property (strong, nonatomic) NSMutableArray* sources;
-@property (strong, nonatomic) NSMutableArray* pathsToSources;
+@property (strong, nonatomic) NSMutableArray* delays; // not sure what I was thinking for this
+@property (strong, nonatomic) segment* source; // list of newtech units that supply power, water, etc.
+@property (strong, nonatomic) NSMutableArray* pathsToSources; // hope will be list of uibezierpath objects (rather than vertices)
 /*
  array[0] = power
  array[0] = water

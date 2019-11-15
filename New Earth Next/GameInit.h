@@ -50,6 +50,8 @@ extern NSString* const kMessageUrgencyKey;
 
 @property (nonatomic, strong) NSTimer* gameEngineTimer;
 
+@property (nonatomic, strong) NSMutableArray* gridPaths;
+
 -(void) startGameEngineTimer;
 -(void) stopGameEngineTimer;
 -(void) gameEngine: (NSTimer*) gameTimer;

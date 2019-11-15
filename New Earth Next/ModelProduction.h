@@ -13,12 +13,17 @@
 #import "ItemEnums.h"
 #import "UnitInventory.h"
 #import "GeoTile.h"
+#import "pathUtilities.h"
+#import "segment.h"
+
 //#import "GameInit.h"
 //#import "AppDelegate.h"
 
 @interface ModelProduction : NSObject
 
-@property NSMutableDictionary* Units;
+//@property NSMutableDictionary* Units;
+@property UnitInventory* Units;
+@property pathUtilities* tools;
 //@property GameInit* gi;
 //@property NewEarthGlobals* theGlobals;
 

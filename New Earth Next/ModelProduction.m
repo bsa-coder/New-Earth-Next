@@ -31,6 +31,8 @@
     if (self) {
         _myGlobals =  [NewEarthGlobals sharedSelf];
         _neNotes = [NeNotifications sharedSelf];
+        
+        _tools = [[pathUtilities alloc] init];
 //        gi = [[GameInit alloc] init];
 
 //        theGlobals = [[NewEarthGlobals alloc] init];
@@ -46,6 +48,7 @@
     //    theUnits = Units.unitInventory;
     
     NewTech* unit = [[NewTech alloc] init];
+    Units = myUnits;
     
     /*
      if(theUnits)
@@ -131,6 +134,12 @@
 
 -(BOOL)calcSiteScore:(CGPoint)aLoc forUnit:(NewTech*)aUnit
 {
+    /*================
+     goal is for returnValue YES (where clear+clean+smooth = 0)
+     should only be striving to get ready for building, which
+     increases HEALTH toward 100 and finally MYCONNECTED grows
+     to 100 (indicating power in place ... for now)
+     ================*/
     BOOL returnValue = NO;
 
     if (aUnit.myStatus == isnew) {
@@ -147,15 +156,16 @@
         // get the connect area
         // get distance to nearest utility source (all of the required ones)
         // find nearest waste, water, power (depends on unit type for requirements)
-        aUnit.myConnected = [self getUtilConnectValue:aUnit];
+//TODO: fix this work for connections to power
+        // aUnit.myConnected = [self getUtilConnectValue:aUnit];
     }
     
-    returnValue = (aUnit.myClean + aUnit.myClear + aUnit.mySmooth + aUnit.myConnected > 0);
+    returnValue = (aUnit.myClean + aUnit.myClear + aUnit.mySmooth > 0);
     
     return returnValue;
 }
 
-// find utilities near unit
+// find utilities near unit (unused currently)
 -(NSInteger) getUtilConnectValue:(NewTech*) aUnit
 {
     if (aUnit.myConnected > 0) {
@@ -164,8 +174,10 @@
     return 15;
 }
 
+// TODO: not sure why this is here ... may have been replaced by method inside NewTech class
 // rect is the area to be surveyed from multiple data maps
 // of type selects the maps
+// THIS SHOULDN'T BE USED ... instead use CALCSITESCORE
 -(NSInteger) getSiteValue:(CGRect)theRect ofType:(NSInteger)futureEnum
 {
     NSInteger theReturnValue = 0;
@@ -279,33 +291,133 @@
     }
     return cleanScore;
 }
+
+-(void) updateUnitConnectStatus: (NewTech*) aUnit
+{
+    if (aUnit.source.srcID != nil) {
+        segment* temp = [[segment alloc] init];
+        temp = aUnit.source.srcID;
+        if (temp.myStatus < 3) { temp.myStatus += 1; }
+    }
+    if (aUnit.source.myStatus < 3)
+        { aUnit.source.myStatus += 1; }
+    
+    aUnit.myConnected += 1;
+    
+}
+
+-(BOOL) incrementSource: (NewTech*) aUnit
+{
+    if (aUnit.source.destID != nil) {
+        aUnit.source = aUnit.source.destID;
+    }
+    return (aUnit.source.myStatus >= 3);
+}
+
+-(void) turnOnPath: (NewTech*) aUnit
+{
+    // update path
+    // find head
+    segment* aseg = [[segment alloc] init];
+    aseg = aUnit.source;
+    
+    while (aseg.srcID != nil) {
+        aseg = aseg.srcID;
+    }
+    // copy head status to path segments
+    int srcStatus = aseg.myStatus;
+    while (aseg.destID != nil) {
+        aseg = aseg.destID;
+        aseg.myStatus = srcStatus;
+    }
+    aseg.myStatus = srcStatus;
+}
+
 -(void) doConnectToUnit:(NewTech*) aUnit from: (UnitInventory*) myUnits
 {
-    // connect to power
-    if (aUnit.sources[0] == nil) {
-        // find nearest power source
-        CapTech* theSource = [self findNearestPowerSourceTo:aUnit from: (UnitInventory*) myUnits];
+//      this should be done after the unit is built
+    NSMutableArray* theGrid = [[NSMutableArray alloc] init];
+    
+    // get connected
+    if (aUnit.myConnected <= 0) {
+        // find nearest source with capacity
+        CapTech* theSource = [self findNearestPowerSourceTo:aUnit from:Units];
         if (theSource == nil) { return; } // look again later
-        
-        // if here ... set power source of unit
-        aUnit.sources[0] = theSource;
-        
-        // create path to power source
-        PathFinder* pf = [[PathFinder alloc] init];
-        
-        UIBezierPath* bp = [pf simplePathFrom:aUnit.myLoc to:theSource.myLoc width:4.0];
-        // if here ... set power source path of unit
-         aUnit.pathsToSources[0] = bp;
-        
-        // calculate the delay (for really long distances)
-        double temp = [self distanceFrom:aUnit.myLoc to:[aUnit.sources[0] myLoc]];
-        aUnit.delays[0] = [NSNumber numberWithInt:(int)(temp / aUnit.myConnectRate > 100.0 ? 100 - temp / aUnit.myConnectRate : 0)] ;
-
-        return; // did work finding source ... next day will start working
-    } else {
-        if (aUnit.delays[0] < 0) { aUnit.delays[0] = [NSNumber numberWithInt: (int)[aUnit.delays[0] intValue] + 1];}
-        if (aUnit.delays[0] >= 0) { aUnit.myConnected += aUnit.myConnectRate; }
+        // plan path from source to this unit
+        [theGrid addObject:[_tools makePathFromUnit: theSource toUnit: aUnit]];
+        [theSource.pathsToSources addObject: [theGrid lastObject]];
+        [aUnit.pathsToSources addObject: [theGrid lastObject]];
+        aUnit.source = [aUnit.pathsToSources[0] firstObject];
     }
+    
+    BOOL doneConnecting = NO;
+    
+    if (aUnit.myConnected < 100) {
+        [self updateUnitConnectStatus: aUnit];
+        doneConnecting = [self incrementSource: aUnit];
+    }
+    
+    if (doneConnecting) {
+        [self turnOnPath:aUnit];
+        aUnit.myConnected = 100; }
+ 
+/*
+// construct lines/piping (increment connected)
+    if (aUnit.myConnected < 100) {
+        segment* aseg = [[segment alloc] init];
+        aseg = (segment*) aUnit.source;
+        // handle head of path
+        if ((aseg.srcID == nil) && (aUnit.myConnected <= 1)) {
+            if (aseg.myStatus < 4) {
+                NSLog(@"Nothing to do ... yet.");
+            } else {
+                if (aseg.destID != nil) {
+                    aUnit.source = aseg.destID;
+                }
+                aUnit.myConnected += 1;
+            }
+        } else if (aseg.destID == nil) {
+            // handle tail of path
+            if (aseg.myStatus == 1) {
+                aseg.myStatus += 1; // update current seg
+                aseg = aseg.srcID;
+                if (aseg.myStatus < 4) {
+                    aseg.myStatus += 1; // update source
+                }
+                aUnit.myConnected += 1;
+            } else if (aseg.myStatus == 2) {
+                aseg.myStatus += 1; // update current seg
+                aUnit.myConnected += 1;
+            } else {
+                // update path
+                // find head
+                while (aseg.srcID != nil) {
+                    aseg = aseg.srcID;
+                }
+                // copy head status to path segments
+                int srcStatus = aseg.myStatus;
+                while (aseg.destID != nil) {
+                    aseg = aseg.destID;
+                    aseg.myStatus = srcStatus;
+                }
+                aseg.myStatus = srcStatus;
+                aUnit.myConnected = 100;
+            }
+
+        } else {
+            // handle middle path
+            aseg.myStatus += 1; // update current seg
+            if (aseg.destID != nil) { aUnit.source = aseg.destID; }
+            aseg = aseg.srcID;
+            if (aseg.myStatus < 4) {
+                aseg.myStatus += 1; // update source
+            }
+            aUnit.myConnected += 1;
+        }
+    }
+
+*/
+    
     
     /*
     // connect to water
@@ -335,8 +447,6 @@
     }
     */
 
-    
-    
 }
 
 -(CapTech*) findNearestPowerSourceTo:(NewTech*) aUnit from: (UnitInventory*) myUnits
@@ -347,8 +457,8 @@
     for (int i = 0; i < myUnits.count; i++) {
         NSIndexPath* nsPath = [NSIndexPath indexPathForRow:i inSection:0];
         CapTech* nt = (CapTech*)[myUnits unitAtIndexPath:nsPath];
-        
         if (nt.myType == (itemType) power) {
+            if (nt.myStatus != operating) { return nil; }
             double dist = [self distanceFrom:aUnit.myLoc to:nt.myLoc];
             if (dist < closestDist) {
                 closestDist = dist;
@@ -402,15 +512,7 @@
 
         if (aUnit.mySmooth < 0) { aUnit.mySmooth = 0; }
     }
-    /*
-    else {
-        aUnit.myConnected += aUnit.myConnectRate;
-        if (aUnit.myConnected <=0) { // connect to utilities for operation
-            aUnit.myConnected = 0;
-            aUnit.myStatus = building;
-        }
-    }
-    */
+    
 }
 
 -(void) doUnitProduction:(NewTech*) aUnit
@@ -464,7 +566,7 @@
             // increment preparation fields (clean, clear, smooth, connect)
             [self doSitePreparation: aUnit];
             if (aUnit.mySmooth <= 0) {
-                aUnit.myStatus = connecting;
+                aUnit.myStatus = preparing;
                 _theMessage.message = [NSString stringWithFormat: @"%@ site is leveled", aUnit.myName];
                 _theMessage.type = info;
             }
@@ -477,6 +579,8 @@
                 aUnit.myStatus = building;
                 _theMessage.message = [NSString stringWithFormat: @"Site preparation complete, %@ is building.", aUnit.myName];
                 _theMessage.type = info;
+            } else {
+                aUnit.myStatus = cleaning;
             }
             break;
             
@@ -493,7 +597,8 @@
             
         case connecting:
             // increment preparation fields (clean, clear, smooth, connect)
-            [self doSitePreparation: aUnit];
+//            [self doSitePreparation: aUnit];
+            [self doConnectToUnit:(NewTech*) aUnit from: (UnitInventory*) Units];
             if (aUnit.myConnected >= 100) {
                 aUnit.myStatus = operating;
                 _theMessage.message = [NSString stringWithFormat: @"%@ site connected and now operating.", aUnit.myName];
@@ -593,7 +698,7 @@
     // usage is adjusted by the NewTech class based upon supply
     
 }
-
+/*
 // TODO: not sure why this is here ... may have been replaced by method inside NewTech class
 -(void) createUnits
 {
@@ -646,6 +751,7 @@
     
 
 }
+*/
 
 // TODO: not sure why this is here ... may have been replaced by method inside NewTech class
 -(NewTech*) makeUnit:(NSString*) aName ofType:(itemType) aType ofSize:(CGSize) aSize wasPlaced:(BOOL)placed

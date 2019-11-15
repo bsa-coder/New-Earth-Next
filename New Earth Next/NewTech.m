@@ -67,7 +67,7 @@ NSString* const klaborUsageKey = @"laborUsageKey";
 @synthesize makerBOM, takerBOM, repairBOM, myStockpiles;
 @synthesize myClass;
 @synthesize myTileItem;
-@synthesize delays, sources, pathsToSources;
+@synthesize delays, source, pathsToSources;
 
 #pragma mark - Initialization methods
 
@@ -134,8 +134,8 @@ NSString* const klaborUsageKey = @"laborUsageKey";
         [self fillRepairBOMStruct:0 comp:0 supp:0 matl:0 powr:0 watr:0 air:0 food:0 labr:0];
         
         int delays[3] = {0, 0, 0};
-        CapTech* sources[3] = {nil,nil,nil};
-        UIBezierPath* pathsToSources[3] = {nil,nil,nil};
+        source = [[segment alloc] init];
+        pathsToSources = [[NSMutableArray alloc] init];
     }
     _theMessage = [[NENotification alloc] initNotificationOnDay:0 from:fromPlant type:info content:@"" date:nil isRemote:NO];
     _myGlobals = [NewEarthGlobals sharedSelf];
@@ -180,8 +180,8 @@ NSString* const klaborUsageKey = @"laborUsageKey";
         makerBOM = [[NSMutableArray alloc] initWithArray:origUnit.makerBOM];
         repairBOM = [[NSMutableArray alloc] initWithArray:origUnit.repairBOM];
         int delays[3] = {0, 0, 0};
-        CapTech* sources[3] = {nil,nil,nil};
-        UIBezierPath* pathsToSources[3] = {nil,nil,nil};
+        source = [[segment alloc] init];
+        pathsToSources = [[NSMutableArray alloc] init];
     }
     _theMessage = [[NENotification alloc] initNotificationOnDay:0 from:fromPlant type:info content:@"" date:nil isRemote:NO];
     _myGlobals = [NewEarthGlobals sharedSelf];

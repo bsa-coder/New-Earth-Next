@@ -40,8 +40,8 @@
         for (NSInteger i = 0; i < [theUnits count]; i++) {
             NSIndexPath* indexPath = [NSIndexPath indexPathForRow:i inSection:0];
             aUnit = [theUnits unitAtIndexPath:indexPath];
-//            if (aUnit && !aUnit.myPlaced) {
-            if (aUnit) {
+            if (aUnit != nil && !aUnit.myPlaced) {
+//            if (aUnit) {
                 theUnitLocation = aUnit.myLoc;
                 [aUnit placeMe:aUnit atPoint:theUnitLocation atScale:theViewScale inContext:thisContext];
                 [self addSubview: aUnit.myTileItem.itemOutline];
@@ -58,31 +58,6 @@
     {
         [aUnit placeMe:aUnit atPoint:aUnit.myLoc atScale:theViewScale inContext:thisContext];
     }
-    
-//    CGContextRef thisContext = UIGraphicsGetCurrentContext();
-    CGContextSaveGState(thisContext);
-    
-    CGContextSetStrokeColorWithColor(thisContext, [[UIColor yellowColor] CGColor]);
-    CGContextSetLineWidth(thisContext, 8.0);
-    CGContextMoveToPoint(thisContext, 50.0, 50.0);
-    CGContextAddLineToPoint(thisContext, 100.0, 100.0);
-//    CGContextMoveToPoint(thisContext, 150.0, 150.0);
-//    CGContextAddLineToPoint(thisContext, 250.0, 250.0);
-    CGContextDrawPath(thisContext, kCGPathStroke);
-    
-    CGContextRestoreGState(thisContext);
-    
-    CGContextSaveGState(thisContext);
-    
-    CGContextSetStrokeColorWithColor(thisContext, [[UIColor colorWithRed:0.0 green:1.0 blue:0.0 alpha:0.5] CGColor]);
-    CGContextSetLineWidth(thisContext, 18.0);
-//    CGContextMoveToPoint(thisContext, 50.0, 50.0);
-//    CGContextAddLineToPoint(thisContext, 100.0, 100.0);
-    CGContextMoveToPoint(thisContext, 100.0, 100.0);
-    CGContextAddLineToPoint(thisContext, 100.0, 250.0);
-    CGContextDrawPath(thisContext, kCGPathStroke);
-    
-    CGContextRestoreGState(thisContext);
     
 }
 

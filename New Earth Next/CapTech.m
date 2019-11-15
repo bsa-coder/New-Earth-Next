@@ -84,7 +84,7 @@
                      withClean:(NSInteger) aClean
                      withClear:(NSInteger) aClear
                     withSmooth:(NSInteger) aSmooth
-                 withConnected:(NSInteger) aConnected
+                 withConnected:(NSInteger) 100
                  withBuildRate:(NSInteger) aBuildRate
                 withRepairRate:(NSInteger) aRepairRate
                withProduceRate:(NSInteger) aProduceRate
@@ -97,7 +97,8 @@
     if(self)
     {
         pathsToUnits = [[NSMutableArray alloc] initWithCapacity:10];
-        [self fillPathsToUnitsPath0: nil path1: nil path2: nil path3: nil path4: nil path5: nil path6: nil path7: nil path8: nil path9: nil];
+        
+//        [self fillPathsToUnitsPath0: nil path1: nil path2: nil path3: nil path4: nil path5: nil path6: nil path7: nil path8: nil path9: nil];
     }
     return self;
 }

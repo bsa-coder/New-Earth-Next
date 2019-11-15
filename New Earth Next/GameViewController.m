@@ -394,6 +394,7 @@
     {
         NewTech* aUnit = [[NewTech alloc] init];
         aUnit.mySize = CGSizeMake(100,100);
+        aUnit.itemIcon = @"Image-1";
         
         tapLoc = [recognizer locationInView:myMapView];
 
@@ -580,7 +581,8 @@
 -(UnitInventory*) getTheWarehouse { return _aWarehouse; }
 -(NSMutableDictionary*) tilesToDrawEnv:(Envelope*) requestor { return _aGlobals.geoTileList; }
 
--(CGFloat) gridSpacingEnv:(Envelope *)requestor { return _aGlobals.gridSpacing; }
+-(CGFloat) gridSpacingEnv:(Envelope *) requestor { return _aGlobals.gridSpacing; }
+//-(NSMutableArray*) itemsToDrawEnv:(Envelope *) requestor { return <#expression#>; }
 
 #pragma mark - AppStatusView Delegate Methods
 

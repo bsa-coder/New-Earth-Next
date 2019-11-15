@@ -47,6 +47,8 @@
 		55D2457A206EE7FD00EC8054 /* ModelProduction.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D24578206EE7FC00EC8054 /* ModelProduction.m */; };
 		55D2457D206F06DC00EC8054 /* RootTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D2457C206F06DB00EC8054 /* RootTabBarViewController.m */; };
 		55D24580207723C800EC8054 /* Calendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D2457E207723C700EC8054 /* Calendar.m */; };
+		D233684C2339825800A90AF6 /* pathUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = D233684B2339825800A90AF6 /* pathUtilities.m */; };
+		D233684F233B19B800A90AF6 /* segment.m in Sources */ = {isa = PBXBuildFile; fileRef = D233684E233B19B800A90AF6 /* segment.m */; };
 		D29B4BBA20CCCD0D00C26A10 /* PathFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = D29B4BB920CCCD0D00C26A10 /* PathFinder.m */; };
 		D29B4BBD20CCD25400C26A10 /* PlacementEnvelope.m in Sources */ = {isa = PBXBuildFile; fileRef = D29B4BBC20CCD25400C26A10 /* PlacementEnvelope.m */; };
 		D29B4BC020DB16CB00C26A10 /* CapTech.m in Sources */ = {isa = PBXBuildFile; fileRef = D29B4BBF20DB16CB00C26A10 /* CapTech.m */; };
@@ -133,6 +135,10 @@
 		55D2457F207723C800EC8054 /* Calendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Calendar.h; sourceTree = "<group>"; };
 		D2063CCF209BE890008F585A /* New Earth Next.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "New Earth Next.entitlements"; sourceTree = "<group>"; };
 		D225497F2087F7290028C6E3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D233684A2339825800A90AF6 /* pathUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pathUtilities.h; sourceTree = "<group>"; };
+		D233684B2339825800A90AF6 /* pathUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = pathUtilities.m; sourceTree = "<group>"; };
+		D233684D233B19B800A90AF6 /* segment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = segment.h; sourceTree = "<group>"; };
+		D233684E233B19B800A90AF6 /* segment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = segment.m; sourceTree = "<group>"; };
 		D29B4BB820CCCD0D00C26A10 /* PathFinder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PathFinder.h; sourceTree = "<group>"; };
 		D29B4BB920CCCD0D00C26A10 /* PathFinder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PathFinder.m; sourceTree = "<group>"; };
 		D29B4BBB20CCD25400C26A10 /* PlacementEnvelope.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlacementEnvelope.h; sourceTree = "<group>"; };
@@ -171,6 +177,7 @@
 		551C255B205F0AA4007D8987 /* New Earth Next */ = {
 			isa = PBXGroup;
 			children = (
+				D233684923380B5500A90AF6 /* Classes */,
 				D2063CCF209BE890008F585A /* New Earth Next.entitlements */,
 				551C255C205F0AA4007D8987 /* AppDelegate.h */,
 				551C255D205F0AA4007D8987 /* AppDelegate.m */,
@@ -194,16 +201,42 @@
 				557680D12062078200F88B18 /* UnitView.m */,
 				557680DC20634CFD00F88B18 /* AppStatusBarView.h */,
 				557680DA20634CFD00F88B18 /* AppStatusBarView.m */,
-				557680DB20634CFD00F88B18 /* AppStatusItem.h */,
-				557680DD20634CFE00F88B18 /* AppStatusItem.m */,
 				557680DE20634CFF00F88B18 /* AppStatusView.h */,
 				557680DF20634CFF00F88B18 /* AppStatusView.m */,
 				557680E62064952000F88B18 /* StatusViewController.h */,
 				557680E72064952100F88B18 /* StatusViewController.m */,
-				557680EA2064956F00F88B18 /* StatusRoom.h */,
-				557680E92064956F00F88B18 /* StatusRoom.m */,
 				557680EC2065DA2A00F88B18 /* NotificationsViewController.h */,
 				557680ED2065DA2A00F88B18 /* NotificationsViewController.m */,
+				551C2562205F0AA4007D8987 /* DataViewController.h */,
+				551C2563205F0AA4007D8987 /* DataViewController.m */,
+				551C2565205F0AA4007D8987 /* ModelController.h */,
+				551C2566205F0AA4007D8987 /* ModelController.m */,
+				557680FF2065F4E200F88B18 /* DetailResourceView.h */,
+				557680FE2065F4E100F88B18 /* DetailResourceView.m */,
+				557681012065F8A700F88B18 /* DetailResourceView2.h */,
+				557681022065F8A700F88B18 /* DetailResourceView2.m */,
+				557680FB2065F47C00F88B18 /* UnitsViewController.h */,
+				557680FC2065F47D00F88B18 /* UnitsViewController.m */,
+				557680F82065F43200F88B18 /* UnitsDetailViewController.h */,
+				557680F92065F43200F88B18 /* UnitsDetailViewController.m */,
+				557680F52065EF7000F88B18 /* WarehouseViewController.h */,
+				557680F62065EF7000F88B18 /* WarehouseViewController.m */,
+				551C256B205F0AA4007D8987 /* Assets.xcassets */,
+				551C2568205F0AA4007D8987 /* Main.storyboard */,
+				551C256D205F0AA4007D8987 /* LaunchScreen.storyboard */,
+				551C2570205F0AA4007D8987 /* Info.plist */,
+				551C2571205F0AA4007D8987 /* main.m */,
+			);
+			path = "New Earth Next";
+			sourceTree = "<group>";
+		};
+		D233684923380B5500A90AF6 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				557680DB20634CFD00F88B18 /* AppStatusItem.h */,
+				557680DD20634CFE00F88B18 /* AppStatusItem.m */,
+				557680EA2064956F00F88B18 /* StatusRoom.h */,
+				557680E92064956F00F88B18 /* StatusRoom.m */,
 				557680F22065DB5D00F88B18 /* NENotification.h */,
 				557680F32065DB5D00F88B18 /* NENotification.m */,
 				557680EF2065DAD200F88B18 /* NeNotifications.h */,
@@ -230,33 +263,18 @@
 				557E860220608D19009E8A11 /* NewTech.m */,
 				D29B4BBE20DB16CB00C26A10 /* CapTech.h */,
 				D29B4BBF20DB16CB00C26A10 /* CapTech.m */,
-				551C2562205F0AA4007D8987 /* DataViewController.h */,
-				551C2563205F0AA4007D8987 /* DataViewController.m */,
-				551C2565205F0AA4007D8987 /* ModelController.h */,
-				551C2566205F0AA4007D8987 /* ModelController.m */,
-				557680FF2065F4E200F88B18 /* DetailResourceView.h */,
-				557680FE2065F4E100F88B18 /* DetailResourceView.m */,
-				557681012065F8A700F88B18 /* DetailResourceView2.h */,
-				557681022065F8A700F88B18 /* DetailResourceView2.m */,
-				557680FB2065F47C00F88B18 /* UnitsViewController.h */,
-				557680FC2065F47D00F88B18 /* UnitsViewController.m */,
-				557680F82065F43200F88B18 /* UnitsDetailViewController.h */,
-				557680F92065F43200F88B18 /* UnitsDetailViewController.m */,
-				557680F52065EF7000F88B18 /* WarehouseViewController.h */,
-				557680F62065EF7000F88B18 /* WarehouseViewController.m */,
 				D29B4BB820CCCD0D00C26A10 /* PathFinder.h */,
 				D29B4BB920CCCD0D00C26A10 /* PathFinder.m */,
+				D233684A2339825800A90AF6 /* pathUtilities.h */,
+				D233684B2339825800A90AF6 /* pathUtilities.m */,
+				D233684D233B19B800A90AF6 /* segment.h */,
+				D233684E233B19B800A90AF6 /* segment.m */,
 				D29B4BBB20CCD25400C26A10 /* PlacementEnvelope.h */,
 				D29B4BBC20CCD25400C26A10 /* PlacementEnvelope.m */,
 				551C2585205F6B0E007D8987 /* Globals.h */,
 				551C2584205F6B0D007D8987 /* Globals.m */,
-				551C256B205F0AA4007D8987 /* Assets.xcassets */,
-				551C2568205F0AA4007D8987 /* Main.storyboard */,
-				551C256D205F0AA4007D8987 /* LaunchScreen.storyboard */,
-				551C2570205F0AA4007D8987 /* Info.plist */,
-				551C2571205F0AA4007D8987 /* main.m */,
 			);
-			path = "New Earth Next";
+			name = Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -335,6 +353,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D233684C2339825800A90AF6 /* pathUtilities.m in Sources */,
 				557680FD2065F47D00F88B18 /* UnitsViewController.m in Sources */,
 				557E860420608D1A009E8A11 /* NewTech.m in Sources */,
 				55D24580207723C800EC8054 /* Calendar.m in Sources */,
@@ -347,6 +366,7 @@
 				557680FA2065F43300F88B18 /* UnitsDetailViewController.m in Sources */,
 				557680D32062078400F88B18 /* UnitView.m in Sources */,
 				557680F12065DAD300F88B18 /* NeNotifications.m in Sources */,
+				D233684F233B19B800A90AF6 /* segment.m in Sources */,
 				557E86072060B4F9009E8A11 /* TileItem.m in Sources */,
 				551C2572205F0AA4007D8987 /* main.m in Sources */,
 				557680F72065EF7100F88B18 /* WarehouseViewController.m in Sources */,

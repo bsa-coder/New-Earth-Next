@@ -42,6 +42,7 @@
         aUnit = [[NewTech alloc] init];
     }
     
+    NSMutableArray* gridPaths = [[NSMutableArray alloc] init];
     _theUnits = [myEnvDelegate unitsToDrawEnv:self];
     
     if ([_theUnits count] > 0) {
@@ -50,6 +51,13 @@
             aUnit = [_theUnits unitAtIndexPath:indexPath];
             theUnitLocation = aUnit.myLoc;
             [aUnit showMyEnvelope:aUnit atPoint:theUnitLocation atScale:theViewScale inContext:thisContext];
+            NSMutableArray* gridPaths2 = [[NSMutableArray alloc] init];
+
+            for (int j = 0; j < [aUnit.pathsToSources count] ; j++) {
+                for (int k = 0; k < [aUnit.pathsToSources[j] count]; k++) {
+                    [gridPaths addObject:aUnit.pathsToSources[j][k]];
+                }
+            }
         }
     }
     
@@ -85,11 +93,192 @@
         
         CGContextDrawPath(thisContext, kCGPathFillStroke);
         CGContextRestoreGState(thisContext);
-
+    }
+    
+    // step through the segments
+    if(gridPaths)
+    {
+        while ([gridPaths count] > 0) {
+            segment* aSeg = gridPaths[0];
+            if (gridPaths[0] != nil) { [gridPaths removeObjectAtIndex: 0]; }
         
+            switch (aSeg.myStatus) {
+                case 0:
+                    break;
+                case 1:
+                    [self drawItemPlanning:aSeg];
+                    break;
+                case 2:
+                    [self drawItemBuild:aSeg];
+                    break;
+                case 3:
+                    [self drawItemOff:aSeg];
+                    break;
+                case 4:
+                    [self drawItemOn:aSeg];
+                    break;
+
+                default:
+                    break;
+            }
+        }
     }
 }
 
+-(void) drawItemPlanning: (segment*) aSeg {
+    
+    UIBezierPath* pathToSee = [[UIBezierPath alloc] init];
+    
+    CGPoint startPt;
+    if (aSeg.srcID == 0) {
+        startPt = aSeg.myLoc;
+    } else {
+        startPt = [aSeg.srcID myLoc];
+    }
+    
+    [pathToSee moveToPoint:startPt];
+    [pathToSee addLineToPoint:aSeg.myLoc];
+    
+    CGContextRef currentContext = UIGraphicsGetCurrentContext();
+
+    CGContextSaveGState(currentContext);
+    CGContextBeginPath(currentContext);
+
+    
+    
+    
+    //    CGContextSetLineCap(currentContext, kCGLineCapRound);
+//    CGContextSetLineJoin(currentContext, kCGLineJoinRound);
+//    CGContextSetLineWidth(currentContext, 4);
+    CGContextSetLineWidth(currentContext, 1);
+    CGContextSetStrokeColorWithColor(currentContext, [UIColor blackColor].CGColor);
+//    const double hmmm[2] = {2,8};
+//    CGContextSetLineDash(currentContext, 2, hmmm, 2);
+    const double hmmm[2] = {1,4};
+    CGContextSetLineDash(currentContext, 1, hmmm, 1);
+
+    CGContextBeginPath(currentContext);
+    CGContextAddPath(currentContext, pathToSee.CGPath);
+    CGContextDrawPath(currentContext, kCGPathStroke);
+
+
+
+    CGContextRestoreGState(currentContext);
+    
+    currentContext = nil;
+}
+-(void) drawItemBuild: (segment*) aSeg {
+    UIBezierPath* pathToSee = [[UIBezierPath alloc] init];
+    
+    CGPoint startPt;
+    if (aSeg.srcID == 0) {
+        startPt = aSeg.myLoc;
+    } else {
+        startPt = [aSeg.srcID myLoc];
+    }
+    
+    [pathToSee moveToPoint:startPt];
+    [pathToSee addLineToPoint:aSeg.myLoc];
+    
+    CGContextRef currentContext = UIGraphicsGetCurrentContext();
+    
+    CGContextSaveGState(currentContext);
+    CGContextBeginPath(currentContext);
+
+    
+    
+    CGContextSetLineCap(currentContext, kCGLineCapRound);
+    CGContextSetLineJoin(currentContext, kCGLineJoinRound);
+    CGContextSetLineWidth(currentContext, 2);
+    CGContextSetStrokeColorWithColor(currentContext, [UIColor grayColor].CGColor);
+
+    CGContextBeginPath(currentContext);
+    CGContextAddPath(currentContext, pathToSee.CGPath);
+    CGContextDrawPath(currentContext, kCGPathStroke);
+
+    
+
+    CGContextRestoreGState(currentContext);
+
+    currentContext = nil;
+}
+-(void) drawItemOff: (segment*) aSeg {
+    UIBezierPath* pathToSee = [[UIBezierPath alloc] init];
+    
+    CGPoint startPt;
+    if (aSeg.srcID == 0) {
+        startPt = aSeg.myLoc;
+    } else {
+        startPt = [aSeg.srcID myLoc];
+    }
+    
+    [pathToSee moveToPoint:startPt];
+    [pathToSee addLineToPoint:aSeg.myLoc];
+    
+    CGContextRef currentContext = UIGraphicsGetCurrentContext();
+    CGContextSaveGState(currentContext);
+    CGContextBeginPath(currentContext);
+
+    
+    CGContextSetLineCap(currentContext, kCGLineCapRound);
+    CGContextSetLineJoin(currentContext, kCGLineJoinRound);
+    CGContextSetLineWidth(currentContext, 4);
+    CGContextSetStrokeColorWithColor(currentContext, [UIColor grayColor].CGColor);
+    CGContextBeginPath(currentContext);
+    CGContextAddPath(currentContext, pathToSee.CGPath);
+    CGContextDrawPath(currentContext, kCGPathStroke);
+
+    
+
+    CGContextRestoreGState(currentContext);
+
+    currentContext = nil;
+}
+-(void) drawItemOn: (segment*) aSeg {
+    UIBezierPath* pathToSee = [[UIBezierPath alloc] init];
+    
+    CGPoint startPt;
+    if (aSeg.srcID == 0) {
+        startPt = aSeg.myLoc;
+    } else {
+        startPt = [aSeg.srcID myLoc];
+    }
+    
+    [pathToSee moveToPoint:startPt];
+    [pathToSee addLineToPoint:aSeg.myLoc];
+    
+    CGContextRef currentContext = UIGraphicsGetCurrentContext();
+    CGContextSaveGState(currentContext);
+    CGContextBeginPath(currentContext);
+
+    
+    CGContextSetLineCap(currentContext, kCGLineCapRound);
+    CGContextSetLineJoin(currentContext, kCGLineJoinRound);
+    CGContextSetLineWidth(currentContext, 4);
+    switch (aSeg.myType) {
+        case 5:
+            CGContextSetStrokeColorWithColor(currentContext, [UIColor yellowColor].CGColor);
+            break;
+            
+        case 1:
+            CGContextSetStrokeColorWithColor(currentContext, [UIColor blueColor].CGColor);
+            break;
+            
+        default:
+            CGContextSetStrokeColorWithColor(currentContext, [UIColor redColor].CGColor);
+            break;
+    }
+
+    CGContextBeginPath(currentContext);
+    CGContextAddPath(currentContext, pathToSee.CGPath);
+    CGContextDrawPath(currentContext, kCGPathStroke);
+
+    
+
+    CGContextRestoreGState(currentContext);
+
+    currentContext = nil;
+}
 
 - (void) setDefaults
 {

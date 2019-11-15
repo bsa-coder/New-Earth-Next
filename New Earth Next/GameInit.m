@@ -18,7 +18,7 @@ NSString* const kMessageUrgencyKey = @"MsgFire"; // color, icons, etc
 @implementation GameInit
 @synthesize fo, theWarehouse, theGlobals, theStore, aProdEng;
 @synthesize neNotes, updateNotification, corporateNotification, systemNotification, gameOverNotification;
-@synthesize gameEngineTimer, myCalendar;
+@synthesize gameEngineTimer, myCalendar, gridPaths;
 
 #pragma mark - Initialization Methods
 -(id)init
@@ -31,6 +31,7 @@ NSString* const kMessageUrgencyKey = @"MsgFire"; // color, icons, etc
         theStore = [AvailTech sharedSelf];
         neNotes = [NeNotifications sharedSelf]; 
         aProdEng = [[ModelProduction alloc] init];
+        gridPaths = [[NSMutableArray alloc] init];
 //        myCalendar = [[NECalendar alloc] init];
         myCalendar = [NECalendar sharedSelf];
 
