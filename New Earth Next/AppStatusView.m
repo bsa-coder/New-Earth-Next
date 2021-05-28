@@ -63,7 +63,7 @@
         
     }
     
-    __unused int tempCount = [self.subviews count];
+    __unused int tempCount = (int)[self.subviews count];
     
     for (int i = 0; i < [self.subviews count]; i++) { [self.subviews[i] setNeedsDisplay]; }
     
@@ -88,7 +88,7 @@
         
     }
     
-    __unused int tempCount = [self.subviews count];
+    __unused int tempCount = (int)[self.subviews count];
     
     CGFloat rawViewWidth = [self window].frame.size.width - 20.0;
     CGFloat rawViewHeight = 50.0;

@@ -2,7 +2,7 @@
 //  GeoTile.h
 //  New Earth
 //
-//  Created by David Alexander on 12/25/16.
+//  Created by Scott Alexander on 12/25/16.
 //  Copyright © 2016 Big Dog Tools. All rights reserved.
 //
 

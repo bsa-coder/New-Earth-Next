@@ -51,7 +51,7 @@
             aUnit = [_theUnits unitAtIndexPath:indexPath];
             theUnitLocation = aUnit.myLoc;
             [aUnit showMyEnvelope:aUnit atPoint:theUnitLocation atScale:theViewScale inContext:thisContext];
-            NSMutableArray* gridPaths2 = [[NSMutableArray alloc] init];
+            __unused NSMutableArray* gridPaths2 = [[NSMutableArray alloc] init];
 
             for (int j = 0; j < [aUnit.pathsToSources count] ; j++) {
                 for (int k = 0; k < [aUnit.pathsToSources[j] count]; k++) {

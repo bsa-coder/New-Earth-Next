@@ -82,7 +82,7 @@ NSString* const kNENoteNotificationIndexPathKey     = @"NENoteNotificationIndexP
                         userInfo:@{kNENoteNotificationIndexPathKey:indexPath}];
     [center postNotificationName:kNENoteChangesCompleteNotification object:self];
     
-    __unused int tempCount = self.count;
+    __unused int tempCount = (int)self.count;
 }
 
 -(void) deleteNoteAtIndexPath:(NSIndexPath *)indexPath

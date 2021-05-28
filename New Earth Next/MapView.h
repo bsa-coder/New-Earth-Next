@@ -2,7 +2,7 @@
 //  MapView.h
 //  New Earth
 //
-//  Created by David Alexander on 7/11/16.
+//  Created by Scott Alexander on 7/11/16.
 //  Copyright © 2016 Big Dog Tools. All rights reserved.
 //
 

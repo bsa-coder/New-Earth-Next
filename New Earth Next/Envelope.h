@@ -2,7 +2,7 @@
 //  Envelope.h
 //  New Earth
 //
-//  Created by David Alexander on 12/24/16.
+//  Created by Scott Alexander on 12/24/16.
 //  Copyright © 2016 Big Dog Tools. All rights reserved.
 //
 

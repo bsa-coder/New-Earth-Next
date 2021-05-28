@@ -2,7 +2,7 @@
 //  FileOps.m
 //  New Earth Next
 //
-//  Created by David Alexander on 3/30/18.
+//  Created by Scott Alexander on 3/30/18.
 //  Copyright © 2018 Big Dog Tools. All rights reserved.
 //
 

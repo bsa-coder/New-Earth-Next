@@ -2,7 +2,7 @@
 //  WarehouseViewController.h
 //  New Earth
 //
-//  Created by David Alexander on 9/23/17.
+//  Created by Scott Alexander on 9/23/17.
 //  Copyright © 2017 Big Dog Tools. All rights reserved.
 //
 

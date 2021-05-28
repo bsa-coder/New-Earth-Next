@@ -133,7 +133,7 @@ NSString* const klaborUsageKey = @"laborUsageKey";
         [self fillMakerBOMStruct:0 comp:0 supp:0 matl:0 powr:0 watr:0 air:0 food:0 labr:0];
         [self fillRepairBOMStruct:0 comp:0 supp:0 matl:0 powr:0 watr:0 air:0 food:0 labr:0];
         
-        int delays[3] = {0, 0, 0};
+        __unused int delays[3] = {0, 0, 0};
         source = [[segment alloc] init];
         pathsToSources = [[NSMutableArray alloc] init];
     }
@@ -179,7 +179,7 @@ NSString* const klaborUsageKey = @"laborUsageKey";
         takerBOM = [[NSMutableArray alloc] initWithArray:origUnit.takerBOM];
         makerBOM = [[NSMutableArray alloc] initWithArray:origUnit.makerBOM];
         repairBOM = [[NSMutableArray alloc] initWithArray:origUnit.repairBOM];
-        int delays[3] = {0, 0, 0};
+        __unused int delays[3] = {0, 0, 0};
         source = [[segment alloc] init];
         pathsToSources = [[NSMutableArray alloc] init];
     }

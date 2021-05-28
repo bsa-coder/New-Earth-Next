@@ -79,7 +79,8 @@
     X1 = [self quadraticFormulaA:x B:y C:z Add:YES];
     X2 = [self quadraticFormulaA:x B:y C:z Add:NO];
     
-    double Y1, Y2, Y1b, Y2b;
+    double Y1, Y2;
+    __unused double Y1b, Y2b;
     Y1 = (-a * X1 - c) / b;
     Y2 = (-a * X2 - c) / b;
 

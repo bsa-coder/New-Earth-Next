@@ -489,5 +489,6 @@
                                       }];
     
 }
-
+-(void) handleUpdateNotification:(NSNotification*) paramNotification;
+{}
 @end

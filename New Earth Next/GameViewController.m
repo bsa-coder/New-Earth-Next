@@ -613,4 +613,10 @@
 
 -(void) handleUpdateNotification:(NSNotification*) paramNotification { [self updateUI]; }
 
+
+// Envelope view delegate stubs (previously not implemented BSA 2021-05-28)
+-(NSMutableArray*) itemsToDrawEnv:(Envelope*) requestor { return NULL;}
+
+
+
 @end

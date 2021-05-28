@@ -2,7 +2,7 @@
 //  GameInit.m
 //  New Earth Next
 //
-//  Created by David Alexander on 3/30/18.
+//  Created by Scott Alexander on 3/30/18.
 //  Copyright © 2018 Big Dog Tools. All rights reserved.
 //
 
@@ -37,11 +37,11 @@ NSString* const kMessageUrgencyKey = @"MsgFire"; // color, icons, etc
 
         NSMutableArray* goals = myCalendar.milestoneList;
         CGPoint firstGoal = [goals[1] CGPointValue];
-        NSInteger nextGoal = firstGoal.y;
-        NSInteger nextDur = firstGoal.x;
+        __unused NSInteger nextGoal = firstGoal.y;
+        __unused NSInteger nextDur = firstGoal.x;
         NSInteger theCount = goals.count;
         CGPoint lastGoal = [goals[theCount-1] CGPointValue];
-        NSInteger contractGoal = lastGoal.y;
+        __unused NSInteger contractGoal = lastGoal.y;
         NSInteger contractDur = lastGoal.x;
         theGlobals.lengthOfContract = (int) contractDur;
         

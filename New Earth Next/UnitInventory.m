@@ -1021,7 +1021,7 @@ CGFloat runoutRate[(stockType) 9]; // holds the number of days until running out
 
 - (void)saveContents {
     
-    int numberOfUnits = [self count];
+    int numberOfUnits = (int)[self count];
     if (numberOfUnits <= 0) return;
     
     for (int i = 0; i < numberOfUnits; i++) {
